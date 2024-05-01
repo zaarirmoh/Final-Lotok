@@ -26,6 +26,7 @@ import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
 import com.example.newlotok.LotokApplication
 import com.example.newlotok.data.LotokRepository
+import com.example.newlotok.model.CarPost
 import com.example.newlotok.model.MarsPhoto
 import kotlinx.coroutines.launch
 import retrofit2.HttpException
@@ -34,37 +35,37 @@ import java.io.IOException
 /**
  * UI state for the Home screen
  */
-sealed interface MarsUiState {
-    data class Success(val photos: List<MarsPhoto>) : MarsUiState
-    object Error : MarsUiState
-    object Loading : MarsUiState
+sealed interface LotokUiState {
+    data class Success(val photos: List<CarPost>) : LotokUiState
+    object Error : LotokUiState
+    object Loading : LotokUiState
 }
 
 class LotokViewModel(private val lotokRepository: LotokRepository) : ViewModel() {
     /** The mutable State that stores the status of the most recent request */
-    var marsUiState: MarsUiState by mutableStateOf(MarsUiState.Loading)
+    var lotokUiState: LotokUiState by mutableStateOf(LotokUiState.Loading)
         private set
 
     /**
      * Call getMarsPhotos() on init so we can display status immediately.
      */
     init {
-        getMarsPhotos()
+        getCarPosts()
     }
 
     /**
      * Gets Mars photos information from the Mars API Retrofit service and updates the
      * [MarsPhoto] [List] [MutableList].
      */
-    fun getMarsPhotos() {
+    fun getCarPosts() {
         viewModelScope.launch {
-            marsUiState = MarsUiState.Loading
-            marsUiState = try {
-                MarsUiState.Success(lotokRepository.getMarsPhotos())
+            lotokUiState = LotokUiState.Loading
+            lotokUiState = try {
+                LotokUiState.Success(lotokRepository.getCarPosts())
             } catch (e: IOException) {
-                MarsUiState.Error
+                LotokUiState.Error
             } catch (e: HttpException) {
-                MarsUiState.Error
+                LotokUiState.Error
             }
         }
     }

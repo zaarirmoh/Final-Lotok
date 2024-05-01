@@ -47,8 +47,8 @@ fun LotokApp() {
             val lotokViewModel: LotokViewModel =
                 viewModel(factory = LotokViewModel.Factory)
             HomeScreen2(
-                marsUiState = lotokViewModel.marsUiState,
-                retryAction = lotokViewModel::getMarsPhotos,
+                lotokUiState = lotokViewModel.lotokUiState,
+                retryAction = lotokViewModel::getCarPosts,
                 contentPadding = it
             )
         }

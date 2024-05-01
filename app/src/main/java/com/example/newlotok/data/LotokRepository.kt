@@ -16,6 +16,7 @@
 package com.example.newlotok.data
 
 import com.example.newlotok.model.CarPost
+import com.example.newlotok.model.Category
 import com.example.newlotok.model.MarsPhoto
 import com.example.newlotok.network.LotokApiService
 
@@ -27,6 +28,8 @@ interface LotokRepository {
     suspend fun getMarsPhotos(): List<MarsPhoto>
 
     suspend fun getCarPosts(): List<CarPost>
+
+    suspend fun getCategories(): List<Category>
 }
 
 /**
@@ -39,4 +42,6 @@ class NetworkLotokRepository(
     override suspend fun getMarsPhotos(): List<MarsPhoto> = lotokApiService.getPhotos()
 
     override suspend fun getCarPosts(): List<CarPost> = lotokApiService.getCarPosts()
+
+    override suspend fun getCategories(): List<Category> = lotokApiService.getCategories()
 }

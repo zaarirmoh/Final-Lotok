@@ -43,20 +43,21 @@ import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.example.newlotok.R
 import com.example.newlotok.model.MarsPhoto
+import com.example.newlotok.ui.screens.homeScreen.CarPosts
 
 @Composable
 fun HomeScreen2(
-    marsUiState: MarsUiState,
+    lotokUiState: LotokUiState,
     retryAction: () -> Unit,
     modifier: Modifier = Modifier,
     contentPadding: PaddingValues = PaddingValues(0.dp),
 ) {
-    when (marsUiState) {
-        is MarsUiState.Loading -> LoadingScreen(modifier = modifier.fillMaxSize())
-        is MarsUiState.Success -> PhotosGridScreen(
-            marsUiState.photos, contentPadding = contentPadding, modifier = modifier.fillMaxWidth()
+    when (lotokUiState) {
+        is LotokUiState.Loading -> LoadingScreen(modifier = modifier.fillMaxSize())
+        is LotokUiState.Success -> CarPosts(
+            posts = lotokUiState.photos,
         )
-        is MarsUiState.Error -> ErrorScreen(retryAction, modifier = modifier.fillMaxSize())
+        is LotokUiState.Error -> ErrorScreen(retryAction, modifier = modifier.fillMaxSize())
     }
 }
 
