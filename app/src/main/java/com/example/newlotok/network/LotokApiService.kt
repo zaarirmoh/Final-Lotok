@@ -17,6 +17,7 @@
 package com.example.newlotok.network
 
 import com.example.newlotok.model.CarPost
+import com.example.newlotok.model.Category
 import com.example.newlotok.model.MarsPhoto
 import retrofit2.http.GET
 
@@ -32,8 +33,10 @@ interface LotokApiService {
     @GET("images")
     suspend fun getPhotos(): List<MarsPhoto>
 
-    /*
+
     @GET("posts")
-    suspend fun getPosts(): List<CarPost>
-     */
+    suspend fun getCarPosts(): List<CarPost>
+
+    @GET("categories")
+    suspend fun getCategories(): List<Category>
 }

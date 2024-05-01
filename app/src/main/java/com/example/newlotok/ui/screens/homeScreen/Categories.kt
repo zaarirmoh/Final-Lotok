@@ -16,11 +16,14 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import coil.compose.AsyncImage
+import coil.request.ImageRequest
 import com.example.lotok.ui.theme.Shapes
 import com.example.newlotok.R
 import com.example.newlotok.model.Data
@@ -48,7 +51,7 @@ fun Categories(
 @Composable
 fun CategoryCard(
     modifier: Modifier = Modifier,
-    categoryPhoto: Int,
+    categoryPhoto: String,
 ){
     Button(
         onClick = { /*TODO*/ },
@@ -57,14 +60,13 @@ fun CategoryCard(
         //colors = ButtonDefaults.buttonColors(containerColor = Color(0xFFFBEBEA)),
         modifier = modifier.size(115.dp)
     ) {
-        Image(
-            painter = painterResource(id = categoryPhoto),
+        AsyncImage(
+            model = ImageRequest.Builder(context = LocalContext.current).data(categoryPhoto)
+                .crossfade(true).build(),
+            error = painterResource(R.drawable.ic_broken_image),
+            placeholder = painterResource(R.drawable.loading_img),
             contentDescription = null,
             modifier = modifier.fillMaxSize()
-            //contentScale = ContentScale.Fit
-            //modifier = modifier
-              //  .width(101.dp)
-                //.height(70.dp)
         )
     }
 }

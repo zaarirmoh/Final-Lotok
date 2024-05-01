@@ -1,7 +1,10 @@
 package com.example.newlotok.model
 
-import androidx.annotation.DrawableRes
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 
+@Serializable
 data class Category(
-    @DrawableRes val imgSrc: Int
+    @SerialName(value = "id") val id: Int,
+    @SerialName(value = "img_src") val imgSrc: String
 )

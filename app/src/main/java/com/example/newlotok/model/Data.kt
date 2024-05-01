@@ -310,10 +310,12 @@ object Data{
         ),
     )
     val categoriesList: List<Category> = listOf(
+        /*
         Category(imgSrc = R.drawable.car_category),
         Category(imgSrc = R.drawable.motorcycle_category),
         Category(imgSrc = R.drawable.master_category),
         Category(imgSrc = R.drawable.truck_category),
+         */
     )
     val comments: List<Comment> = listOf(
         Comment(

@@ -15,6 +15,7 @@
  */
 package com.example.newlotok.data
 
+import com.example.newlotok.model.CarPost
 import com.example.newlotok.model.MarsPhoto
 import com.example.newlotok.network.LotokApiService
 
@@ -24,6 +25,8 @@ import com.example.newlotok.network.LotokApiService
 interface LotokRepository {
     /** Fetches list of MarsPhoto from marsApi */
     suspend fun getMarsPhotos(): List<MarsPhoto>
+
+    suspend fun getCarPosts(): List<CarPost>
 }
 
 /**
@@ -34,4 +37,6 @@ class NetworkLotokRepository(
 ) : LotokRepository {
     /** Fetches list of MarsPhoto from marsApi*/
     override suspend fun getMarsPhotos(): List<MarsPhoto> = lotokApiService.getPhotos()
+
+    override suspend fun getCarPosts(): List<CarPost> = lotokApiService.getCarPosts()
 }
