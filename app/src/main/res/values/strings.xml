@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">new lotok</string>
+    <string name="welcome_screen_text">Rent your Favourite Car</string>
+    <string name="get_Started">Get Started</string>
+    <string name="TopBarMenuLogoNotification">TopBarMenuLogoNotification</string>
+    <string name="TopBarGoBackTextProfile">TopBarGoBackTextProfile</string>
+    <string name="SearchForACar">Search for a car</string>
+    <string name="Categories">Categories</string>
+    <string name="PopularCars">Popular cars</string>
+    <string name="BookNow">Book now</string>
+    <string name="State">State</string>
+    <string name="FromTo">From/to</string>
+    <string name="Year">Year</string>
+    <string name="Energy">Energy</string>
+</resources>

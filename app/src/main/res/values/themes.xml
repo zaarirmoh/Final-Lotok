@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="Theme.NewLotok" parent="android:Theme.Material.Light.NoActionBar" />
+
+    <style name="Theme.Starting" parent="Theme.SplashScreen" >
+        <item name="windowSplashScreenBackground">@color/RedBackground</item>
+        <item name="postSplashScreenTheme">@style/Theme.NewLotok</item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/animated_logo</item>
+    </style>
+</resources>
