@@ -34,6 +34,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.SpanStyle
@@ -42,6 +43,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import coil.compose.AsyncImage
+import coil.request.ImageRequest
 import com.example.newlotok.R
 import com.example.newlotok.model.CarPost
 
@@ -63,14 +66,17 @@ fun CarPostCard(
                     .fillMaxWidth()
                     .height(105.dp)
             ) {
-                Image(
-                    painter = painterResource(id = carPostInfo.imgSrc[0]),
-                    contentDescription = null,
+                AsyncImage(
+                    model = ImageRequest.Builder(context = LocalContext.current).data(carPostInfo.imgSrc)
+                        .crossfade(true).build(),
+                    error = painterResource(R.drawable.ic_broken_image),
+                    placeholder = painterResource(R.drawable.loading_img),
+                    contentDescription = "",
+                    contentScale = ContentScale.Crop,
                     modifier = modifier
                         .fillMaxWidth()
                         .height(105.dp)
                         .background(Color.Gray),
-                    contentScale = ContentScale.Crop
                 )
                 Rating(stars = carPostInfo.rating)
                 Favourite(modifier = modifier

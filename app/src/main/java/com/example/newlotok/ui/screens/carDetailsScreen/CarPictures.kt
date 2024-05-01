@@ -36,7 +36,7 @@ import com.example.newlotok.model.Data
 @Composable
 fun CarPictures(
     modifier : Modifier = Modifier,
-    imgSrc : List<Int>,
+    imgSrc : List<Int> = listOf(),
     onButtonClicked : () -> Unit = {}
 
 ){
@@ -115,8 +115,3 @@ fun CarPictures(
 }
 
 
-@Composable
-@Preview
-fun CarPicturesPreview(){
-    CarPictures(imgSrc = Data.carPostsList[0].imgSrc)
-}

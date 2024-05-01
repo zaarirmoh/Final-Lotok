@@ -16,6 +16,7 @@
 
 package com.example.newlotok.network
 
+import com.example.newlotok.model.CarPost
 import com.example.newlotok.model.MarsPhoto
 import retrofit2.http.GET
 
@@ -28,6 +29,11 @@ interface LotokApiService {
      * The @GET annotation indicates that the "photos" endpoint will be requested with the GET
      * HTTP method
      */
-    @GET("photos")
+    @GET("images")
     suspend fun getPhotos(): List<MarsPhoto>
+
+    /*
+    @GET("posts")
+    suspend fun getPosts(): List<CarPost>
+     */
 }

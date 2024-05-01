@@ -61,7 +61,6 @@ fun CarDetailsScreen(
             var showMore  by remember { mutableStateOf(true) }
             val showText = if (showMore) "show More" else "show less"
             CarPictures(
-                imgSrc = carPost.imgSrc,
                 modifier = Modifier.fillMaxWidth(),
                 onButtonClicked = bookButtonClicked
 
@@ -117,7 +116,7 @@ fun CarDetailsScreen(
             )
 
             Text(
-                text = "${carPost.comments.size} Comments",
+                text = "${Data.comments.size} Comments",
                 fontSize = 20.sp,
                 fontWeight = FontWeight.Bold,
                 color = Color(0x1D, 0x1B, 0x20),
@@ -126,7 +125,7 @@ fun CarDetailsScreen(
                 )
             Spacer(modifier = Modifier.height(30.dp))
             Column(modifier = Modifier.padding(start = 2.dp,end = 10.dp)) {
-                if (showMore)carPost.comments.subList(0,2).forEach { it ->
+                if (showMore)Data.comments.subList(0,2).forEach { it ->
                     CommentCard(
                         profilePic = it.profilePic,
                         title = it.title,
@@ -135,7 +134,7 @@ fun CarDetailsScreen(
                     )
                     Spacer(modifier = Modifier.height(20.dp))
                 }
-                else carPost.comments.forEach { it ->
+                else Data.comments.forEach { it ->
                     CommentCard(
                         profilePic = it.profilePic,
                         title = it.title,

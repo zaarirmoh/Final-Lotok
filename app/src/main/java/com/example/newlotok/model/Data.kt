@@ -8,12 +8,15 @@ object Data{
     val carPostsList: List<CarPost> = listOf(
         CarPost(
             id = id,
-            imgSrc = listOf(
+            imgSrc = "",
+            /*
+            listOf(
                 R.drawable.car_picture,
                 R.drawable.car2_pic,
                 R.drawable.car3_pic,
                 R.drawable.car4_pic
             ),
+             */
             model = "M4 Competition",
             make = "BMW",
             year = 2000,
@@ -27,46 +30,24 @@ object Data{
             description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore  .Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore  .Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore  .",
             transmission = "",
             location = "Mila",
-            comments = listOf(
-                Comment(
-                    profilePic = R.drawable.profile_picture,
-                    title = "El Bench",
-                    date = "June 5, 2019",
-                    review = "good. but I prefer Atos.",
-                    ),
-                Comment(
-                    profilePic = R.drawable.profile_picture,
-                    title = "El Bench",
-                    date = "June 5, 2019",
-                    review = "good. but I prefer Atos.",
-                ),
-                Comment(
-                    profilePic = R.drawable.profile_picture,
-                    title = "El Bench",
-                    date = "June 5, 2019",
-                    review = "good. but I prefer Atos.",
-                ),
-                Comment(
-                    profilePic = R.drawable.profile_picture,
-                    title = "El Bench",
-                    date = "June 5, 2019",
-                    review = "good. but I prefer Atos.",
-                ),
-                Comment(
-                    profilePic = R.drawable.profile_picture,
-                    title = "El Bench",
-                    date = "June 5, 2019",
-                    review = "good. but I prefer Atos.",
-                ),
-                Comment(
-                    profilePic = R.drawable.profile_picture,
-                    title = "El Bench",
-                    date = "June 5, 2019",
-                    review = "good. but I prefer Atos.",
-                )
-            )
-
-            ),
+        ),
+        CarPost(
+            id = id,
+            imgSrc = "",
+            model = "M4 Competition",
+            make = "BMW",
+            year = 2000,
+            engine = "V8",
+            dayPrice = 4000,
+            weekPrice = 12000,
+            rating = 3.5,
+            body = "",
+            fuel = "",
+            power = "",
+            transmission = "",
+            location = ""
+        ),
+        /*
         CarPost(
             id = id,
             imgSrc = listOf(
@@ -277,27 +258,7 @@ object Data{
             transmission = "",
             location = ""
         ),
-        CarPost(
-            id = id,
-            imgSrc = listOf(
-                R.drawable.car_picture,
-                R.drawable.car2_pic,
-                R.drawable.car3_pic,
-                R.drawable.car4_pic
-            ),
-            model = "M4 Competition",
-            make = "BMW",
-            year = 2000,
-            engine = "V8",
-            dayPrice = 4000,
-            weekPrice = 12000,
-            rating = 3.5,
-            body = "",
-            fuel = "",
-            power = "",
-            transmission = "",
-            location = ""
-        ),
+         */
     )
     val carBrandsList: List<CarBrand> = listOf(
         CarBrand(
@@ -353,5 +314,43 @@ object Data{
         Category(imgSrc = R.drawable.motorcycle_category),
         Category(imgSrc = R.drawable.master_category),
         Category(imgSrc = R.drawable.truck_category),
+    )
+    val comments: List<Comment> = listOf(
+        Comment(
+            profilePic = R.drawable.profile_picture,
+            title = "El Bench",
+            date = "June 5, 2019",
+            review = "good. but I prefer Atos.",
+        ),
+        Comment(
+            profilePic = R.drawable.profile_picture,
+            title = "El Bench",
+            date = "June 5, 2019",
+            review = "good. but I prefer Atos.",
+        ),
+        Comment(
+            profilePic = R.drawable.profile_picture,
+            title = "El Bench",
+            date = "June 5, 2019",
+            review = "good. but I prefer Atos.",
+        ),
+        Comment(
+            profilePic = R.drawable.profile_picture,
+            title = "El Bench",
+            date = "June 5, 2019",
+            review = "good. but I prefer Atos.",
+        ),
+        Comment(
+            profilePic = R.drawable.profile_picture,
+            title = "El Bench",
+            date = "June 5, 2019",
+            review = "good. but I prefer Atos.",
+        ),
+        Comment(
+            profilePic = R.drawable.profile_picture,
+            title = "El Bench",
+            date = "June 5, 2019",
+            review = "good. but I prefer Atos.",
+        )
     )
 }
