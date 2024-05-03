@@ -11,7 +11,6 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
@@ -20,21 +19,25 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.example.newlotok.model.Data
 import com.example.newlotok.model.Data.profileInformation
-import com.example.newlotok.ui.screens.homeScreen.HomeScreenViewModel
 import com.example.newlotok.ui.components.navigationBar.MyNavigationBar
 import com.example.newlotok.ui.screens.carDetailsScreen.CarDetailsScreen
-import com.example.newlotok.ui.screens.homeScreen.HomeScreenWithConnection
+import com.example.newlotok.ui.screens.homeScreen.homeScreenNavigation
 import com.example.newlotok.ui.screens.profileDetailsScreens.editProfileScreen.EditProfileScreen
 import com.example.newlotok.ui.screens.profileDetailsScreens.profileDetailsScreen.ProfileDetailsScreen
 import com.example.newlotok.ui.screens.profileScreen.ProfileScreen
+import com.example.newlotok.ui.screens.profileScreen.profileScreenNavigation
 import com.example.newlotok.ui.screens.selectACarScreen.SelectACarScreen
+import com.example.newlotok.ui.screens.selectACarScreen.selectACarScreenNavigation
 import com.example.newlotok.ui.screens.selectBrandScreen.SelectBrandScreen
+import com.example.newlotok.ui.screens.selectBrandScreen.selectBrandScreenNavigation
 import com.example.newlotok.ui.screens.settingsScreens.mainSettingsScreen.MainSettingsScreen
+import com.example.newlotok.ui.screens.settingsScreens.mainSettingsScreen.mainSettingsScreenNavigation
 import com.example.newlotok.ui.screens.signInUpScreens.forgotPasswordScreen.ForgotPasswordScreen
 import com.example.newlotok.ui.screens.signInUpScreens.otpVerificationScreen.OtpVerificationScreen
 import com.example.newlotok.ui.screens.signInUpScreens.signInScreen.SignInScreen
 import com.example.newlotok.ui.screens.signInUpScreens.singUpScreen.SignUpScreen
 import com.example.newlotok.ui.screens.welcomeScreen.WelcomeScreen
+import com.example.newlotok.ui.screens.welcomeScreen.welcomeScreenNavigation
 
 // ToDo: Try to Extract the scaffold out so all the screen have like one topAppBar and one NavigationBar
 @OptIn(ExperimentalMaterial3Api::class)
@@ -43,14 +46,11 @@ fun LotokNavHost(
     modifier: Modifier = Modifier,
     navController: NavHostController = rememberNavController(),
     onWelcomeScreenButtonClicked: () -> Unit = {},
-    showWelcomeScreen: Boolean = true,
     contentPadding: PaddingValues = PaddingValues(0.dp),
     scrollBehavior: TopAppBarScrollBehavior,
     startDestination: String = LotokScreen.WelcomeScreen.name
 ) {
     val backStackEntry by navController.currentBackStackEntryAsState()
-    val expandedMenu = remember { mutableStateOf(false)}
-    val openDialog = remember { mutableStateOf(false)}
     val newFirstName = remember { mutableStateOf(profileInformation.firstName) }
     val newLastName = remember{ mutableStateOf(profileInformation.lastName) }
     val newEmail = remember { mutableStateOf(profileInformation.email) }
@@ -77,99 +77,15 @@ fun LotokNavHost(
             startDestination = startDestination,
             modifier = modifier.padding(it)
         ) {
-            composable(route = LotokScreen.WelcomeScreen.name){
-                WelcomeScreen(
-                    onButtonClicked = {
-                        onWelcomeScreenButtonClicked()
-                        navController.navigate(LotokScreen.HomeScreen.name) {
-                            // Empty the back stack
-                            popUpTo(navController.graph.startDestinationId) {
-                                inclusive = true
-                            }
-                        }
-                    }
-                )
-            }
-            composable(route = LotokScreen.HomeScreen.name){
-                val homeScreenViewModel: HomeScreenViewModel =
-                    viewModel(factory = HomeScreenViewModel.Factory)
-                HomeScreenWithConnection(
-                    homeScreenUiState = homeScreenViewModel.homeScreenUiState,
-                    retryAction = homeScreenViewModel::getCarPosts,
-                    scrollBehavior = scrollBehavior,
-                    onMenuIconClicked = {
-                        expandedMenu.value = true
-                    },
-                    onSearchForACarButtonClicked = {
-                        navController.navigate(LotokScreen.SelectBrandScreen.name)
-                    },
-                    onSettingsClicked = {
-                        expandedMenu.value = false
-                        navController.navigate(LotokScreen.MainSettingsScreen.name)
-                    },
-                    openDialog = openDialog,
-                    expendedMenu = expandedMenu
-                )
-                /*
-                HomeScreen(
-                    onNotificationIconClicked = {
-                    },
-                    onMenuIconClicked = {
-                        expandedMenu.value = true
-                    },
-                    onSearchForACarButtonClicked = {
-                        navController.navigate(LotokScreen.SelectBrandScreen.name)
-                    },
-                    onSettingsClicked = {
-                        expandedMenu.value = false
-                        navController.navigate(LotokScreen.MainSettingsScreen.name)
-                    },
-                    openDialog = openDialog,
-                    expendedMenu = expandedMenu
-                )
-                 */
-            }
-            composable(route = LotokScreen.SelectACarScreen.name){
-                SelectACarScreen(
-                    onProfileIconClicked = {
-                    },
-                    onGoBackIconClicked = {
-                        navController.navigateUp()
-                    },
-                    onHomeIconClicked = {
-                        navController.navigateUp()
-                    }
-                )
-            }
-            composable(route = LotokScreen.SelectBrandScreen.name){
-                SelectBrandScreen(
-                    carBrandsList = Data.carBrandsList,
-                    onGoBackIconClicked = {
-                        navController.navigateUp()
-                    },
-                    onLogoClicked ={ navController.navigate(LotokScreen.CarDetailsScreen.name)}
-                )
-            }
-            composable(route = LotokScreen.ProfileScreen.name){
-                ProfileScreen(
-                    onEditIconClicked = {},
-                    onProfileCardClicked = {
-                        navController.navigate(LotokScreen.ProfileDetailsScreen.name)
-                    },
-                    onCarsPostedCardClicked = {},
-                    onSettingsCardClicked = {
-                        navController.navigate(LotokScreen.MainSettingsScreen.name)
-                    },
-                    onVersionCardClicked = {},
-                )
-            }
-            composable(route = LotokScreen.MainSettingsScreen.name){
-                MainSettingsScreen(
-                    onGoBackButtonClicked = {
-                        navController.navigateUp()
-                    }
-                )
-            }
+            welcomeScreenNavigation(
+                navController = navController,
+                onWelcomeScreenButtonClicked = onWelcomeScreenButtonClicked,
+            )
+            homeScreenNavigation(navController = navController, scrollBehavior = scrollBehavior)
+            selectACarScreenNavigation(navController = navController)
+            selectBrandScreenNavigation(navController = navController)
+            profileScreenNavigation(navController = navController)
+            mainSettingsScreenNavigation(navController = navController)
             composable(route = LotokScreen.ProfileDetailsScreen.name){
                 ProfileDetailsScreen(
                     onGoBackButtonClicked = {
