@@ -213,7 +213,8 @@ object Data{
         )
     )
     val profileInformation: ProfileInformation = ProfileInformation(
-        name = "Mohamed",
+        name = "Mohamed Zaarir",
+        firstName = "Mohamed",
         picture = R.drawable.profile_picture,
         email = "zaarirmo07@gmail.com",
         location = "Soumaa Blida",
