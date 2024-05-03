@@ -37,11 +37,13 @@ import com.example.newlotok.ui.components.topBar.EndIconNotification
 import com.example.newlotok.ui.components.topBar.StartIconMenu
 import com.example.newlotok.ui.components.topBar.TopBar
 import com.example.newlotok.ui.components.topBar.TopBarCenterLogo
+import com.example.newlotok.ui.navigation.LotokNavHost
 import com.example.newlotok.ui.screens.homeScreen.ExpendMenu
 
 @Composable
 fun LotokApp() {
     val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior()
+    /*
     Scaffold(
         modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
         topBar = { TopBar(
@@ -56,15 +58,24 @@ fun LotokApp() {
         Surface(
             modifier = Modifier.fillMaxSize()
         ) {
-            val lotokViewModel: LotokViewModel =
-                viewModel(factory = LotokViewModel.Factory)
+
+            /*
             HomeScreen2(
                 lotokUiState = lotokViewModel.lotokUiState,
                 retryAction = lotokViewModel::getCarPosts,
                 contentPadding = it
             )
+             */
         }
     }
+     */
+    /*
+    val lotokViewModel: LotokViewModel =
+        viewModel(factory = LotokViewModel.Factory)
+     */
+    LotokNavHost(
+        scrollBehavior = scrollBehavior
+    )
 }
 
 @OptIn(ExperimentalMaterial3Api::class)

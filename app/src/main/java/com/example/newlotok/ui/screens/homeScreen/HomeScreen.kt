@@ -8,6 +8,7 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.TopAppBarScrollBehavior
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.ui.Modifier
@@ -32,12 +33,13 @@ fun HomeScreen(
     expendedMenu: MutableState<Boolean>,
     onSettingsClicked: () -> Unit = {},
     carPosts: List<CarPost> = listOf(),
-    categories: List<Category> = listOf()
+    categories: List<Category> = listOf(),
+    scrollBehavior: TopAppBarScrollBehavior,
 ) {
     val navigationBarHeight = 90
     Scaffold(
         topBar = {
-            /*
+
             TopBar(
                 startIcon = {
                     StartIconMenu(onButtonClicked = onMenuIconClicked)
@@ -46,9 +48,10 @@ fun HomeScreen(
                         onSettingsClicked = onSettingsClicked
                     ) }, //StartIconMenu()
                 topBarCenter = { TopBarCenterLogo() },   //TopBarCenterText(text = "Home")
-                endIcon = { EndIconNotification(onButtonClicked = onNotificationIconClicked) }
+                endIcon = { EndIconNotification(onButtonClicked = onNotificationIconClicked) },
+                scrollBehavior = scrollBehavior
             )
-             */
+
         }
     ){ paddingContent ->
         Column(

@@ -1,24 +1,29 @@
 package com.example.newlotok.ui.navigation
 
 import android.annotation.SuppressLint
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.TopAppBarScrollBehavior
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import com.example.newlotok.R
 import com.example.newlotok.model.Data
 import com.example.newlotok.model.Data.profileInformation
-import com.example.newlotok.model.ProfileInformation
+import com.example.newlotok.ui.LotokViewModel
 import com.example.newlotok.ui.components.navigationBar.MyNavigationBar
 import com.example.newlotok.ui.screens.carDetailsScreen.CarDetailsScreen
-import com.example.newlotok.ui.screens.homeScreen.HomeScreen
+import com.example.newlotok.ui.screens.homeScreen.HomeScreenWithConnection
 import com.example.newlotok.ui.screens.profileDetailsScreens.editProfileScreen.EditProfileScreen
 import com.example.newlotok.ui.screens.profileDetailsScreens.profileDetailsScreen.ProfileDetailsScreen
 import com.example.newlotok.ui.screens.profileScreen.ProfileScreen
@@ -32,13 +37,16 @@ import com.example.newlotok.ui.screens.signInUpScreens.singUpScreen.SignUpScreen
 import com.example.newlotok.ui.screens.welcomeScreen.WelcomeScreen
 
 // ToDo: Try to Extract the scaffold out so all the screen have like one topAppBar and one NavigationBar
+@OptIn(ExperimentalMaterial3Api::class)
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 fun LotokNavHost(
     modifier: Modifier = Modifier,
     navController: NavHostController = rememberNavController(),
     onWelcomeScreenButtonClicked: () -> Unit = {},
-    showWelcomeScreen: Boolean
+    showWelcomeScreen: Boolean = true,
+    contentPadding: PaddingValues = PaddingValues(0.dp),
+    scrollBehavior: TopAppBarScrollBehavior,
 ) {
     val backStackEntry by navController.currentBackStackEntryAsState()
     val expandedMenu = remember { mutableStateOf(false)}
@@ -75,6 +83,14 @@ fun LotokNavHost(
                 )
             }
             composable(route = LotokScreen.HomeScreen.name){
+                val lotokViewModel: LotokViewModel =
+                    viewModel(factory = LotokViewModel.Factory)
+                HomeScreenWithConnection(
+                    lotokUiState = lotokViewModel.lotokUiState,
+                    retryAction = lotokViewModel::getCarPosts,
+                    scrollBehavior = scrollBehavior
+                )
+                /*
                 HomeScreen(
                     onNotificationIconClicked = {
                     },
@@ -91,6 +107,7 @@ fun LotokNavHost(
                     openDialog = openDialog,
                     expendedMenu = expandedMenu
                 )
+                 */
             }
             composable(route = LotokScreen.SelectACarScreen.name){
                 SelectACarScreen(
@@ -209,4 +226,10 @@ fun LotokNavHost(
             }
         }
     }
+}
+
+@Composable
+fun NavGraphBuilder.NewFunction(
+
+){
 }
