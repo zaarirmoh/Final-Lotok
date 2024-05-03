@@ -39,7 +39,6 @@ fun HomeScreen(
     val navigationBarHeight = 90
     Scaffold(
         topBar = {
-
             TopBar(
                 startIcon = {
                     StartIconMenu(onButtonClicked = onMenuIconClicked)
@@ -57,7 +56,7 @@ fun HomeScreen(
         Column(
             modifier = modifier
                 .padding(paddingContent)
-                .padding(bottom = navigationBarHeight.dp)
+                //.padding(bottom = navigationBarHeight.dp)
                 .verticalScroll(rememberScrollState())
         ){
             Spacer(modifier = modifier.height(11.dp))
