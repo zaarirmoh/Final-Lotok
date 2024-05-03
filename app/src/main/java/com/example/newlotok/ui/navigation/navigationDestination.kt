@@ -96,7 +96,19 @@ fun LotokNavHost(
                 HomeScreenWithConnection(
                     homeScreenUiState = homeScreenViewModel.homeScreenUiState,
                     retryAction = homeScreenViewModel::getCarPosts,
-                    scrollBehavior = scrollBehavior
+                    scrollBehavior = scrollBehavior,
+                    onMenuIconClicked = {
+                        expandedMenu.value = true
+                    },
+                    onSearchForACarButtonClicked = {
+                        navController.navigate(LotokScreen.SelectBrandScreen.name)
+                    },
+                    onSettingsClicked = {
+                        expandedMenu.value = false
+                        navController.navigate(LotokScreen.MainSettingsScreen.name)
+                    },
+                    openDialog = openDialog,
+                    expendedMenu = expandedMenu
                 )
                 /*
                 HomeScreen(

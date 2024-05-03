@@ -30,283 +30,140 @@ object Data{
             description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore  .Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore  .Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore  .",
             transmission = "",
             location = "Mila",
-        ),
-        CarPost(
-            id = id,
-            imgSrc = "",
-            model = "M4 Competition",
-            make = "BMW",
-            year = 2000,
-            engine = "V8",
-            dayPrice = 4000,
-            weekPrice = 12000,
-            rating = 3.5,
-            body = "",
-            fuel = "",
-            power = "",
-            transmission = "",
-            location = ""
-        ),
-        /*
-        CarPost(
-            id = id,
-            imgSrc = listOf(
-                R.drawable.car_picture,
-                R.drawable.car2_pic,
-                R.drawable.car3_pic,
-                R.drawable.car4_pic
-            ),
-            model = "M4 Competition",
-            make = "BMW",
-            year = 2000,
-            engine = "V8",
-            dayPrice = 4000,
-            weekPrice = 12000,
-            rating = 3.5,
-            body = "",
-            fuel = "",
-            power = "",
-            transmission = "",
-            location = ""
-        ),
-        CarPost(
-            id = id,
-            imgSrc = listOf(
-                R.drawable.car_picture,
-                R.drawable.car2_pic,
-                R.drawable.car3_pic,
-                R.drawable.car4_pic
-            ),
-            model = "M4 Competition",
-            make = "BMW",
-            year = 2000,
-            engine = "V8",
-            dayPrice = 4000,
-            weekPrice = 12000,
-            rating = 3.5,
-            body = "",
-            fuel = "",
-            power = "",
-            transmission = "",
-            location = ""
-        ),
-        CarPost(
-            id = id,
-            imgSrc = listOf(
-                R.drawable.car_picture,
-                R.drawable.car2_pic,
-                R.drawable.car3_pic,
-                R.drawable.car4_pic
-            ),
-            model = "M4 Competition",
-            make = "BMW",
-            year = 2000,
-            engine = "V8",
-            dayPrice = 4000,
-            weekPrice = 12000,
-            rating = 3.5,
-            body = "",
-            fuel = "",
-            power = "",
-            transmission = "",
-            location = ""
-        ),
-        CarPost(
-            id = id,
-            imgSrc = listOf(
-                R.drawable.car_picture,
-                R.drawable.car2_pic,
-                R.drawable.car3_pic,
-                R.drawable.car4_pic
-            ),
-            model = "M4 Competition",
-            make = "BMW",
-            year = 2000,
-            engine = "V8",
-            dayPrice = 4000,
-            weekPrice = 12000,
-            rating = 3.5,
-            body = "",
-            fuel = "",
-            power = "",
-            transmission = "",
-            location = ""
-        ),
-        CarPost(
-            id = id,
-            imgSrc = listOf(
-                R.drawable.car_picture,
-                R.drawable.car2_pic,
-                R.drawable.car3_pic,
-                R.drawable.car4_pic
-            ),
-            model = "M4 Competition",
-            make = "BMW",
-            year = 2000,
-            engine = "V8",
-            dayPrice = 4000,
-            weekPrice = 12000,
-            rating = 3.5,
-            body = "",
-            fuel = "",
-            power = "",
-            transmission = "",
-            location = ""
-        ),
-        CarPost(
-            id = id,
-            imgSrc = listOf(
-                R.drawable.car_picture,
-                R.drawable.car2_pic,
-                R.drawable.car3_pic,
-                R.drawable.car4_pic
-            ),
-            model = "M4 Competition",
-            make = "BMW",
-            year = 2000,
-            engine = "V8",
-            dayPrice = 4000,
-            weekPrice = 12000,
-            rating = 3.5,
-            body = "",
-            fuel = "",
-            power = "",
-            transmission = "",
-            location = ""
-        ),
-        CarPost(
-            id = id,
-            imgSrc = listOf(
-                R.drawable.car_picture,
-                R.drawable.car2_pic,
-                R.drawable.car3_pic,
-                R.drawable.car4_pic
-            ),
-            model = "M4 Competition",
-            make = "BMW",
-            year = 2000,
-            engine = "V8",
-            dayPrice = 4000,
-            weekPrice = 12000,
-            rating = 3.5,
-            body = "",
-            fuel = "",
-            power = "",
-            transmission = "",
-            location = ""
-        ),
-        CarPost(
-            id = id,
-            imgSrc = listOf(
-                R.drawable.car_picture,
-                R.drawable.car2_pic,
-                R.drawable.car3_pic,
-                R.drawable.car4_pic
-            ),
-            model = "M4 Competition",
-            make = "BMW",
-            year = 2000,
-            engine = "V8",
-            dayPrice = 4000,
-            weekPrice = 12000,
-            rating = 3.5,
-            body = "",
-            fuel = "",
-            power = "",
-            transmission = "",
-            location = ""
-        ),
-        CarPost(
-            id = id,
-            imgSrc = listOf(
-                R.drawable.car_picture,
-                R.drawable.car2_pic,
-                R.drawable.car3_pic,
-                R.drawable.car4_pic
-            ),
-            model = "M4 Competition",
-            make = "BMW",
-            year = 2000,
-            engine = "V8",
-            dayPrice = 4000,
-            weekPrice = 12000,
-            rating = 3.5,
-            body = "",
-            fuel = "",
-            power = "",
-            transmission = "",
-            location = ""
-        ),
-        CarPost(
-            id = id,
-            imgSrc = listOf(
-                R.drawable.car_picture,
-                R.drawable.car2_pic,
-                R.drawable.car3_pic,
-                R.drawable.car4_pic
-            ),
-            model = "M4 Competition",
-            make = "BMW",
-            year = 2000,
-            engine = "V8",
-            dayPrice = 4000,
-            weekPrice = 12000,
-            rating = 3.5,
-            body = "",
-            fuel = "",
-            power = "",
-            transmission = "",
-            location = ""
-        ),
-         */
+        )
     )
     val carBrandsList: List<CarBrand> = listOf(
         CarBrand(
             id = 1,
-            brandPic = R.drawable.tesla,
+            brandPic = R.drawable.bmw_logo2_logo_svg_vector,
         ),
         CarBrand(
             id = 2,
-            brandPic = R.drawable.bmw),
+            brandPic = R.drawable.fiat_3_logo_svg_vector),
         CarBrand(
             id = 3,
-            brandPic = R.drawable.auddi,
+            brandPic = R.drawable.audi_14_logo_svg_vector,
         ),
         CarBrand(
             4,
-            R.drawable.mercedes,
+            R.drawable.ford_8_logo_svg_vector,
         ),
         CarBrand(
             5,
-            R.drawable.tesla,
+            R.drawable.honda_11_logo_svg_vector,
         ),
         CarBrand(
             6,
-            R.drawable.bmw,
+            R.drawable.infiniti_1_logo_svg_vector,
         ),
         CarBrand(
             7,
-            R.drawable.auddi,
+            R.drawable.jaguar_cars_logo_svg_vector,
         ),
         CarBrand(
             8,
-            R.drawable.mercedes,
+            R.drawable.jeep_7_logo_svg_vector,
         ),
         CarBrand(
             9,
-            R.drawable.tesla,
+            R.drawable.lamborghini_logo_svg_vector,
         ),
         CarBrand(
             10,
-            R.drawable.bmw,
+            R.drawable.rolls_royce_logo_svg_vector,
         ),
         CarBrand(
             11,
-            R.drawable.auddi,
+            R.drawable.mercedes_benz_6_logo_svg_vector,
         ),
         CarBrand(
             12,
-            R.drawable.mercedes,
+            R.drawable.chevrolet,
+        ),
+        CarBrand(
+            id = 1,
+            brandPic = R.drawable.camry_logo_svg_vector,
+        ),
+        CarBrand(
+            id = 2,
+            brandPic = R.drawable.nissan_6_logo_svg_vector),
+        CarBrand(
+            id = 3,
+            brandPic = R.drawable.porsche_6_logo_svg_vector,
+        ),
+        CarBrand(
+            4,
+            R.drawable.toyota_logo_svg_vector,
+        ),
+        CarBrand(
+            5,
+            R.drawable.bentley_logo_svg_vector,
+        ),
+        CarBrand(
+            id = 1,
+            brandPic = R.drawable.bmw_logo2_logo_svg_vector,
+        ),
+        CarBrand(
+            id = 2,
+            brandPic = R.drawable.fiat_3_logo_svg_vector),
+        CarBrand(
+            id = 3,
+            brandPic = R.drawable.audi_14_logo_svg_vector,
+        ),
+        CarBrand(
+            4,
+            R.drawable.ford_8_logo_svg_vector,
+        ),
+        CarBrand(
+            5,
+            R.drawable.honda_11_logo_svg_vector,
+        ),
+        CarBrand(
+            6,
+            R.drawable.infiniti_1_logo_svg_vector,
+        ),
+        CarBrand(
+            7,
+            R.drawable.jaguar_cars_logo_svg_vector,
+        ),
+        CarBrand(
+            8,
+            R.drawable.jeep_7_logo_svg_vector,
+        ),
+        CarBrand(
+            9,
+            R.drawable.lamborghini_logo_svg_vector,
+        ),
+        CarBrand(
+            10,
+            R.drawable.rolls_royce_logo_svg_vector,
+        ),
+        CarBrand(
+            11,
+            R.drawable.mercedes_benz_6_logo_svg_vector,
+        ),
+        CarBrand(
+            12,
+            R.drawable.chevrolet,
+        ),
+        CarBrand(
+            id = 1,
+            brandPic = R.drawable.camry_logo_svg_vector,
+        ),
+        CarBrand(
+            id = 2,
+            brandPic = R.drawable.nissan_6_logo_svg_vector),
+        CarBrand(
+            id = 3,
+            brandPic = R.drawable.porsche_6_logo_svg_vector,
+        ),
+        CarBrand(
+            4,
+            R.drawable.toyota_logo_svg_vector,
+        ),
+        CarBrand(
+            5,
+            R.drawable.bentley_logo_svg_vector,
         ),
     )
     val categoriesList: List<Category> = listOf(

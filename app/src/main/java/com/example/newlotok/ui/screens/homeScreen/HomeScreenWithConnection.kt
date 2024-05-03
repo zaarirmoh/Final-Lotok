@@ -12,6 +12,7 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarScrollBehavior
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
@@ -28,17 +29,25 @@ fun HomeScreenWithConnection(
     modifier: Modifier = Modifier,
     contentPadding: PaddingValues = PaddingValues(0.dp),
     scrollBehavior: TopAppBarScrollBehavior,
+    openDialog: MutableState<Boolean>,
+    expendedMenu: MutableState<Boolean>,
+    onMenuIconClicked: () -> Unit,
+    onSearchForACarButtonClicked: () -> Unit,
+    onSettingsClicked: () -> Unit
+
 ) {
-    val expandedMenu = remember { mutableStateOf(false) }
-    val openDialog = remember { mutableStateOf(false) }
     when (homeScreenUiState) {
         is HomeScreenUiState.Loading -> LoadingScreen(modifier = modifier.fillMaxSize())
         is HomeScreenUiState.Success -> HomeScreen(
             openDialog = openDialog,
-            expendedMenu = expandedMenu,
+            expendedMenu = expendedMenu,
             categories = homeScreenUiState.categories,
             carPosts = homeScreenUiState.carPosts,
-            scrollBehavior = scrollBehavior
+            scrollBehavior = scrollBehavior,
+            onMenuIconClicked = onMenuIconClicked,
+            onSearchForACarButtonClicked = onSearchForACarButtonClicked,
+            onSettingsClicked = onSettingsClicked,
+            modifier = modifier.padding(contentPadding)
         )
         is HomeScreenUiState.Error -> ErrorScreen(retryAction, modifier = modifier.fillMaxSize())
     }
