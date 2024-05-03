@@ -17,7 +17,7 @@ fun SimpleLine(
     startX : Int,
     endX : Int
 
-    ) {
+) {
     Canvas(modifier = modifier
         .fillMaxWidth()
         .height(height.dp)) {
@@ -29,8 +29,6 @@ fun SimpleLine(
         )
     }
 }
-
-
 @Composable
 @Preview(showBackground = true)
 fun SimpleLinePreview(){

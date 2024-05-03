@@ -33,13 +33,25 @@ import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.newlotok.R
+import com.example.newlotok.ui.components.topBar.EndIconNotification
+import com.example.newlotok.ui.components.topBar.StartIconMenu
+import com.example.newlotok.ui.components.topBar.TopBar
+import com.example.newlotok.ui.components.topBar.TopBarCenterLogo
+import com.example.newlotok.ui.screens.homeScreen.ExpendMenu
 
 @Composable
 fun LotokApp() {
-    val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior()
+    val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior()
     Scaffold(
         modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
-        topBar = { MarsTopAppBar(scrollBehavior = scrollBehavior) }
+        topBar = { TopBar(
+            startIcon =  {
+                StartIconMenu(onButtonClicked = {})
+            },
+            topBarCenter = { TopBarCenterLogo() },   //TopBarCenterText(text = "Home")
+            endIcon = { EndIconNotification() },
+            scrollBehavior = scrollBehavior
+        ) }
     ) {
         Surface(
             modifier = Modifier.fillMaxSize()

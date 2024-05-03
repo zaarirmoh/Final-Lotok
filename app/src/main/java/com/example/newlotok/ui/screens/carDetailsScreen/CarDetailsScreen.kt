@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -24,10 +25,6 @@ import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.lotok.ui.screens.carDetailsScreen.Details
-import com.example.lotok.ui.screens.carDetailsScreen.NameAndPrice
-import com.example.lotok.ui.screens.carDetailsScreen.RatingBar
-import com.example.lotok.ui.screens.carDetailsScreen.ReviewSection
 import com.example.newlotok.model.CarPost
 import com.example.newlotok.model.Data
 import com.example.newlotok.ui.components.carPost.CommentCard
@@ -37,6 +34,7 @@ import com.example.newlotok.ui.components.topBar.StartIconGoBack
 import com.example.newlotok.ui.components.topBar.TopBar
 import com.example.newlotok.ui.components.topBar.TopBarCenterText
 
+@OptIn(ExperimentalMaterial3Api::class)
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 fun CarDetailsScreen(
@@ -65,7 +63,6 @@ fun CarDetailsScreen(
                 onButtonClicked = bookButtonClicked
 
             )
-
             ClickableText(
                 text = "Check availability here ? " ,
                 onClick = {  },
@@ -152,17 +149,6 @@ fun CarDetailsScreen(
                     .padding(bottom = 16.dp)
                     .align(alignment = Alignment.CenterHorizontally)
             )
-
-
-
-
-
-
-
-
-
-
-
         }
     }
 }
@@ -182,13 +168,15 @@ fun ClickableText(
 }
 
 
-
-
 @Composable
 @Preview
 fun CarDetailsScreenPreview(){
     CarDetailsScreen(Data.carPostsList[0])
 }
+
+
+
+
 
 
 

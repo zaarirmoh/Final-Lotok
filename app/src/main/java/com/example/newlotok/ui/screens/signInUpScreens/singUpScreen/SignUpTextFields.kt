@@ -1,4 +1,4 @@
-package com.example.lotok.ui.screens.signInUpScreens.singUpScreen
+package com.example.newlotok.ui.screens.signInUpScreens.singUpScreen
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -23,8 +23,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.unit.dp
-import com.example.lotok.ui.screens.signInUpScreens.signInScreen.EmailTextField
-import com.example.lotok.ui.screens.signInUpScreens.signInScreen.PasswordTextField
+import com.example.newlotok.ui.screens.signInUpScreens.signInScreen.EmailTextField
+import com.example.newlotok.ui.screens.signInUpScreens.signInScreen.PasswordTextField
 
 @Composable
 fun SignUpTextFields(

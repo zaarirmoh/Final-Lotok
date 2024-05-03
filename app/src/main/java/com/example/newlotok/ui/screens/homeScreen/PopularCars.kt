@@ -19,10 +19,12 @@ import com.example.newlotok.R
 import com.example.newlotok.model.CarPost
 import com.example.newlotok.model.Data
 import com.example.newlotok.ui.components.carPost.CarPostCard
+import com.example.newlotok.ui.components.navigationBar.items
 
 @Composable
 fun PopularCars(
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    carPosts: List<CarPost> = listOf()
 ){
     Column{
         Text(
@@ -31,22 +33,22 @@ fun PopularCars(
             fontSize = 20.sp,
             modifier = modifier.padding(start = 21.dp)
         )
-        CarPosts()
+        CarPosts(carPosts = carPosts)
     }
 }
 @Composable
 fun CarPosts(
     modifier: Modifier = Modifier,
-    posts: List<CarPost> = listOf()
+    carPosts: List<CarPost> = listOf()
 ) {
     LazyVerticalGrid(
         columns = GridCells.Fixed(count = 2),
         contentPadding = PaddingValues(8.dp),
         verticalArrangement = Arrangement.spacedBy(18.dp),
         horizontalArrangement = Arrangement.spacedBy(13.dp),
-        modifier = modifier.height((220*(Data.carPostsList.size/2)).dp)
+        modifier = modifier.height((220*(carPosts.size/2)).dp)
     ) {
-        items(posts){
+        items(carPosts){
             CarPostCard(carPostInfo = it)
         }
     }

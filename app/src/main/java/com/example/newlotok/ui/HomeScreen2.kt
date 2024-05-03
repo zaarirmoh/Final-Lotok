@@ -33,6 +33,8 @@ import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
@@ -43,7 +45,8 @@ import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.example.newlotok.R
 import com.example.newlotok.model.MarsPhoto
-import com.example.newlotok.ui.screens.homeScreen.CarPosts
+import com.example.newlotok.ui.screens.homeScreen.Categories
+import com.example.newlotok.ui.screens.homeScreen.HomeScreen
 
 @Composable
 fun HomeScreen2(
@@ -52,13 +55,19 @@ fun HomeScreen2(
     modifier: Modifier = Modifier,
     contentPadding: PaddingValues = PaddingValues(0.dp),
 ) {
+    val expandedMenu = remember { mutableStateOf(false) }
+    val openDialog = remember { mutableStateOf(false) }
     when (lotokUiState) {
         is LotokUiState.Loading -> LoadingScreen(modifier = modifier.fillMaxSize())
-        is LotokUiState.Success -> CarPosts(
-            posts = lotokUiState.photos,
+        is LotokUiState.Success -> HomeScreen(
+            openDialog = openDialog,
+            expendedMenu = expandedMenu,
+            categories = lotokUiState.categories,
+            carPosts = lotokUiState.carPosts
         )
         is LotokUiState.Error -> ErrorScreen(retryAction, modifier = modifier.fillMaxSize())
     }
+
 }
 
 /**
@@ -90,50 +99,5 @@ fun ErrorScreen(retryAction: () -> Unit, modifier: Modifier = Modifier) {
         Button(onClick = retryAction) {
             Text("here we go")
         }
-    }
-}
-
-/**
- * The home screen displaying photo grid.
- */
-@Composable
-fun PhotosGridScreen(
-    photos: List<MarsPhoto>,
-    modifier: Modifier = Modifier,
-    contentPadding: PaddingValues = PaddingValues(0.dp),
-) {
-    LazyVerticalGrid(
-        columns = GridCells.Adaptive(150.dp),
-        modifier = modifier.padding(horizontal = 4.dp),
-        contentPadding = contentPadding,
-    ) {
-        items(items = photos, key = { photo -> photo.id }) { photo ->
-            MarsPhotoCard(
-                photo,
-                modifier = modifier
-                    .padding(4.dp)
-                    .fillMaxWidth()
-                    .aspectRatio(1.5f)
-            )
-        }
-    }
-}
-
-@Composable
-fun MarsPhotoCard(photo: MarsPhoto, modifier: Modifier = Modifier) {
-    Card(
-        modifier = modifier,
-        shape = MaterialTheme.shapes.medium,
-        elevation = CardDefaults.cardElevation(defaultElevation = 8.dp)
-    ) {
-        AsyncImage(
-            model = ImageRequest.Builder(context = LocalContext.current).data(photo.imgSrc)
-                .crossfade(true).build(),
-            error = painterResource(R.drawable.ic_broken_image),
-            placeholder = painterResource(R.drawable.loading_img),
-            contentDescription = null,
-            contentScale = ContentScale.Crop,
-            modifier = Modifier.fillMaxWidth()
-        )
     }
 }

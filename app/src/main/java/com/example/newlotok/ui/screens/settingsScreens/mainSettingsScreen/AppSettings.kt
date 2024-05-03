@@ -1,11 +1,9 @@
-package com.example.lotok.ui.screens.settingsScreens.mainSettingsScreen
+package com.example.newlotok.ui.screens.settingsScreens.mainSettingsScreen
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.outlined.Notifications
 import androidx.compose.material3.Divider
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable

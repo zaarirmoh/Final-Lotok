@@ -29,7 +29,7 @@ import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.lotok.ui.theme.LotokTheme
+import com.example.newlotok.ui.theme.LotokTheme
 import com.example.newlotok.R
 
 
@@ -123,6 +123,7 @@ fun WelcomeScreenPreview(){
     Surface(color = Color.White, modifier = Modifier.fillMaxSize()) {
     LotokTheme {
         //WelcomeScreen(onButtonClicked = {})
-    }}
+    }
+    }
 
 }

@@ -10,7 +10,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
 import com.example.newlotok.ui.components.icons.MyAppIcons
-import com.example.lotok.ui.theme.StartIconHomeColor
+import com.example.newlotok.ui.theme.StartIconHomeColor
 
 @Composable
 fun EndIconNotification(

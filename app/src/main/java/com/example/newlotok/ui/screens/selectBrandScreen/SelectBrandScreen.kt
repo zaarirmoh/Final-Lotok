@@ -1,4 +1,4 @@
-package com.example.lotok.ui.screens.selectBrandScreen
+package com.example.newlotok.ui.screens.selectBrandScreen
 
 import android.annotation.SuppressLint
 import androidx.compose.foundation.Image
@@ -29,8 +29,9 @@ import com.example.newlotok.ui.components.topBar.EndIconProfile
 import com.example.newlotok.ui.components.topBar.StartIconGoBack
 import com.example.newlotok.ui.components.topBar.TopBar
 import com.example.newlotok.ui.components.topBar.TopBarCenterText
-import com.example.lotok.ui.theme.LotokTheme
+import com.example.newlotok.ui.theme.LotokTheme
 
+@OptIn(ExperimentalMaterial3Api::class)
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 fun SelectBrandScreen(

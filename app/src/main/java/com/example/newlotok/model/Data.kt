@@ -355,4 +355,15 @@ object Data{
             review = "good. but I prefer Atos.",
         )
     )
+    val profileInformation: ProfileInformation = ProfileInformation(
+        name = "Mohamed",
+        picture = R.drawable.profile_picture,
+        email = "zaarirmo07@gmail.com",
+        location = "Soumaa Blida",
+        lastName = "Zaarir",
+        carsPosted = 424,
+        postsSaved = 785,
+        bookings = 123,
+        mobileNumber = "0776325625"
+    )
 }

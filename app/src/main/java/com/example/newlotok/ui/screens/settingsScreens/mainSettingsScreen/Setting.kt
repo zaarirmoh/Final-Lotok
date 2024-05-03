@@ -1,4 +1,4 @@
-package com.example.lotok.ui.screens.settingsScreens.mainSettingsScreen
+package com.example.newlotok.ui.screens.settingsScreens.mainSettingsScreen
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
@@ -21,14 +21,13 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.lotok.ui.theme.Shapes
+import com.example.newlotok.ui.theme.Shapes
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable

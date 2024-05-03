@@ -28,10 +28,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.newlotok.model.Data
 
 @Composable
 fun CarPictures(
@@ -107,11 +105,9 @@ fun CarPictures(
                     imageVector = Icons.AutoMirrored.Filled.KeyboardArrowRight,
                     contentDescription = "Next",
                     modifier = Modifier.fillMaxSize(),
-                    tint = if (currentPosition < maxPosition - 1)Color.White else Color.Gray
+                    tint = if (currentPosition < maxPosition - 1) Color.White else Color.Gray
                 )
             }
         }
     }
 }
-
-

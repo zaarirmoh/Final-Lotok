@@ -1,4 +1,4 @@
-package com.example.lotok.ui.screens.carDetailsScreen
+package com.example.newlotok.ui.screens.carDetailsScreen
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column

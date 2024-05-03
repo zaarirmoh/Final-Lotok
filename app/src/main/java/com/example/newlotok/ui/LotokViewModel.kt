@@ -27,6 +27,7 @@ import androidx.lifecycle.viewmodel.viewModelFactory
 import com.example.newlotok.LotokApplication
 import com.example.newlotok.data.LotokRepository
 import com.example.newlotok.model.CarPost
+import com.example.newlotok.model.Category
 import com.example.newlotok.model.MarsPhoto
 import kotlinx.coroutines.launch
 import retrofit2.HttpException
@@ -36,7 +37,10 @@ import java.io.IOException
  * UI state for the Home screen
  */
 sealed interface LotokUiState {
-    data class Success(val photos: List<CarPost>) : LotokUiState
+    data class Success(
+        val carPosts: List<CarPost>,
+        val categories: List<Category>
+    ) : LotokUiState
     object Error : LotokUiState
     object Loading : LotokUiState
 }
@@ -61,7 +65,10 @@ class LotokViewModel(private val lotokRepository: LotokRepository) : ViewModel()
         viewModelScope.launch {
             lotokUiState = LotokUiState.Loading
             lotokUiState = try {
-                LotokUiState.Success(lotokRepository.getCarPosts())
+                LotokUiState.Success(
+                    lotokRepository.getCarPosts(),
+                    lotokRepository.getCategories()
+                )
             } catch (e: IOException) {
                 LotokUiState.Error
             } catch (e: HttpException) {

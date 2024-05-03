@@ -1,4 +1,4 @@
-package com.example.lotok.ui.screens.homeScreen
+package com.example.newlotok.ui.screens.homeScreen
 
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Settings

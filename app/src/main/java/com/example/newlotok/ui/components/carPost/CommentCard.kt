@@ -35,7 +35,7 @@ fun CommentCard(
     title: String,
     date: String,
     review: String,
-    ) {
+) {
     Box(modifier = modifier.padding(bottom = 16.dp )) {
         Card(
             modifier = Modifier.padding(top = 24.dp,start = 10.dp),
@@ -43,7 +43,7 @@ fun CommentCard(
             elevation = CardDefaults.cardElevation(8.dp),
             shape = RoundedCornerShape(8.dp),
 
-        ) {
+            ) {
             Column(modifier = Modifier.padding(start = 16.dp, top = 25.dp,end = 16.dp,bottom = 16.dp )) {
                 Row(
                     modifier = Modifier.fillMaxWidth(),
@@ -80,8 +80,6 @@ fun CommentCard(
         )
     }
 }
-
-
 @Preview(showBackground = true)
 @Composable
 fun PreviewReviewCard() {
@@ -90,6 +88,6 @@ fun PreviewReviewCard() {
         title = "El Bench",
         date = "June 5, 2019",
         review = "good. but I prefer Atos.",
-        
-    )
+
+        )
 }

@@ -1,6 +1,5 @@
 package com.example.newlotok.ui.screens.homeScreen
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -24,13 +23,14 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
-import com.example.lotok.ui.theme.Shapes
+import com.example.newlotok.ui.theme.Shapes
 import com.example.newlotok.R
-import com.example.newlotok.model.Data
+import com.example.newlotok.model.Category
 
 @Composable
 fun Categories(
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    categories: List<Category> = listOf()
 ){
     Column {
         Text(
@@ -41,9 +41,10 @@ fun Categories(
         )
         Spacer(modifier = modifier.height(11.dp))
         LazyRow {
-            items(Data.categoriesList){
-                Spacer(modifier = modifier.width(30.dp))
+            items(categories){
+                Spacer(modifier = modifier.width(15.dp))
                 CategoryCard(categoryPhoto = it.imgSrc)
+                Spacer(modifier = modifier.width(15.dp))
             }
         }
     }

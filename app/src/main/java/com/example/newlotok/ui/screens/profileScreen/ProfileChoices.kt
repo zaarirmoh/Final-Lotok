@@ -1,4 +1,4 @@
-package com.example.lotok.ui.screens.profileScreen
+package com.example.newlotok.ui.screens.profileScreen
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -27,7 +27,7 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.lotok.ui.theme.Shapes
+import com.example.newlotok.ui.theme.Shapes
 
 
 @Composable

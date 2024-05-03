@@ -12,21 +12,23 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import com.example.newlotok.R
 import com.example.newlotok.model.Data
-import com.example.newlotok.model.profileInformation
+import com.example.newlotok.model.Data.profileInformation
+import com.example.newlotok.model.ProfileInformation
 import com.example.newlotok.ui.components.navigationBar.MyNavigationBar
 import com.example.newlotok.ui.screens.carDetailsScreen.CarDetailsScreen
-import com.example.lotok.ui.screens.homeScreen.HomeScreen
-import com.example.lotok.ui.screens.profileDetailsScreens.editProfileScreen.EditProfileScreen
-import com.example.lotok.ui.screens.profileDetailsScreens.profileDetailsScreen.ProfileDetailsScreen
-import com.example.lotok.ui.screens.profileScreen.ProfileScreen
-import com.example.lotok.ui.screens.selectACarScreen.SelectACarScreen
-import com.example.lotok.ui.screens.selectBrandScreen.SelectBrandScreen
-import com.example.lotok.ui.screens.settingsScreens.mainSettingsScreen.MainSettingsScreen
-import com.example.lotok.ui.screens.signInUpScreens.forgotPasswordScreen.ForgotPasswordScreen
-import com.example.lotok.ui.screens.signInUpScreens.otpVerificationScreen.OtpVerificationScreen
-import com.example.lotok.ui.screens.signInUpScreens.signInScreen.SignInScreen
-import com.example.lotok.ui.screens.signInUpScreens.singUpScreen.SignUpScreen
+import com.example.newlotok.ui.screens.homeScreen.HomeScreen
+import com.example.newlotok.ui.screens.profileDetailsScreens.editProfileScreen.EditProfileScreen
+import com.example.newlotok.ui.screens.profileDetailsScreens.profileDetailsScreen.ProfileDetailsScreen
+import com.example.newlotok.ui.screens.profileScreen.ProfileScreen
+import com.example.newlotok.ui.screens.selectACarScreen.SelectACarScreen
+import com.example.newlotok.ui.screens.selectBrandScreen.SelectBrandScreen
+import com.example.newlotok.ui.screens.settingsScreens.mainSettingsScreen.MainSettingsScreen
+import com.example.newlotok.ui.screens.signInUpScreens.forgotPasswordScreen.ForgotPasswordScreen
+import com.example.newlotok.ui.screens.signInUpScreens.otpVerificationScreen.OtpVerificationScreen
+import com.example.newlotok.ui.screens.signInUpScreens.signInScreen.SignInScreen
+import com.example.newlotok.ui.screens.signInUpScreens.singUpScreen.SignUpScreen
 import com.example.newlotok.ui.screens.welcomeScreen.WelcomeScreen
 
 // ToDo: Try to Extract the scaffold out so all the screen have like one topAppBar and one NavigationBar

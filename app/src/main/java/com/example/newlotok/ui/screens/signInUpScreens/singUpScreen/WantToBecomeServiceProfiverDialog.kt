@@ -1,4 +1,4 @@
-package com.example.lotok.ui.screens.signInUpScreens.singUpScreen
+package com.example.newlotok.ui.screens.signInUpScreens.singUpScreen
 
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Text

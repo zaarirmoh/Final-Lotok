@@ -1,4 +1,4 @@
-package com.example.lotok.ui.screens.profileDetailsScreens.profileDetailsScreen
+package com.example.newlotok.ui.screens.profileDetailsScreens.profileDetailsScreen
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -14,7 +14,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.newlotok.model.profileInformation
+import com.example.newlotok.model.Data.profileInformation
 
 @Composable
 fun ProfileInformationCards(

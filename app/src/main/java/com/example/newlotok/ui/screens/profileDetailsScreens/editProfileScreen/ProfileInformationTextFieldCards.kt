@@ -1,4 +1,4 @@
-package com.example.lotok.ui.screens.profileDetailsScreens.editProfileScreen
+package com.example.newlotok.ui.screens.profileDetailsScreens.editProfileScreen
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer

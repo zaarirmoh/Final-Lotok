@@ -1,4 +1,4 @@
-package com.example.lotok.ui.screens.settingsScreens.mainSettingsScreen
+package com.example.newlotok.ui.screens.settingsScreens.mainSettingsScreen
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer

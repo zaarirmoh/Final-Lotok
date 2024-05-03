@@ -11,8 +11,8 @@ import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
 import androidx.core.animation.doOnEnd
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
-import com.example.lotok.ui.theme.LotokTheme
 import com.example.newlotok.ui.LotokApp
+import com.example.newlotok.ui.theme.LotokTheme
 
 
 class MainActivity : ComponentActivity() {

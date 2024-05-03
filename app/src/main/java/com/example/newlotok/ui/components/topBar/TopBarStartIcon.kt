@@ -9,7 +9,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import com.example.newlotok.ui.components.icons.MyAppIcons
-import com.example.lotok.ui.theme.StartIconHomeColor
+import com.example.newlotok.ui.theme.StartIconHomeColor
 
 @Composable
 fun StartIconMenu(

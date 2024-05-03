@@ -1,9 +1,10 @@
-package com.example.lotok.ui.screens.settingsScreens.mainSettingsScreen
+package com.example.newlotok.ui.screens.settingsScreens.mainSettingsScreen
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -11,7 +12,10 @@ import androidx.compose.ui.unit.dp
 import com.example.newlotok.ui.components.topBar.StartIconGoBack
 import com.example.newlotok.ui.components.topBar.TopBar
 import com.example.newlotok.ui.components.topBar.TopBarCenterText
+import com.example.newlotok.ui.screens.settingsScreens.mainSettingsScreen.AccountSettings
+import com.example.newlotok.ui.screens.settingsScreens.mainSettingsScreen.AppSettings
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MainSettingsScreen(
     modifier: Modifier = Modifier,

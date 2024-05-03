@@ -1,4 +1,4 @@
-package com.example.lotok.ui.screens.signInUpScreens.otpVerificationScreen
+package com.example.newlotok.ui.screens.signInUpScreens.otpVerificationScreen
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement

@@ -1,4 +1,4 @@
-package com.example.lotok.ui.theme
+package com.example.newlotok.ui.theme
 
 import androidx.compose.ui.graphics.Color
 

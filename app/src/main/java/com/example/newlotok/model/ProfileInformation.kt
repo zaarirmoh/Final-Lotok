@@ -15,15 +15,4 @@ data class ProfileInformation(
     var location: String = "",
     var mobileNumber: String = "",
 )
-val profileInformation = ProfileInformation(
-    name = "Mohamed",
-    picture = R.drawable.profile_picture,
-    email = "mr.zaarir@esi-sba.dz",
-    carsPosted = 360,
-    postsSaved = 238,
-    bookings = 473,
-    firstName = "Mohamed",
-    lastName = "Zaarir",
-    location = "Soumaa",
-    mobileNumber = "0776325625"
-)
+

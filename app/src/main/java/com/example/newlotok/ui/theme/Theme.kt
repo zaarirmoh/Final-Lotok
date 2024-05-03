@@ -1,4 +1,4 @@
-package com.example.lotok.ui.theme
+package com.example.newlotok.ui.theme
 
 import android.annotation.SuppressLint
 import android.app.Activity

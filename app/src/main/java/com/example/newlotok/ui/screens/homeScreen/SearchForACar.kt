@@ -17,7 +17,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.lotok.ui.theme.md_theme_light_onPrimary
+import com.example.newlotok.ui.theme.md_theme_light_onPrimary
 import com.example.newlotok.R
 
 @Composable

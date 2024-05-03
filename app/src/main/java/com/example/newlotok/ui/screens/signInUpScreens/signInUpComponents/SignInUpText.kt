@@ -1,4 +1,4 @@
-package com.example.lotok.ui.screens.signInUpScreens.signInUpComponents
+package com.example.newlotok.ui.screens.signInUpScreens.signInUpComponents
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement

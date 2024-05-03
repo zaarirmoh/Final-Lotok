@@ -160,7 +160,7 @@ fun Energy(
                 .height(34.dp)
                 .width(106.dp),
             colors = ButtonDefaults.buttonColors(containerColor = Color(0xFFDADADA))
-            ) {
+        ) {
             Text(
                 text = stringResource(id = R.string.Energy),
                 fontSize = 13.sp,
@@ -178,4 +178,3 @@ fun Energy(
         )
     }
 }
-

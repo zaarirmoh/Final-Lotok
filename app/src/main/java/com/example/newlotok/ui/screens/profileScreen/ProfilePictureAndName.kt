@@ -1,4 +1,4 @@
-package com.example.lotok.ui.screens.profileScreen
+package com.example.newlotok.ui.screens.profileScreen
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
@@ -17,7 +17,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.newlotok.model.profileInformation
+import com.example.newlotok.model.Data.profileInformation
 
 @Composable
 fun ProfilePictureAndName(
