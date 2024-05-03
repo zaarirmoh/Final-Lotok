@@ -43,36 +43,7 @@ import com.example.newlotok.ui.screens.homeScreen.ExpendMenu
 @Composable
 fun LotokApp() {
     val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior()
-    /*
-    Scaffold(
-        modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
-        topBar = { TopBar(
-            startIcon =  {
-                StartIconMenu(onButtonClicked = {})
-            },
-            topBarCenter = { TopBarCenterLogo() },   //TopBarCenterText(text = "Home")
-            endIcon = { EndIconNotification() },
-            scrollBehavior = scrollBehavior
-        ) }
-    ) {
-        Surface(
-            modifier = Modifier.fillMaxSize()
-        ) {
 
-            /*
-            HomeScreen2(
-                lotokUiState = lotokViewModel.lotokUiState,
-                retryAction = lotokViewModel::getCarPosts,
-                contentPadding = it
-            )
-             */
-        }
-    }
-     */
-    /*
-    val lotokViewModel: LotokViewModel =
-        viewModel(factory = LotokViewModel.Factory)
-     */
     LotokNavHost(
         scrollBehavior = scrollBehavior
     )
@@ -92,3 +63,34 @@ fun MarsTopAppBar(scrollBehavior: TopAppBarScrollBehavior, modifier: Modifier = 
         modifier = modifier
     )
 }
+
+/*
+    Scaffold(
+        modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
+        topBar = { TopBar(
+            startIcon =  {
+                StartIconMenu(onButtonClicked = {})
+            },
+            topBarCenter = { TopBarCenterLogo() },   //TopBarCenterText(text = "Home")
+            endIcon = { EndIconNotification() },
+            scrollBehavior = scrollBehavior
+        ) }
+    ) {
+        Surface(
+            modifier = Modifier.fillMaxSize()
+        ) {
+
+            /*
+            HomeScreen2(
+                homeScreenUiState = lotokViewModel.homeScreenUiState,
+                retryAction = lotokViewModel::getCarPosts,
+                contentPadding = it
+            )
+             */
+        }
+    }
+     */
+/*
+val lotokViewModel: HomeScreenViewModel =
+    viewModel(factory = HomeScreenViewModel.Factory)
+ */

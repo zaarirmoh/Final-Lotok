@@ -1,6 +1,5 @@
 package com.example.newlotok.ui.navigation
 
-import android.annotation.SuppressLint
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -21,7 +20,7 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.example.newlotok.model.Data
 import com.example.newlotok.model.Data.profileInformation
-import com.example.newlotok.ui.LotokViewModel
+import com.example.newlotok.ui.screens.homeScreen.HomeScreenViewModel
 import com.example.newlotok.ui.components.navigationBar.MyNavigationBar
 import com.example.newlotok.ui.screens.carDetailsScreen.CarDetailsScreen
 import com.example.newlotok.ui.screens.homeScreen.HomeScreenWithConnection
@@ -83,11 +82,11 @@ fun LotokNavHost(
                 )
             }
             composable(route = LotokScreen.HomeScreen.name){
-                val lotokViewModel: LotokViewModel =
-                    viewModel(factory = LotokViewModel.Factory)
+                val homeScreenViewModel: HomeScreenViewModel =
+                    viewModel(factory = HomeScreenViewModel.Factory)
                 HomeScreenWithConnection(
-                    lotokUiState = lotokViewModel.lotokUiState,
-                    retryAction = lotokViewModel::getCarPosts,
+                    homeScreenUiState = homeScreenViewModel.homeScreenUiState,
+                    retryAction = homeScreenViewModel::getCarPosts,
                     scrollBehavior = scrollBehavior
                 )
                 /*

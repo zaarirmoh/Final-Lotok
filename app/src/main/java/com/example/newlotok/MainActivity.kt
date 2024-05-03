@@ -20,6 +20,9 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         installSplashScreen().apply {
+            setKeepOnScreenCondition {
+                false
+            }
             setOnExitAnimationListener { screen ->
                 val zoomX = ObjectAnimator.ofFloat(
                     screen.iconView,

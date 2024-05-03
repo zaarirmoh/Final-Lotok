@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.example.newlotok.ui
+package com.example.newlotok.ui.screens.homeScreen
 
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -36,18 +36,18 @@ import java.io.IOException
 /**
  * UI state for the Home screen
  */
-sealed interface LotokUiState {
+sealed interface HomeScreenUiState {
     data class Success(
         val carPosts: List<CarPost>,
         val categories: List<Category>
-    ) : LotokUiState
-    object Error : LotokUiState
-    object Loading : LotokUiState
+    ) : HomeScreenUiState
+    object Error : HomeScreenUiState
+    object Loading : HomeScreenUiState
 }
 
-class LotokViewModel(private val lotokRepository: LotokRepository) : ViewModel() {
+class HomeScreenViewModel(private val lotokRepository: LotokRepository) : ViewModel() {
     /** The mutable State that stores the status of the most recent request */
-    var lotokUiState: LotokUiState by mutableStateOf(LotokUiState.Loading)
+    var homeScreenUiState: HomeScreenUiState by mutableStateOf(HomeScreenUiState.Loading)
         private set
 
     /**
@@ -63,29 +63,29 @@ class LotokViewModel(private val lotokRepository: LotokRepository) : ViewModel()
      */
     fun getCarPosts() {
         viewModelScope.launch {
-            lotokUiState = LotokUiState.Loading
-            lotokUiState = try {
-                LotokUiState.Success(
+            homeScreenUiState = HomeScreenUiState.Loading
+            homeScreenUiState = try {
+                HomeScreenUiState.Success(
                     lotokRepository.getCarPosts(),
                     lotokRepository.getCategories()
                 )
             } catch (e: IOException) {
-                LotokUiState.Error
+                HomeScreenUiState.Error
             } catch (e: HttpException) {
-                LotokUiState.Error
+                HomeScreenUiState.Error
             }
         }
     }
 
     /**
-     * Factory for [LotokViewModel] that takes [LotokRepository] as a dependency
+     * Factory for [HomeScreenViewModel] that takes [LotokRepository] as a dependency
      */
     companion object {
         val Factory: ViewModelProvider.Factory = viewModelFactory {
             initializer {
                 val application = (this[APPLICATION_KEY] as LotokApplication)
                 val marsPhotosRepository = application.container.lotokRepository
-                LotokViewModel(lotokRepository = marsPhotosRepository)
+                HomeScreenViewModel(lotokRepository = marsPhotosRepository)
             }
         }
     }

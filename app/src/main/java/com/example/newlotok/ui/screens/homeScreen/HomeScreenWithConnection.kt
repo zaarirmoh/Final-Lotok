@@ -19,12 +19,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.example.newlotok.R
-import com.example.newlotok.ui.LotokUiState
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HomeScreenWithConnection(
-    lotokUiState: LotokUiState,
+    homeScreenUiState: HomeScreenUiState,
     retryAction: () -> Unit,
     modifier: Modifier = Modifier,
     contentPadding: PaddingValues = PaddingValues(0.dp),
@@ -32,16 +31,16 @@ fun HomeScreenWithConnection(
 ) {
     val expandedMenu = remember { mutableStateOf(false) }
     val openDialog = remember { mutableStateOf(false) }
-    when (lotokUiState) {
-        is LotokUiState.Loading -> LoadingScreen(modifier = modifier.fillMaxSize())
-        is LotokUiState.Success -> HomeScreen(
+    when (homeScreenUiState) {
+        is HomeScreenUiState.Loading -> LoadingScreen(modifier = modifier.fillMaxSize())
+        is HomeScreenUiState.Success -> HomeScreen(
             openDialog = openDialog,
             expendedMenu = expandedMenu,
-            categories = lotokUiState.categories,
-            carPosts = lotokUiState.carPosts,
+            categories = homeScreenUiState.categories,
+            carPosts = homeScreenUiState.carPosts,
             scrollBehavior = scrollBehavior
         )
-        is LotokUiState.Error -> ErrorScreen(retryAction, modifier = modifier.fillMaxSize())
+        is HomeScreenUiState.Error -> ErrorScreen(retryAction, modifier = modifier.fillMaxSize())
     }
 
 }
