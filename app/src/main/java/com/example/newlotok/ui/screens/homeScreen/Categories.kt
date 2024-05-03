@@ -41,7 +41,10 @@ fun Categories(
         )
         Spacer(modifier = modifier.height(11.dp))
         LazyRow {
-            items(categories){
+            items(
+                items = categories,
+                key = { it.id }
+            ){
                 Spacer(modifier = modifier.width(15.dp))
                 CategoryCard(categoryPhoto = it.imgSrc)
                 Spacer(modifier = modifier.width(15.dp))

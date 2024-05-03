@@ -48,7 +48,10 @@ fun CarPosts(
         horizontalArrangement = Arrangement.spacedBy(13.dp),
         modifier = modifier.height((220*(carPosts.size/2)).dp)
     ) {
-        items(carPosts){
+        items(
+            items = carPosts,
+            key = { it.id }
+        ){
             CarPostCard(carPostInfo = it)
         }
     }
