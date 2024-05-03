@@ -1,27 +1,56 @@
 package com.example.newlotok
 
 import android.animation.ObjectAnimator
+import android.content.Context
 import android.os.Bundle
 import android.view.View
 import android.view.animation.OvershootInterpolator
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.activity.viewModels
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.Surface
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.core.animation.doOnEnd
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
+import androidx.datastore.core.DataStore
+import androidx.datastore.preferences.core.Preferences
+import androidx.datastore.preferences.core.booleanPreferencesKey
+import androidx.datastore.preferences.preferencesDataStore
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import com.example.newlotok.ui.LotokApp
+import com.example.newlotok.ui.LotokViewModel
+import com.example.newlotok.ui.navigation.LotokScreen
 import com.example.newlotok.ui.theme.LotokTheme
+import kotlinx.coroutines.launch
+
+
+val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "settings")
+val SHOW_WELCOME_SCREEN = booleanPreferencesKey("show_welcome_screen")
+
 
 
 class MainActivity : ComponentActivity() {
 
+    val viewModelFactory = object : ViewModelProvider.Factory {
+        override fun <T : ViewModel> create(modelClass: Class<T>): T {
+            if (modelClass.isAssignableFrom(LotokViewModel::class.java)) {
+                // Pass the required parameter to the LotokViewModel constructor
+                return LotokViewModel(context = applicationContext) as T
+            }
+            throw IllegalArgumentException("Unknown ViewModel class")
+        }
+    }
+    private val viewModel by viewModels<LotokViewModel>{ viewModelFactory }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         installSplashScreen().apply {
             setKeepOnScreenCondition {
-                false
+                !viewModel.isReady.value
             }
             setOnExitAnimationListener { screen ->
                 val zoomX = ObjectAnimator.ofFloat(
@@ -31,7 +60,7 @@ class MainActivity : ComponentActivity() {
                     0.0f
                 )
                 zoomX.interpolator = OvershootInterpolator()
-                zoomX.duration = 500L
+                zoomX.duration = 500
                 zoomX.doOnEnd { screen.remove() }
 
                 val zoomY = ObjectAnimator.ofFloat(
@@ -41,7 +70,7 @@ class MainActivity : ComponentActivity() {
                     0.0f
                 )
                 zoomY.interpolator = OvershootInterpolator()
-                zoomY.duration = 500L
+                zoomY.duration = 500
                 zoomY.doOnEnd { screen.remove() }
 
                 zoomX.start()
@@ -54,7 +83,15 @@ class MainActivity : ComponentActivity() {
                 Surface(
                     modifier = Modifier.fillMaxSize()
                 ) {
-                    LotokApp()
+                    val startDestination = viewModel.getStartingScreen()
+                    LotokApp(
+                        onWelcomeScreenButtonClicked = {
+                            lifecycleScope.launch{
+                                viewModel.changeStartingScreen()
+                            }
+                        },
+                        startDestination = startDestination
+                    )
                     /*
                     var moh by remember {
                         mutableStateOf(true)

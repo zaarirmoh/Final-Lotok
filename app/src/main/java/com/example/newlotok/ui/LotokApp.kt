@@ -41,11 +41,16 @@ import com.example.newlotok.ui.navigation.LotokNavHost
 import com.example.newlotok.ui.screens.homeScreen.ExpendMenu
 
 @Composable
-fun LotokApp() {
+fun LotokApp(
+    startDestination: String,
+    onWelcomeScreenButtonClicked: () -> Unit = {}
+) {
     val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior()
 
     LotokNavHost(
-        scrollBehavior = scrollBehavior
+        scrollBehavior = scrollBehavior,
+        startDestination = startDestination,
+        onWelcomeScreenButtonClicked = onWelcomeScreenButtonClicked
     )
 }
 

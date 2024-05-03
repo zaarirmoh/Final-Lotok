@@ -46,6 +46,7 @@ fun LotokNavHost(
     showWelcomeScreen: Boolean = true,
     contentPadding: PaddingValues = PaddingValues(0.dp),
     scrollBehavior: TopAppBarScrollBehavior,
+    startDestination: String = LotokScreen.WelcomeScreen.name
 ) {
     val backStackEntry by navController.currentBackStackEntryAsState()
     val expandedMenu = remember { mutableStateOf(false)}
@@ -73,12 +74,20 @@ fun LotokNavHost(
     ) {
         NavHost(
             navController = navController,
-            startDestination = if (showWelcomeScreen) LotokScreen.HomeScreen.name else LotokScreen.WelcomeScreen.name,
+            startDestination = startDestination,
             modifier = modifier.padding(it)
         ) {
             composable(route = LotokScreen.WelcomeScreen.name){
                 WelcomeScreen(
-                    onButtonClicked =  onWelcomeScreenButtonClicked
+                    onButtonClicked = {
+                        onWelcomeScreenButtonClicked()
+                        navController.navigate(LotokScreen.HomeScreen.name) {
+                            // Empty the back stack
+                            popUpTo(navController.graph.startDestinationId) {
+                                inclusive = true
+                            }
+                        }
+                    }
                 )
             }
             composable(route = LotokScreen.HomeScreen.name){
