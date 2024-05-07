@@ -87,7 +87,9 @@ fun DateRangePicker(
                     Text(text = "Save")
                 }
             }
-            androidx.compose.material3.DateRangePicker(state = datePickerState)
+            androidx.compose.material3.DateRangePicker(
+                state = datePickerState,
+            )
         }
     }
 }

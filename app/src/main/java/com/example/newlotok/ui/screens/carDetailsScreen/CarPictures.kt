@@ -30,11 +30,13 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.newlotok.R
+import com.example.newlotok.model.Data
 
 @Composable
 fun CarPictures(
     modifier : Modifier = Modifier,
-    imgSrc : List<Int> = listOf(),
+    imgSrc : List<Int> = Data.fakeImages,
     onButtonClicked : () -> Unit = {}
 
 ){

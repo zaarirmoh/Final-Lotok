@@ -32,6 +32,12 @@ object Data{
             location = "Mila",
         )
     )
+    val fakeImages: List<Int> = listOf(
+        R.drawable.car_picture,
+        R.drawable.car2_pic,
+        R.drawable.car3_pic,
+        R.drawable.car4_pic
+    )
     val carBrandsList: List<CarBrand> = listOf(
         CarBrand(
             id = 1,
@@ -165,14 +171,6 @@ object Data{
             5,
             R.drawable.bentley_logo_svg_vector,
         ),
-    )
-    val categoriesList: List<Category> = listOf(
-        /*
-        Category(imgSrc = R.drawable.car_category),
-        Category(imgSrc = R.drawable.motorcycle_category),
-        Category(imgSrc = R.drawable.master_category),
-        Category(imgSrc = R.drawable.truck_category),
-         */
     )
     val comments: List<Comment> = listOf(
         Comment(

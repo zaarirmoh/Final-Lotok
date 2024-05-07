@@ -61,7 +61,6 @@ fun CarDetailsScreen(
             CarPictures(
                 modifier = Modifier.fillMaxWidth(),
                 onButtonClicked = bookButtonClicked
-
             )
             ClickableText(
                 text = "Check availability here ? " ,
