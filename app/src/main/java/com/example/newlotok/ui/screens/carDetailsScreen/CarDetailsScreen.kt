@@ -59,9 +59,13 @@ fun CarDetailsScreen(
             var showMore  by remember { mutableStateOf(true) }
             val showText = if (showMore) "show More" else "show less"
             CarPictures(
+                imgSrc = carPost.fakeImgSrc,
                 modifier = Modifier.fillMaxWidth(),
-                onButtonClicked = bookButtonClicked
+                onButtonClicked = bookButtonClicked,
+                buttonEnabled = true,
+
             )
+
             ClickableText(
                 text = "Check availability here ? " ,
                 onClick = {  },
@@ -121,7 +125,7 @@ fun CarDetailsScreen(
                 )
             Spacer(modifier = Modifier.height(30.dp))
             Column(modifier = Modifier.padding(start = 2.dp,end = 10.dp)) {
-                if (showMore)Data.comments.subList(0,2).forEach { it ->
+                if (showMore) Data.comments.subList(0,2).forEach { it ->
                     CommentCard(
                         profilePic = it.profilePic,
                         title = it.title,
@@ -148,6 +152,17 @@ fun CarDetailsScreen(
                     .padding(bottom = 16.dp)
                     .align(alignment = Alignment.CenterHorizontally)
             )
+
+
+
+
+
+
+
+
+
+
+
         }
     }
 }
@@ -167,15 +182,13 @@ fun ClickableText(
 }
 
 
+
+
 @Composable
 @Preview
 fun CarDetailsScreenPreview(){
     CarDetailsScreen(Data.carPostsList[0])
 }
-
-
-
-
 
 
 

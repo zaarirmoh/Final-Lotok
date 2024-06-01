@@ -10,6 +10,9 @@ fun NavGraphBuilder.carDetailsScreenNavigation(
     navController: NavHostController
 ){
     composable(route = LotokScreen.CarDetailsScreen.name){
-        CarDetailsScreen(Data.carPostsList[0])
+        CarDetailsScreen(
+            Data.carPostsList[0],
+            bookButtonClicked = { navController.navigate(LotokScreen.BookingScreen.name)}
+        )
     }
 }

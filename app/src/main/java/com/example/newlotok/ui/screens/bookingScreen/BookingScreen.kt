@@ -126,9 +126,10 @@ fun BookingScreen(
         ) {
             Box(modifier = Modifier.fillMaxWidth()){
                 CarPictures(
-                    imgSrc = carPost.imgSrc,
+                    imgSrc = carPost.fakeImgSrc,
                     modifier = Modifier.fillMaxWidth(),
                     buttonEnabled = false,
+                    onButtonClicked = bookNowButtonClicked
                 )
                 Rating(stars = carPost.rating)
             }

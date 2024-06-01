@@ -9,6 +9,12 @@ object Data{
         CarPost(
             id = id,
             imgSrc = "",
+            fakeImgSrc = listOf(
+                R.drawable.car_picture,
+                R.drawable.car2_pic,
+                R.drawable.car3_pic,
+                R.drawable.car4_pic
+            ),
             /*
             listOf(
                 R.drawable.car_picture,

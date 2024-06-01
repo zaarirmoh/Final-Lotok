@@ -26,4 +26,6 @@ data class CarPost(
     val rating: Double,
     val description: String? = null,
     val location: String ,
+    // to be removed
+    val fakeImgSrc: List<Int> = listOf()
 )
