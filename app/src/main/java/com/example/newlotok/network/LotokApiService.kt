@@ -19,7 +19,9 @@ package com.example.newlotok.network
 import com.example.newlotok.model.CarPost
 import com.example.newlotok.model.Category
 import com.example.newlotok.model.MarsPhoto
+import retrofit2.http.Body
 import retrofit2.http.GET
+import retrofit2.http.POST
 
 /**
  * A public interface that exposes the [getPhotos] method
@@ -30,13 +32,16 @@ interface LotokApiService {
      * The @GET annotation indicates that the "photos" endpoint will be requested with the GET
      * HTTP method
      */
-    @GET("images")
-    suspend fun getPhotos(): List<MarsPhoto>
-
 
     @GET("posts")
     suspend fun getCarPosts(): List<CarPost>
 
+    @POST("api/users/")
+    suspend fun addCarPost(
+        @Body carPost: CarPost
+    )
+
     @GET("categories")
     suspend fun getCategories(): List<Category>
+
 }

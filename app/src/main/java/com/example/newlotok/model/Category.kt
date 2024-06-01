@@ -9,5 +9,6 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class Category(
     val id: Int,
-    @SerialName(value = "img_src") val imgSrc: String
+    @SerialName(value = "img_src")
+    val imgSrc: String
 )

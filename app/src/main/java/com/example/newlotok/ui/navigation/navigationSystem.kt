@@ -1,11 +1,17 @@
 package com.example.newlotok.ui.navigation
 
+import android.content.Context
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.TopAppBarScrollBehavior
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
+import com.example.newlotok.model.OrderDetails
+import com.example.newlotok.ui.screens.addPostScreen.addPostScreenNavigation
+import com.example.newlotok.ui.screens.bookingScreen.BookingSharedViewModel
+import com.example.newlotok.ui.screens.bookingScreen.bookingScreenNavigation
 import com.example.newlotok.ui.screens.carDetailsScreen.carDetailsScreenNavigation
 import com.example.newlotok.ui.screens.homeScreen.homeScreenNavigation
+import com.example.newlotok.ui.screens.orderDetailsScreen.orderDetailsScreenNavigation
 import com.example.newlotok.ui.screens.profileDetailsScreens.editProfileScreen.editProfileScreenNavigation
 import com.example.newlotok.ui.screens.profileDetailsScreens.profileDetailsScreen.profileDetailsScreenNavigation
 import com.example.newlotok.ui.screens.profileScreen.profileScreenNavigation
@@ -23,6 +29,9 @@ fun NavGraphBuilder.navigationSystem(
     navController: NavHostController,
     onWelcomeScreenButtonClicked: () -> Unit = {},
     scrollBehavior: TopAppBarScrollBehavior,
+    context: Context,
+    bookingSharedViewModel: BookingSharedViewModel,
+    uiState: OrderDetails
 ){
     welcomeScreenNavigation(
         navController = navController,
@@ -40,4 +49,15 @@ fun NavGraphBuilder.navigationSystem(
     forgotPasswordScreenNavigation(navController = navController)
     otpVerificationScreenNavigation(navController = navController)
     carDetailsScreenNavigation(navController = navController)
+    bookingScreenNavigation(
+        navController = navController,
+        bookingSharedViewModel = bookingSharedViewModel,
+    )
+    orderDetailsScreenNavigation(
+        navController = navController,
+        uiState = uiState,
+        context = context,
+    )
+    addPostScreenNavigation(navController = navController)
+
 }

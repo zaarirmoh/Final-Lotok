@@ -46,6 +46,7 @@ fun LotokApp(
     onWelcomeScreenButtonClicked: () -> Unit = {}
 ) {
     val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior()
+    //TryPost()
 
     LotokNavHost(
         scrollBehavior = scrollBehavior,
@@ -53,49 +54,3 @@ fun LotokApp(
         onWelcomeScreenButtonClicked = onWelcomeScreenButtonClicked
     )
 }
-
-@OptIn(ExperimentalMaterial3Api::class)
-@Composable
-fun MarsTopAppBar(scrollBehavior: TopAppBarScrollBehavior, modifier: Modifier = Modifier) {
-    CenterAlignedTopAppBar(
-        scrollBehavior = scrollBehavior,
-        title = {
-            Text(
-                text = stringResource(R.string.app_name),
-                style = MaterialTheme.typography.headlineSmall,
-            )
-        },
-        modifier = modifier
-    )
-}
-
-/*
-    Scaffold(
-        modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
-        topBar = { TopBar(
-            startIcon =  {
-                StartIconMenu(onButtonClicked = {})
-            },
-            topBarCenter = { TopBarCenterLogo() },   //TopBarCenterText(text = "Home")
-            endIcon = { EndIconNotification() },
-            scrollBehavior = scrollBehavior
-        ) }
-    ) {
-        Surface(
-            modifier = Modifier.fillMaxSize()
-        ) {
-
-            /*
-            HomeScreen2(
-                homeScreenUiState = lotokViewModel.homeScreenUiState,
-                retryAction = lotokViewModel::getCarPosts,
-                contentPadding = it
-            )
-             */
-        }
-    }
-     */
-/*
-val lotokViewModel: HomeScreenViewModel =
-    viewModel(factory = HomeScreenViewModel.Factory)
- */

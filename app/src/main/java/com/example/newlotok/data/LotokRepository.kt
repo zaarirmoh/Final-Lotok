@@ -25,11 +25,13 @@ import com.example.newlotok.network.LotokApiService
  */
 interface LotokRepository {
     /** Fetches list of MarsPhoto from marsApi */
-    suspend fun getMarsPhotos(): List<MarsPhoto>
 
     suspend fun getCarPosts(): List<CarPost>
 
     suspend fun getCategories(): List<Category>
+
+    suspend fun addCarPost(carPost: CarPost)
+
 }
 
 /**
@@ -39,9 +41,11 @@ class NetworkLotokRepository(
     private val lotokApiService: LotokApiService
 ) : LotokRepository {
     /** Fetches list of MarsPhoto from marsApi*/
-    override suspend fun getMarsPhotos(): List<MarsPhoto> = lotokApiService.getPhotos()
 
     override suspend fun getCarPosts(): List<CarPost> = lotokApiService.getCarPosts()
 
     override suspend fun getCategories(): List<Category> = lotokApiService.getCategories()
+
+    override suspend fun addCarPost(carPost: CarPost) = lotokApiService.addCarPost(carPost)
+
 }

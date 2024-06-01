@@ -28,17 +28,17 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.newlotok.R
 import com.example.newlotok.model.Data
 
 @Composable
 fun CarPictures(
     modifier : Modifier = Modifier,
-    imgSrc : List<Int> = Data.fakeImages,
-    onButtonClicked : () -> Unit = {}
-
+    imgSrc : List<Int>,
+    onButtonClicked : () -> Unit = {},
+    buttonEnabled : Boolean = true,
 ){
     var currentPosition by remember { mutableIntStateOf(0) }
     val maxPosition = imgSrc.size
@@ -54,23 +54,12 @@ fun CarPictures(
                 .padding(bottom = 20.dp)
                 .background(Color.Gray)
         )
-        Button(
-            onClick = onButtonClicked,
-            colors = ButtonDefaults.buttonColors(Color(android.graphics.Color.parseColor("#B3261E"))),
-            modifier = Modifier
-                .height(36.dp)
-                .fillMaxWidth()
-                .padding(start = 4.dp, end = 4.dp)
-                .align(alignment = Alignment.BottomCenter)
-        ) {
-            Text(
-                text = "Book",
-                fontSize = 18.sp ,
-                color = Color.White   ,
-                fontWeight = FontWeight.Bold,
-                modifier= Modifier.align(alignment = Alignment.CenterVertically)
-            )
-        }
+
+        if (buttonEnabled) BookButton (onButtonClicked,modifier = Modifier
+            .height(36.dp)
+            .fillMaxWidth()
+            .padding(start = 4.dp, end = 4.dp)
+            .align(alignment = Alignment.BottomCenter))
 
         Row(
             modifier = Modifier
@@ -85,7 +74,6 @@ fun CarPictures(
                 enabled = currentPosition > 0 ,
                 modifier = Modifier
                     .size(40.dp)
-
 
             ) {
                 Icon(
@@ -107,9 +95,34 @@ fun CarPictures(
                     imageVector = Icons.AutoMirrored.Filled.KeyboardArrowRight,
                     contentDescription = "Next",
                     modifier = Modifier.fillMaxSize(),
-                    tint = if (currentPosition < maxPosition - 1) Color.White else Color.Gray
+                    tint = if (currentPosition < maxPosition - 1)Color.White else Color.Gray
                 )
             }
         }
     }
 }
+
+@Composable
+fun BookButton(onButtonClicked : ()-> Unit , modifier: Modifier){
+    Button(
+        onClick = onButtonClicked,
+        colors = ButtonDefaults.buttonColors(Color(android.graphics.Color.parseColor("#B3261E"))),
+        modifier = modifier
+    ) {
+        Text(
+            text = "Book",
+            fontSize = 18.sp ,
+            color = Color.White   ,
+            fontWeight = FontWeight.Bold,
+            modifier= Modifier.align(alignment = Alignment.CenterVertically)
+        )
+    }
+}
+
+/*
+@Composable
+@Preview
+fun CarPicturesPreview(){
+    CarPictures(imgSrc = Data.carPostsList[0].imgSrc)
+}
+ */

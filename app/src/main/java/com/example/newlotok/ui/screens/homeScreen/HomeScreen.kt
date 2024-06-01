@@ -35,6 +35,7 @@ fun HomeScreen(
     carPosts: List<CarPost> = listOf(),
     categories: List<Category> = listOf(),
     scrollBehavior: TopAppBarScrollBehavior,
+    isLoading: Boolean = false,
 ) {
     val navigationBarHeight = 90
     Scaffold(

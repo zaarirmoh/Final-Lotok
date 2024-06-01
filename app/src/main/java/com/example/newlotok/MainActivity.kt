@@ -10,8 +10,6 @@ import androidx.activity.compose.setContent
 import androidx.activity.viewModels
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.Surface
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.core.animation.doOnEnd
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
@@ -24,7 +22,6 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.example.newlotok.ui.LotokApp
 import com.example.newlotok.ui.LotokViewModel
-import com.example.newlotok.ui.navigation.LotokScreen
 import com.example.newlotok.ui.theme.LotokTheme
 import kotlinx.coroutines.launch
 
