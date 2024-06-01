@@ -16,6 +16,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
@@ -30,8 +31,8 @@ import com.example.newlotok.ui.screens.signInUpScreens.signInScreen.PasswordText
 fun SignUpTextFields(
     modifier: Modifier = Modifier,
 ){
-
-
+    val emailAddress = remember { mutableStateOf("") }
+    val password = remember { mutableStateOf("") }
     Column(
         modifier = modifier
             .fillMaxWidth()
@@ -39,9 +40,14 @@ fun SignUpTextFields(
     ){
         UserNameTextField()
         Spacer(modifier = modifier.height(20.dp))
-        EmailTextField()
+        EmailTextField(
+            emailAddress = emailAddress,
+        )
         Spacer(modifier = modifier.height(20.dp))
-        PasswordTextField(supportingText = { Text(text = "example: At least 8 characters") })
+        PasswordTextField(
+            supportingText = { Text(text = "example: At least 8 characters") },
+            password = password,
+        )
     }
 }
 @Composable

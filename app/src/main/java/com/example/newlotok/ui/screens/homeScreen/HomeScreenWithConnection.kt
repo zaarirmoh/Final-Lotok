@@ -81,7 +81,7 @@ fun ErrorScreen(retryAction: () -> Unit, modifier: Modifier = Modifier) {
         )
         Text(text = "", modifier = Modifier.padding(16.dp))
         Button(onClick = retryAction) {
-            Text("here we go")
+            Text("Reload page")
         }
     }
 }

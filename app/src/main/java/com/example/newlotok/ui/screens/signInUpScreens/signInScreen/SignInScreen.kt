@@ -9,6 +9,8 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.example.newlotok.ui.components.topBar.StartIconGoBack
@@ -26,6 +28,8 @@ fun SignInScreen(
     onSignInTextClicked: () -> Unit = {},
     onForgotPasswordTextClicked: () -> Unit
 ){
+    val emailAddress = remember { mutableStateOf("")}
+    val password = remember { mutableStateOf("")}
     Scaffold(
         topBar = {
             TopBar(
@@ -42,7 +46,11 @@ fun SignInScreen(
                 description = "Please sign in to continue to our app"
             )
             Spacer(modifier = modifier.height(50.dp))
-            SignInTextFields(onForgotPasswordTextClicked = onForgotPasswordTextClicked)
+            SignInTextFields(
+                onForgotPasswordTextClicked = onForgotPasswordTextClicked,
+                emailAddress = emailAddress,
+                password = password
+            )
             Spacer(modifier = modifier.height(40.dp))
             SignInUpButton(text = "Sign In")
             Column(
