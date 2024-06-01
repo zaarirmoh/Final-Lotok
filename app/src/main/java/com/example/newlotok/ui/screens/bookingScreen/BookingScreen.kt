@@ -1,6 +1,7 @@
 package com.example.newlotok.ui.screens.bookingScreen
 
 import android.annotation.SuppressLint
+import android.util.Log
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -108,8 +109,7 @@ fun BookingScreen(
     var openDialog by remember { mutableStateOf(false)}
 
     var requeredFields by remember { mutableStateOf(false) }
-
-
+    Log.d(null, "correct until here 2")
     Scaffold(
         topBar = {
             TopBar(
@@ -129,10 +129,10 @@ fun BookingScreen(
                     imgSrc = carPost.fakeImgSrc,
                     modifier = Modifier.fillMaxWidth(),
                     buttonEnabled = false,
-                    onButtonClicked = bookNowButtonClicked
                 )
                 Rating(stars = carPost.rating)
             }
+            Log.d(null, "correct until here 3")
             NameAndPrice(
                 modifier = Modifier.padding(start = 11.dp , end = 11.dp ),
                 name = carPost.model,
@@ -221,12 +221,12 @@ fun BookingScreen(
                 fontWeight = FontWeight.SemiBold,
                 modifier = Modifier.padding(start = 16.dp, top = 25.dp)
             )
-
+            Log.d(null, "correct until here 4")
             ImagePickerTextField(
                 modifier= Modifier
                     .padding(start = 24.dp, end = 16.dp, bottom = 8.dp, top = 16.dp)
             )
-
+            Log.d(null, "correct until here 0")
             Text(
                 text = "Expiration Date :",
                 fontSize = 13.sp,

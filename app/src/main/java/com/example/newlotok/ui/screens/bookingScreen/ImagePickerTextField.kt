@@ -4,6 +4,7 @@ import android.Manifest
 import android.content.Context
 import android.content.pm.PackageManager
 import android.net.Uri
+import android.util.Log
 import android.widget.Toast
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.PickVisualMediaRequest
@@ -55,19 +56,19 @@ fun ImagePickerTextField(
     shapeSize : Int = 80,
     imageSize : Int = 80,
 ) {
-
+    Log.d(null, "correct until here 5")
     val context = LocalContext.current
     val file = context.createImageFile()
-
+    Log.d(null, "correct until here 6")
     val uri = FileProvider.getUriForFile(
         Objects.requireNonNull(context),
         context.packageName + ".provider", file
     )
-
+    Log.d(null, "correct until here 7")
     var capturedImageUri by remember {
         mutableStateOf<Uri>(Uri.EMPTY)
     }
-
+    Log.d(null, "correct until here 8")
     var selectedImageUris by remember {
         mutableStateOf<List<Uri>>(emptyList())
     }
@@ -100,7 +101,7 @@ fun ImagePickerTextField(
         contract = ActivityResultContracts.PickMultipleVisualMedia(),
         onResult = { uris -> selectedImageUris = uris }
     )
-
+    Log.d(null, "correct until here ")
     Card(
         modifier = modifier.fillMaxWidth().height(shapeSize.dp).clickable { isDialogOpen = true },
         shape = RoundedCornerShape(4.dp),
