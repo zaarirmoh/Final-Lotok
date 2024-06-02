@@ -5,7 +5,9 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.TopAppBarScrollBehavior
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
+import com.example.newlotok.model.CarPostFirst
 import com.example.newlotok.model.OrderDetails
+import com.example.newlotok.ui.screens.addPostScreen.AddPostScreenViewModel
 import com.example.newlotok.ui.screens.addPostScreen.addPostScreenNavigation
 import com.example.newlotok.ui.screens.bookingScreen.BookingSharedViewModel
 import com.example.newlotok.ui.screens.bookingScreen.bookingScreenNavigation
@@ -31,7 +33,9 @@ fun NavGraphBuilder.navigationSystem(
     scrollBehavior: TopAppBarScrollBehavior,
     context: Context,
     bookingSharedViewModel: BookingSharedViewModel,
-    uiState: OrderDetails
+    uiState: OrderDetails,
+    addPostScreenViewModel: AddPostScreenViewModel,
+
 ){
     welcomeScreenNavigation(
         navController = navController,
@@ -61,6 +65,9 @@ fun NavGraphBuilder.navigationSystem(
         uiState = uiState,
         context = context,
     )
-    addPostScreenNavigation(navController = navController)
+    addPostScreenNavigation(
+        navController = navController,
+        addPostScreenViewModel = addPostScreenViewModel,
+    )
 
 }

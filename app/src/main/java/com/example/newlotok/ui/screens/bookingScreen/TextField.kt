@@ -1,5 +1,6 @@
 package com.example.newlotok.ui.screens.bookingScreen
 
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
@@ -32,6 +33,7 @@ fun TextField(
     imageVector: ImageVector,
     keyboardOptions : KeyboardOptions,
     condition : (String) -> Boolean,
+    shapeSize : Int= 60,
 
 ){
 
@@ -74,7 +76,7 @@ fun TextField(
         singleLine = singleLine,
 
         colors = textFieldColors,
-        modifier = modifier.height(60.dp)
+        modifier = if (shapeSize == 60 ) modifier.height(shapeSize.dp) else modifier
 
     )
 }

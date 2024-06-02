@@ -20,6 +20,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.example.newlotok.ui.components.navigationBar.MyNavigationBar
+import com.example.newlotok.ui.screens.addPostScreen.AddPostScreenViewModel
 import com.example.newlotok.ui.screens.bookingScreen.BookingSharedViewModel
 
 // ToDo: Try to Extract the scaffold out so all the screen have like one topAppBar and one NavigationBar
@@ -40,6 +41,7 @@ fun LotokNavHost(
     )
     val context : Context = LocalContext.current
     val bookingSharedViewModel = BookingSharedViewModel()
+    val addPostScreenViewModel = AddPostScreenViewModel()
     val uiState by bookingSharedViewModel.uiState.collectAsState()
     Scaffold(
         bottomBar = {
@@ -62,7 +64,8 @@ fun LotokNavHost(
                 onWelcomeScreenButtonClicked = onWelcomeScreenButtonClicked,
                 context = context,
                 bookingSharedViewModel = bookingSharedViewModel,
-                uiState = uiState
+                uiState = uiState,
+                addPostScreenViewModel = addPostScreenViewModel
             )
         }
     }

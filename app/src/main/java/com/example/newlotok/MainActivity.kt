@@ -82,7 +82,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize()
                 ) {
                     //val startDestination = viewModel.getStartingScreen()
-                    val startDestination = LotokScreen.SignUpScreen.name
+                    val startDestination = LotokScreen.AddPostScreen.name
                     LotokApp(
                         onWelcomeScreenButtonClicked = {
                             lifecycleScope.launch{

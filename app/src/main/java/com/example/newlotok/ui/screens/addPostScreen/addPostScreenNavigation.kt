@@ -9,9 +9,11 @@ import com.example.newlotok.ui.navigation.LotokScreen
 fun NavGraphBuilder.addPostScreenNavigation(
     modifier: Modifier = Modifier,
     navController: NavHostController,
+    addPostScreenViewModel: AddPostScreenViewModel
 ){
+
     composable(route = LotokScreen.AddPostScreen.name){
-        AddPostScreen(onGoBackIconClicked = { }) {
+        AddPostScreen(onGoBackIconClicked = { }, addPostScreenViewModel = addPostScreenViewModel) {
 
         }
     }
