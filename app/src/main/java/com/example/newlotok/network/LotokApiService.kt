@@ -19,6 +19,7 @@ package com.example.newlotok.network
 import com.example.newlotok.model.CarPost
 import com.example.newlotok.model.Category
 import com.example.newlotok.model.MarsPhoto
+import com.example.newlotok.model.SignIn
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
@@ -39,6 +40,12 @@ interface LotokApiService {
     @POST("api/users/")
     suspend fun addCarPost(
         @Body carPost: CarPost
+    )
+
+    @POST("api/jwt/create")
+    suspend fun signIn(
+        @Body
+        signInInformation: SignIn,
     )
 
     @GET("categories")

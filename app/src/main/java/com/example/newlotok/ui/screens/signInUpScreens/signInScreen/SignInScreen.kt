@@ -25,8 +25,9 @@ import com.example.newlotok.ui.screens.signInUpScreens.signInUpComponents.SignIn
 fun SignInScreen(
     modifier: Modifier = Modifier,
     onGoBackButtonClicked: () -> Unit = {},
-    onSignInTextClicked: () -> Unit = {},
-    onForgotPasswordTextClicked: () -> Unit
+    onSignUpTextClicked: () -> Unit = {},
+    onForgotPasswordTextClicked: () -> Unit,
+    onSignInButtonClicked: () -> Unit
 ){
     val emailAddress = remember { mutableStateOf("")}
     val password = remember { mutableStateOf("")}
@@ -52,7 +53,10 @@ fun SignInScreen(
                 password = password
             )
             Spacer(modifier = modifier.height(40.dp))
-            SignInUpButton(text = "Sign In")
+            SignInUpButton(
+                text = "Sign In",
+                onSignInButtonClicked = onSignInButtonClicked
+            )
             Column(
                 verticalArrangement = Arrangement.Bottom,
                 modifier = modifier
@@ -61,7 +65,7 @@ fun SignInScreen(
             ) {
                 SignInUpText(
                     text = "Sign Up",
-                    onTextClicked = onSignInTextClicked
+                    onTextClicked = onSignUpTextClicked
                 )
                 Spacer(modifier = modifier.height(40.dp))
                 SignInGoogleFacebook()

@@ -34,7 +34,6 @@ fun HomeScreenWithConnection(
     onMenuIconClicked: () -> Unit,
     onSearchForACarButtonClicked: () -> Unit,
     onSettingsClicked: () -> Unit
-
 ) {
     when (homeScreenUiState) {
         is HomeScreenUiState.Loading -> LoadingScreen(modifier = modifier.fillMaxSize())

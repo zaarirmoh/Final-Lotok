@@ -18,6 +18,7 @@ package com.example.newlotok.data
 import com.example.newlotok.model.CarPost
 import com.example.newlotok.model.Category
 import com.example.newlotok.model.MarsPhoto
+import com.example.newlotok.model.SignIn
 import com.example.newlotok.network.LotokApiService
 
 /**
@@ -31,6 +32,8 @@ interface LotokRepository {
     suspend fun getCategories(): List<Category>
 
     suspend fun addCarPost(carPost: CarPost)
+
+    suspend fun signIn(signInInformation: SignIn)
 
 }
 
@@ -47,5 +50,7 @@ class NetworkLotokRepository(
     override suspend fun getCategories(): List<Category> = lotokApiService.getCategories()
 
     override suspend fun addCarPost(carPost: CarPost) = lotokApiService.addCarPost(carPost)
+
+    override suspend fun signIn(signInInformation: SignIn) = lotokApiService.signIn(signInInformation)
 
 }
