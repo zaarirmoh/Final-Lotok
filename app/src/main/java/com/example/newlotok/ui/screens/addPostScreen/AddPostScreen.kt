@@ -43,7 +43,7 @@ import com.example.newlotok.ui.components.topBar.TopBar
 import com.example.newlotok.ui.components.topBar.TopBarCenterText
 import com.example.newlotok.ui.screens.bookingScreen.ImagePickerTextField
 import com.example.newlotok.ui.screens.bookingScreen.TextField
-import com.example.newlotok.ui.screens.bookingScreen.WilayasDropDownMenu
+
 
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -53,9 +53,10 @@ fun AddPostScreen(
     onGoBackIconClicked: () -> Unit,
     onPostClick: () -> Unit
 ){
-    var wilaya by remember { mutableStateOf("") }
-    var address by remember { mutableStateOf("") }
-    var description by remember { mutableStateOf("") }
+    var wilaya by remember { mutableStateOf(addPostScreenViewModel.uiState.value.wilaya) }
+    var address by remember { mutableStateOf(addPostScreenViewModel.uiState.value.address) }
+    var description by remember { mutableStateOf(addPostScreenViewModel.uiState.value.description) }
+    var vin by remember { mutableStateOf(addPostScreenViewModel.uiState.value.vin) }
 
     Scaffold(
         topBar = {
@@ -199,9 +200,7 @@ fun AddPostScreen(
             addPostScreenViewModel.updateWilaya(wilaya)
             addPostScreenViewModel.updateAddress(address)
             addPostScreenViewModel.updateDescription(description)
-        }
-
-
+            addPostScreenViewModel.updateVin(vin)
         }
     }
 }
