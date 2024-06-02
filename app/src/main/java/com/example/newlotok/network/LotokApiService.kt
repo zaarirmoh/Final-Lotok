@@ -20,6 +20,7 @@ import com.example.newlotok.model.CarPost
 import com.example.newlotok.model.Category
 import com.example.newlotok.model.MarsPhoto
 import com.example.newlotok.model.SignIn
+import com.example.newlotok.model.SignUp
 import com.example.newlotok.model.Tokens
 import retrofit2.http.Body
 import retrofit2.http.GET
@@ -29,11 +30,6 @@ import retrofit2.http.POST
  * A public interface that exposes the [getPhotos] method
  */
 interface LotokApiService {
-    /**
-     * Returns a [List] of [MarsPhoto] and this method can be called from a Coroutine.
-     * The @GET annotation indicates that the "photos" endpoint will be requested with the GET
-     * HTTP method
-     */
 
     @GET("posts")
     suspend fun getCarPosts(): List<CarPost>
@@ -48,6 +44,13 @@ interface LotokApiService {
         @Body
         signInInformation: SignIn,
     ): Tokens
+
+    @POST("api/users")
+    suspend fun signUp(
+        @Body
+        signUpInformation: SignUp
+    )
+
 
     @GET("categories")
     suspend fun getCategories(): List<Category>

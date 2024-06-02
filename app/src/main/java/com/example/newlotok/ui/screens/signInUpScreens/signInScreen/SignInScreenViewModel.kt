@@ -14,6 +14,7 @@ import com.example.newlotok.data.LotokRepository
 import com.example.newlotok.model.MarsPhoto
 import com.example.newlotok.model.SignIn
 import kotlinx.coroutines.launch
+import org.json.JSONObject
 import retrofit2.HttpException
 import java.io.IOException
 
@@ -56,27 +57,18 @@ class SignInScreenViewModel(private val lotokRepository: LotokRepository) : View
                     refreshToken = tokens.refreshToken,
                     accessToken = tokens.accessToken
                 )
-
-
             } catch (e: IOException){
                 Log.d(null, "exception")
                 SignInScreenUiState.Error
             } catch (e: HttpException){
-                Log.e(null, e.message())
+                val data = e.response()?.errorBody()?.string()
+                data.let {
+                    val json = JSONObject(data!!)
+                    val message = json.getString("detail")
+                    Log.e(null, message)
+                }
                 SignInScreenUiState.Error
             }
-            /*
-            signInScreenUiState = try {
-                HomeScreenUiState.Success(
-                    lotokRepository.getCarPosts(),
-                    lotokRepository.getCategories()
-                )
-            } catch (e: IOException) {
-                HomeScreenUiState.Error
-            } catch (e: HttpException) {
-                HomeScreenUiState.Error
-            }
-             */
         }
     }
 
