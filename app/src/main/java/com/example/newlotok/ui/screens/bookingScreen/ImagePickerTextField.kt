@@ -122,7 +122,7 @@ fun ImagePickerTextField(
             }
             else  {
                 var firstIndex = 0
-                val chunkSize = 3
+                val chunkSize = 4
 
                 Column(modifier = Modifier.fillMaxWidth()) {
                     while (firstIndex < selectedImageUris.size) {

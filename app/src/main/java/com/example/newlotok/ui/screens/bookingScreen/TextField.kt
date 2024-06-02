@@ -32,6 +32,7 @@ fun TextField(
     imageVector: ImageVector,
     keyboardOptions : KeyboardOptions,
     condition : (String) -> Boolean,
+    shapeSize : Int= 60,
 
 ){
 
@@ -74,7 +75,7 @@ fun TextField(
         singleLine = singleLine,
 
         colors = textFieldColors,
-        modifier = modifier.height(60.dp)
+        modifier = modifier.height(shapeSize.dp)
 
     )
 }

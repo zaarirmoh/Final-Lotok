@@ -22,6 +22,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.example.newlotok.ui.LotokApp
 import com.example.newlotok.ui.LotokViewModel
+import com.example.newlotok.ui.navigation.LotokScreen
 import com.example.newlotok.ui.theme.LotokTheme
 import kotlinx.coroutines.launch
 
@@ -80,7 +81,8 @@ class MainActivity : ComponentActivity() {
                 Surface(
                     modifier = Modifier.fillMaxSize()
                 ) {
-                    val startDestination = viewModel.getStartingScreen()
+                    //val startDestination = viewModel.getStartingScreen()
+                    val startDestination = LotokScreen.AddPostScreen.name
                     LotokApp(
                         onWelcomeScreenButtonClicked = {
                             lifecycleScope.launch{
