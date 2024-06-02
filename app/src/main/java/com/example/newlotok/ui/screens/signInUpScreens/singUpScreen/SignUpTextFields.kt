@@ -1,10 +1,13 @@
 package com.example.newlotok.ui.screens.signInUpScreens.singUpScreen
 
+import androidx.compose.foundation.gestures.Orientation
+import androidx.compose.foundation.gestures.scrollable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
@@ -40,8 +43,15 @@ fun SignUpTextFields(
     ){
         UserNameTextField()
         Spacer(modifier = modifier.height(20.dp))
+        UserNameTextField()
+        Spacer(modifier = modifier.height(20.dp))
         EmailTextField(
             emailAddress = emailAddress,
+        )
+        Spacer(modifier = modifier.height(20.dp))
+        PasswordTextField(
+            supportingText = { Text(text = "example: At least 8 characters") },
+            password = password,
         )
         Spacer(modifier = modifier.height(20.dp))
         PasswordTextField(

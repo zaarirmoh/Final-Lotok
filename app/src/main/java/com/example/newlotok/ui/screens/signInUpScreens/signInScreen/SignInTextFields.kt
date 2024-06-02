@@ -19,6 +19,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
@@ -60,12 +61,13 @@ fun EmailTextField(
     emailAddress: MutableState<String>
 ){
     val keyboardController = LocalSoftwareKeyboardController.current
+    var suffix by remember{ mutableStateOf("@gmail.com") }
     OutlinedTextField(
         value = emailAddress.value,
         onValueChange = {emailAddress.value = it},
         label = { Text(text = "Email address") },
         placeholder = { Text(text = "example",color = Color(0xFF7D848D)) },
-        suffix = { Text(text = "@gmail.com") },
+        suffix = { Text(text = suffix) },
         trailingIcon = {
             IconButton(onClick = { emailAddress.value = "" }) {
                 Icon(
@@ -80,6 +82,8 @@ fun EmailTextField(
         ),
         keyboardActions = KeyboardActions(onDone = {
             keyboardController?.hide()
+            emailAddress.value += suffix
+            suffix = ""
         }),
         modifier = modifier.fillMaxWidth(),
     )

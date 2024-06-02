@@ -20,6 +20,7 @@ import com.example.newlotok.model.CarPost
 import com.example.newlotok.model.Category
 import com.example.newlotok.model.MarsPhoto
 import com.example.newlotok.model.SignIn
+import com.example.newlotok.model.Tokens
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
@@ -46,7 +47,7 @@ interface LotokApiService {
     suspend fun signIn(
         @Body
         signInInformation: SignIn,
-    )
+    ): Tokens
 
     @GET("categories")
     suspend fun getCategories(): List<Category>

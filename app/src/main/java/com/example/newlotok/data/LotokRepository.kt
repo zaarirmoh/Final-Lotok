@@ -19,6 +19,7 @@ import com.example.newlotok.model.CarPost
 import com.example.newlotok.model.Category
 import com.example.newlotok.model.MarsPhoto
 import com.example.newlotok.model.SignIn
+import com.example.newlotok.model.Tokens
 import com.example.newlotok.network.LotokApiService
 
 /**
@@ -33,7 +34,7 @@ interface LotokRepository {
 
     suspend fun addCarPost(carPost: CarPost)
 
-    suspend fun signIn(signInInformation: SignIn)
+    suspend fun signIn(signInInformation: SignIn): Tokens
 
 }
 

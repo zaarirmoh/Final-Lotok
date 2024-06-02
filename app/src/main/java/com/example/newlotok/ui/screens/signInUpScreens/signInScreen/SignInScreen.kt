@@ -1,5 +1,6 @@
 package com.example.newlotok.ui.screens.signInUpScreens.signInScreen
 
+import android.util.Log
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -27,10 +28,13 @@ fun SignInScreen(
     onGoBackButtonClicked: () -> Unit = {},
     onSignUpTextClicked: () -> Unit = {},
     onForgotPasswordTextClicked: () -> Unit,
-    onSignInButtonClicked: () -> Unit
+    onSignInButtonClicked: () -> Unit,
+    signInScreenViewModel: SignInScreenViewModel
 ){
     val emailAddress = remember { mutableStateOf("")}
     val password = remember { mutableStateOf("")}
+    signInScreenViewModel.emailAddress = emailAddress.value
+    signInScreenViewModel.password = password.value
     Scaffold(
         topBar = {
             TopBar(
@@ -50,7 +54,7 @@ fun SignInScreen(
             SignInTextFields(
                 onForgotPasswordTextClicked = onForgotPasswordTextClicked,
                 emailAddress = emailAddress,
-                password = password
+                password = password,
             )
             Spacer(modifier = modifier.height(40.dp))
             SignInUpButton(

@@ -45,7 +45,10 @@ fun NavGraphBuilder.navigationSystem(
     profileDetailsScreenNavigation(navController = navController)
     editProfileScreenNavigation(navController = navController)
     signInScreenNavigation(navController = navController)
-    signUpScreenNavigation(navController = navController)
+    signUpScreenNavigation(
+        navController = navController,
+        scrollBehavior = scrollBehavior,
+    )
     forgotPasswordScreenNavigation(navController = navController)
     otpVerificationScreenNavigation(navController = navController)
     carDetailsScreenNavigation(navController = navController)

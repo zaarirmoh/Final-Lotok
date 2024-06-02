@@ -11,19 +11,16 @@ import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
 import com.example.newlotok.LotokApplication
 import com.example.newlotok.data.LotokRepository
-import com.example.newlotok.model.CarPost
-import com.example.newlotok.model.Category
 import com.example.newlotok.model.MarsPhoto
 import com.example.newlotok.model.SignIn
-import com.example.newlotok.ui.screens.homeScreen.HomeScreenUiState
 import kotlinx.coroutines.launch
 import retrofit2.HttpException
 import java.io.IOException
 
 sealed interface SignInScreenUiState {
     data class Success(
-        val refresh: String,
-        val access: String
+        val refreshToken: String,
+        val accessToken: String
     ) : SignInScreenUiState
     object Error : SignInScreenUiState
     object Loading : SignInScreenUiState
@@ -33,13 +30,9 @@ class SignInScreenViewModel(private val lotokRepository: LotokRepository) : View
     /** The mutable State that stores the status of the most recent request */
     var signInScreenUiState: SignInScreenUiState by mutableStateOf(SignInScreenUiState.Loading)
         private set
-    var userInformationReady: Boolean by mutableStateOf(false)
-    /**
-     * Call getMarsPhotos() on init so we can display status immediately.
-     */
-    init {
-        postUserInformation()
-    }
+
+    var emailAddress: String by mutableStateOf("")
+    var password: String by mutableStateOf("")
 
     /**
      * Gets Mars photos information from the Mars API Retrofit service and updates the
@@ -48,18 +41,29 @@ class SignInScreenViewModel(private val lotokRepository: LotokRepository) : View
     fun postUserInformation() {
         viewModelScope.launch {
             signInScreenUiState = SignInScreenUiState.Loading
-            if (userInformationReady) {
-                try {
-                    val signInInformation = SignIn(
-                        email = "zaarirmo07@gmail.com",
-                        password = "mynameismohamed"
-                    )
-                    lotokRepository.signIn(
-                        signInInformation = signInInformation
-                    )
-                } catch (e: Exception){
-                    Log.d(null, "exception")
-                }
+            signInScreenUiState = try {
+                val signInInformation = SignIn(
+                    email = emailAddress,
+                    password = password
+                )
+                val tokens = lotokRepository.signIn(
+                    signInInformation = signInInformation
+                )
+                // to be removed
+                Log.d(null, tokens.accessToken)
+                Log.d(null, tokens.refreshToken)
+                SignInScreenUiState.Success(
+                    refreshToken = tokens.refreshToken,
+                    accessToken = tokens.accessToken
+                )
+
+
+            } catch (e: IOException){
+                Log.d(null, "exception")
+                SignInScreenUiState.Error
+            } catch (e: HttpException){
+                Log.e(null, e.message())
+                SignInScreenUiState.Error
             }
             /*
             signInScreenUiState = try {

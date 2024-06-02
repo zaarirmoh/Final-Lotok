@@ -66,8 +66,8 @@ class HomeScreenViewModel(private val lotokRepository: LotokRepository) : ViewMo
             homeScreenUiState = HomeScreenUiState.Loading
             homeScreenUiState = try {
                 HomeScreenUiState.Success(
-                    lotokRepository.getCarPosts(),
-                    lotokRepository.getCategories()
+                    carPosts = lotokRepository.getCarPosts(),
+                    categories = lotokRepository.getCategories()
                 )
             } catch (e: HttpException){
                 HomeScreenUiState.Error

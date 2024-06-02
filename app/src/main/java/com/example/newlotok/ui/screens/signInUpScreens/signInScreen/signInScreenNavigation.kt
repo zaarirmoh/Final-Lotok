@@ -24,9 +24,9 @@ fun NavGraphBuilder.signInScreenNavigation(
                 navController.navigateUp()
             },
             onSignInButtonClicked = {
-                signInScreenViewModel.userInformationReady = true
                 signInScreenViewModel.postUserInformation()
-            }
+            },
+            signInScreenViewModel = signInScreenViewModel
         )
     }
 }
