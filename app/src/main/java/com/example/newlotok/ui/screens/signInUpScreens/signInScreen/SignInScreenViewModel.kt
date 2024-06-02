@@ -11,7 +11,6 @@ import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
 import com.example.newlotok.LotokApplication
 import com.example.newlotok.data.LotokRepository
-import com.example.newlotok.model.MarsPhoto
 import com.example.newlotok.model.SignIn
 import kotlinx.coroutines.launch
 import org.json.JSONObject
@@ -34,12 +33,9 @@ class SignInScreenViewModel(private val lotokRepository: LotokRepository) : View
 
     var emailAddress: String by mutableStateOf("")
     var password: String by mutableStateOf("")
-
-    /**
-     * Gets Mars photos information from the Mars API Retrofit service and updates the
-     * [MarsPhoto] [List] [MutableList].
-     */
-    fun postUserInformation() {
+    var errorMessage: String by mutableStateOf("")
+        private set
+    fun postSignInInformation() {
         viewModelScope.launch {
             signInScreenUiState = SignInScreenUiState.Loading
             signInScreenUiState = try {
@@ -64,10 +60,15 @@ class SignInScreenViewModel(private val lotokRepository: LotokRepository) : View
                 val data = e.response()?.errorBody()?.string()
                 data.let {
                     val json = JSONObject(data!!)
-                    val message = json.getString("detail")
-                    Log.e(null, message)
+                    val keys = json.keys()
+                    while(keys.hasNext()){
+                        val key = keys.next()
+                        val message = json.getString(key)
+                        errorMessage = message
+                        Log.e(e.message(), errorMessage)
+                    }
+                    SignInScreenUiState.Error
                 }
-                SignInScreenUiState.Error
             }
         }
     }

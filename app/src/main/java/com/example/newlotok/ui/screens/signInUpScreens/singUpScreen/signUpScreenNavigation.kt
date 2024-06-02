@@ -2,6 +2,7 @@ package com.example.newlotok.ui.screens.signInUpScreens.singUpScreen
 
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.TopAppBarScrollBehavior
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
@@ -13,14 +14,25 @@ fun NavGraphBuilder.signUpScreenNavigation(
     scrollBehavior: TopAppBarScrollBehavior,
 ){
     composable(route = LotokScreen.SignUpScreen.name){
+        val signUpScreenViewModel: SignUpScreenViewModel =
+            viewModel(factory = SignUpScreenViewModel.Factory)
         SignUpScreen(
-            onSignUPTextClicked = {
+            onSignInTextClicked = {
                 navController.navigate(LotokScreen.SignInScreen.name)
             },
             onGoBackButtonClicked = {
                 navController.navigateUp()
             },
-            scrollBehavior = scrollBehavior
+            scrollBehavior = scrollBehavior,
+            signUpScreenViewModel = signUpScreenViewModel,
+            onSignUpButtonClicked = {
+                signUpScreenViewModel.postSignUpInformation()
+            },
+            onConfirmButtonClicked = {
+            },
+            onDismissButtonClicked = {
+                navController.navigate(LotokScreen.SignInScreen.name)
+            }
         )
     }
 }
