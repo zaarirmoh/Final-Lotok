@@ -34,7 +34,6 @@ fun HomeScreenWithConnection(
     onMenuIconClicked: () -> Unit,
     onSearchForACarButtonClicked: () -> Unit,
     onSettingsClicked: () -> Unit
-
 ) {
     when (homeScreenUiState) {
         is HomeScreenUiState.Loading -> LoadingScreen(modifier = modifier.fillMaxSize())
@@ -81,7 +80,7 @@ fun ErrorScreen(retryAction: () -> Unit, modifier: Modifier = Modifier) {
         )
         Text(text = "", modifier = Modifier.padding(16.dp))
         Button(onClick = retryAction) {
-            Text("here we go")
+            Text("Reload page")
         }
     }
 }

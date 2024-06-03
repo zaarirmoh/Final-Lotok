@@ -10,6 +10,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.example.newlotok.ui.components.topBar.StartIconGoBack
@@ -26,6 +27,7 @@ fun ForgotPasswordScreen(
     isCheckEmailDialogOpen: MutableState<Boolean> = mutableStateOf(false),
     onForgotPasswordButtonClicked: () -> Unit = {}
 ){
+    val emailAddress = remember { mutableStateOf("") }
     Scaffold(
         topBar = {
             TopBar(
@@ -49,7 +51,9 @@ fun ForgotPasswordScreen(
                 description = "enter your email account to reset your password"
             )
             Spacer(modifier = modifier.height(50.dp))
-            EmailTextField()
+            EmailTextField(
+                emailAddress = emailAddress,
+            )
             Spacer(modifier = modifier.height(40.dp))
             SignInUpButton(
                 text = "Reset password",
