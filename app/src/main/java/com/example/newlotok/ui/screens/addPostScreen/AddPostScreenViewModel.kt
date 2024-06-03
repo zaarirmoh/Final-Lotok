@@ -26,13 +26,23 @@ class AddPostScreenViewModel {
         updateItem(description, "description")
     }
 
+    fun updateDailyPrice(price: String) {
+        updateItem(price, "dailyPrice")
+    }
+
+    fun updateWeeklyPrice(price: String) {
+        updateItem(price, "weeklyPrice")
+    }
+
     private fun updateItem(newItem: String, type: String) {
         _uiState.update { currentState ->
             currentState.copy(
                 vin = if (type == "vin") newItem else currentState.vin,
                 wilaya = if (type == "wilaya") newItem.toInt() else currentState.wilaya,
                 address = if (type == "address") newItem else currentState.address,
-                description = if (type == "description") newItem else currentState.description
+                description = if (type == "description") newItem else currentState.description,
+                dailyPrice = if (type == "dailyPrice") newItem.toDouble() else currentState.dailyPrice,
+                weeklyPrice = if (type == "weeklyPrice") newItem.toDouble() else currentState.weeklyPrice
             )
         }
     }

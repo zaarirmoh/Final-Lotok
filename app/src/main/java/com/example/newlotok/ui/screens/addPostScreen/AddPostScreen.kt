@@ -16,7 +16,9 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Description
+import androidx.compose.material.icons.filled.DirectionsCarFilled
 import androidx.compose.material.icons.filled.LocationOn
+import androidx.compose.material.icons.filled.PriceChange
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
@@ -57,7 +59,15 @@ fun AddPostScreen(
     var address by remember { mutableStateOf(addPostScreenViewModel.uiState.value.address) }
     var description by remember { mutableStateOf(addPostScreenViewModel.uiState.value.description) }
     var vin by remember { mutableStateOf(addPostScreenViewModel.uiState.value.vin) }
+    var dailyPrice by remember { mutableStateOf("0.0") }
+    var weeklyPrice by remember { mutableStateOf("0.0") }
 
+    val validPost= (
+            address.isNotEmpty() &&
+                    vin.isNotEmpty() && dailyPrice.isNotEmpty() && weeklyPrice.isNotEmpty()
+            )
+
+    var requeredFields by remember { mutableStateOf(false) }
     Scaffold(
         topBar = {
             TopBar(
@@ -83,7 +93,7 @@ fun AddPostScreen(
             ImagePickerTextField(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(start = 16.dp, end = 16.dp, top = 16.dp, bottom = 4.dp),
+                    .padding(start = 26.dp, end = 16.dp, top = 16.dp, bottom = 4.dp),
                 "     Add the car's images",
                 260
             )
@@ -94,7 +104,8 @@ fun AddPostScreen(
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(start = 16.dp, end = 16.dp, bottom = 4.dp),
-                textAlign = androidx.compose.ui.text.style.TextAlign.End
+                textAlign = androidx.compose.ui.text.style.TextAlign.End,
+                fontSize = 12.sp,
             )
 
             Spacer(modifier = Modifier.height(16.dp))
@@ -109,14 +120,14 @@ fun AddPostScreen(
             ImagePickerTextField(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(start = 16.dp, end = 16.dp, bottom = 4.dp, top = 8.dp),
+                    .padding(start = 24.dp, end = 16.dp, bottom = 4.dp, top = 16.dp),
                 "     Add the Carte Grise",
             )
             Spacer(modifier = Modifier.height(4.dp))
             ImagePickerTextField(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(16.dp),
+                    .padding(start = 24.dp, end = 16.dp , bottom = 4.dp ),
                 "     Add the Assurance",
             )
             Spacer(modifier = Modifier.height(4.dp))
@@ -124,15 +135,37 @@ fun AddPostScreen(
             ImagePickerTextField(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(16.dp),
+                    .padding(start = 24.dp, end = 16.dp , bottom = 16.dp ),
                 "     Add the Technical Control",
             )
+
+
+            TextField(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(start = 24.dp, end = 16.dp, bottom = 24.dp, top = 16.dp),
+                value = vin,
+                onValueChange = { vin = it },
+                labelText = "Vehicle Identification Number",
+                labelTextWarning = "",
+                placeHolderText = "",
+                imageVector = Icons.Default.DirectionsCarFilled,
+                keyboardOptions = KeyboardOptions(
+                    imeAction = ImeAction.Next,
+                    keyboardType = KeyboardType.Text
+                ),
+                condition = {true},
+                shapeSize = 60,
+                singleLine = false,
+            )
+
+
 
             Text(
                 text = "Add car's location :",
                 fontSize = 20.sp,
                 fontWeight = FontWeight.SemiBold,
-                modifier = Modifier.padding(start = 16.dp, top = 30.dp)
+                modifier = Modifier.padding(start = 16.dp, top = 30.dp,bottom = 16.dp)
             )
 
             WilayasDropDownMenu(
@@ -178,29 +211,112 @@ fun AddPostScreen(
                 labelTextWarning = "",
                 placeHolderText = "",
                 imageVector = Icons.Default.Description,
-                keyboardOptions = KeyboardOptions(
-                    imeAction = ImeAction.Next,
-                    keyboardType = KeyboardType.Text
-                ),
-                condition = { it.isNotEmpty() },
-                shapeSize = 60,
+                keyboardOptions = KeyboardOptions.Default,
+                condition = {true},
+                shapeSize = 61,
                 singleLine = false,
             )
 
-            Button(
-                onClick = onPostClick,
+
+            Text(
+                text = "Add a price for your car: ",
+                fontSize = 20.sp,
+                fontWeight = FontWeight.SemiBold,
+                modifier = Modifier.padding(start = 16.dp, top = 30.dp)
+            )
+
+            TextField(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(16.dp)
+                    .padding(start = 24.dp, end = 16.dp, bottom = 16.dp, top = 16.dp),
+                value = dailyPrice,
+                onValueChange = { dailyPrice = it },
+                labelText = "dailyPrice DZA/day",
+                labelTextWarning = "",
+                placeHolderText = "",
+                imageVector = Icons.Default.PriceChange,
+                keyboardOptions = KeyboardOptions(
+                    imeAction = ImeAction.Next,
+                    keyboardType = KeyboardType.Number
+                ),
+                condition = {it.isNotEmpty() },
+                shapeSize = 60,
+                singleLine = true,
+            )
+
+            TextField(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(start = 24.dp, end = 16.dp, bottom = 24.dp),
+                value = weeklyPrice,
+                onValueChange = { weeklyPrice = it },
+                labelText = "dailyPrice DZA/week",
+                labelTextWarning = "",
+                placeHolderText = "",
+                imageVector = Icons.Default.PriceChange,
+
+                keyboardOptions = KeyboardOptions(
+                    imeAction = ImeAction.Done,
+                    keyboardType = KeyboardType.Number
+                ),
+                condition = { it.isNotEmpty() },
+                shapeSize = 60,
+                singleLine = true,
+            )
+
+
+
+            Button(
+                onClick = {
+                    onPostClick()
+                    if (!validPost)  requeredFields = true
+                },
+                colors = ButtonDefaults.buttonColors(Color(android.graphics.Color.parseColor("#B3261E"))),
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(start = 20.dp, end = 16.dp, top = 16.dp )
             ) {
-                Text(text = "Post")
+                Text(
+                    text = "Add Post",
+                    fontSize = 18.sp ,
+                    color = Color.White   ,
+                    fontWeight = FontWeight.Bold,
+                    modifier= Modifier.align(alignment = Alignment.CenterVertically)
+                )
             }
+
+            if (requeredFields){
+                if (dailyPrice.toDouble() < 0 || weeklyPrice.toDouble() < 0) {
+                    Text(
+                        text = "Please enter a valid price !",
+                        color = Color.Red,
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(start = 25.dp, end = 16.dp, bottom = 16.dp),
+                        fontSize = 12.sp,
+                    )
+                }
+                Text(
+                    text = "Please fill all the requered fields !",
+                    color = Color.Red,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(start = 25.dp, end = 16.dp, bottom = 16.dp),
+                    fontSize = 12.sp,
+                )
+            }
+            else Spacer(modifier = Modifier.height(30.dp))
+
+
 
             // Update ViewModel with latest values
             addPostScreenViewModel.updateWilaya(wilaya)
             addPostScreenViewModel.updateAddress(address)
             addPostScreenViewModel.updateDescription(description)
             addPostScreenViewModel.updateVin(vin)
+            addPostScreenViewModel.updateDailyPrice(dailyPrice)
+            addPostScreenViewModel.updateWeeklyPrice(weeklyPrice)
+
         }
     }
 }

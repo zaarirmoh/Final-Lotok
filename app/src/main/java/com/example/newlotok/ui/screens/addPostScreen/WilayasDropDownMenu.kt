@@ -99,7 +99,7 @@ fun WilayasDropDownMenu(
                         onWilayaSelected(wilayas.indexOf(wilaya) )
                         expanded = false
                     },
-                    modifier = Modifier.fillMaxWidth()
+                    modifier = Modifier.fillMaxWidth(),
                 )
             }
         }

@@ -105,8 +105,8 @@ fun ImagePickerTextField(
     Card(
         modifier = modifier.fillMaxWidth().height(shapeSize.dp).clickable { isDialogOpen = true },
         shape = RoundedCornerShape(4.dp),
-        border = BorderStroke(1.dp, Color.Gray),
-        colors = CardDefaults.cardColors(Color.Transparent)
+        border = BorderStroke(0.1.dp, Color.Gray),
+        colors = CardDefaults.cardColors(Color(0xFFF5F5F5))
     ) {
         Row(modifier = Modifier.fillMaxSize(),horizontalArrangement = Arrangement.SpaceBetween) {
             if (selectedImageUris.isEmpty()) {

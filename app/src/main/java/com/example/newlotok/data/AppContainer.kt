@@ -34,8 +34,8 @@ interface AppContainer {
  * Variables are initialized lazily and the same instance is shared across the whole app.
  */
 class DefaultAppContainer : AppContainer {
-    private val baseUrl = "https://mockend.com/api/zaarirmoh/Lotok/"
-    //private val baseUrl = "http://192.168.43.155:8000/"
+    //private val baseUrl = "https://mockend.com/api/zaarirmoh/Lotok/"
+    private val baseUrl = "http://192.168.172.217:8000/"
     /**
      * Use the Retrofit builder to build a retrofit object using a kotlinx.serialization converter
      */
