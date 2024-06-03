@@ -93,6 +93,9 @@ fun BookingScreen(
         mutableStateOf(bookingSharedViewModel.uiState.value.paymentMethod)
     }
 
+    var DrivingLicencePics = mutableStateOf(bookingSharedViewModel.uiState.value.licensePics)
+
+
     val rentedDays = DateDifference(firstDate = fromDate, secondDate = toDate)
 
     val totalPrice = rentedDays * carPost.dayPrice
@@ -224,7 +227,8 @@ fun BookingScreen(
             Log.d(null, "correct until here 4")
             ImagePickerTextField(
                 modifier= Modifier
-                    .padding(start = 24.dp, end = 16.dp, bottom = 8.dp, top = 16.dp)
+                    .padding(start = 24.dp, end = 16.dp, bottom = 8.dp, top = 16.dp),
+                selectedImageUris = DrivingLicencePics,
             )
             Log.d(null, "correct until here 0")
             Text(
@@ -418,6 +422,7 @@ fun BookingScreen(
             bookingSharedViewModel.updateExpirationDate(expirationDate)
             bookingSharedViewModel.updatePaymentMethod(paymentMethod)
             bookingSharedViewModel.updateTotalPrice(totalPrice.toDouble())
+            bookingSharedViewModel.updateLicensePics(DrivingLicencePics.value)
 
 
 

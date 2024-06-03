@@ -1,5 +1,7 @@
 package com.example.newlotok.ui.screens.addPostScreen
 
+import android.annotation.SuppressLint
+import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -8,6 +10,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.text.BasicTextField
@@ -39,6 +42,7 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import coil.compose.AsyncImage
 import com.example.newlotok.ui.components.topBar.EndIconProfile
 import com.example.newlotok.ui.components.topBar.StartIconGoBack
 import com.example.newlotok.ui.components.topBar.TopBar
@@ -48,12 +52,13 @@ import com.example.newlotok.ui.screens.bookingScreen.TextField
 
 
 
+@SuppressLint("UnrememberedMutableState", "StateFlowValueCalledInComposition")
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun AddPostScreen(
     addPostScreenViewModel: AddPostScreenViewModel,
     onGoBackIconClicked: () -> Unit,
-    onPostClick: () -> Unit
+    onConfirmButtonClicked: () -> Unit,
 ){
     var wilaya by remember { mutableStateOf(addPostScreenViewModel.uiState.value.wilaya) }
     var address by remember { mutableStateOf(addPostScreenViewModel.uiState.value.address) }
@@ -61,13 +66,22 @@ fun AddPostScreen(
     var vin by remember { mutableStateOf(addPostScreenViewModel.uiState.value.vin) }
     var dailyPrice by remember { mutableStateOf("0.0") }
     var weeklyPrice by remember { mutableStateOf("0.0") }
+    var carPictures = mutableStateOf(addPostScreenViewModel.uiState.value.carPictures)
+    var carteGrisePic = mutableStateOf(addPostScreenViewModel.uiState.value.carteGrisePic)
+    var assurancePic = mutableStateOf(addPostScreenViewModel.uiState.value.assurancePic)
+    var technicalControlPic = mutableStateOf(addPostScreenViewModel.uiState.value.technicalControlPic)
+
 
     val validPost= (
             address.isNotEmpty() &&
                     vin.isNotEmpty() && dailyPrice.isNotEmpty() && weeklyPrice.isNotEmpty()
+                    && carPictures.value.isNotEmpty() && carteGrisePic.value.isNotEmpty() &&
+                    assurancePic.value.isNotEmpty() && technicalControlPic.value.isNotEmpty()
             )
 
     var requeredFields by remember { mutableStateOf(false) }
+    var openDialog by remember { mutableStateOf(false)}
+
     Scaffold(
         topBar = {
             TopBar(
@@ -95,7 +109,8 @@ fun AddPostScreen(
                     .fillMaxWidth()
                     .padding(start = 26.dp, end = 16.dp, top = 16.dp, bottom = 4.dp),
                 "     Add the car's images",
-                260
+                260,
+                selectedImageUris = carPictures
             )
 
             Text(
@@ -122,21 +137,24 @@ fun AddPostScreen(
                     .fillMaxWidth()
                     .padding(start = 24.dp, end = 16.dp, bottom = 4.dp, top = 16.dp),
                 "     Add the Carte Grise",
+                selectedImageUris = carteGrisePic
             )
             Spacer(modifier = Modifier.height(4.dp))
             ImagePickerTextField(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(start = 24.dp, end = 16.dp, bottom = 4.dp),
+                    .padding(start = 24.dp, end = 16.dp , bottom = 4.dp ),
                 "     Add the Assurance",
+                selectedImageUris = assurancePic
             )
             Spacer(modifier = Modifier.height(4.dp))
 
             ImagePickerTextField(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(start = 24.dp, end = 16.dp, bottom = 16.dp),
+                    .padding(start = 24.dp, end = 16.dp , bottom = 16.dp ),
                 "     Add the Technical Control",
+                selectedImageUris = technicalControlPic
             )
 
 
@@ -268,13 +286,12 @@ fun AddPostScreen(
 
             Button(
                 onClick = {
-                    onPostClick()
-                    if (!validPost)  requeredFields = true
+                    if (!validPost)  requeredFields = true else openDialog = true
                 },
                 colors = ButtonDefaults.buttonColors(Color(android.graphics.Color.parseColor("#B3261E"))),
                 modifier = Modifier
                     .fillMaxSize()
-                    .padding(start = 20.dp, end = 16.dp, top = 16.dp)
+                    .padding(start = 20.dp, end = 16.dp, top = 16.dp )
             ) {
                 Text(
                     text = "Add Post",
@@ -285,37 +302,74 @@ fun AddPostScreen(
                 )
             }
 
-            if (requeredFields){
-                if (dailyPrice.toDouble() < 0 || weeklyPrice.toDouble() < 0) {
-                    Text(
-                        text = "Please enter a valid price !",
+            if (requeredFields ){
+                Text(
+                        text = "Please fill all the requered fields !",
                         color = Color.Red,
                         modifier = Modifier
                             .fillMaxWidth()
                             .padding(start = 25.dp, end = 16.dp, bottom = 16.dp),
                         fontSize = 12.sp,
                     )
-                }
-                Text(
-                    text = "Please fill all the requered fields !",
-                    color = Color.Red,
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(start = 25.dp, end = 16.dp, bottom = 16.dp),
-                    fontSize = 12.sp,
-                )
             }
             else Spacer(modifier = Modifier.height(30.dp))
+
+
+
 
             // Update ViewModel with latest values
             addPostScreenViewModel.updateWilaya(wilaya)
             addPostScreenViewModel.updateAddress(address)
             addPostScreenViewModel.updateDescription(description)
             addPostScreenViewModel.updateVin(vin)
-            addPostScreenViewModel.updateDailyPrice(dailyPrice)
-            addPostScreenViewModel.updateWeeklyPrice(weeklyPrice)
+            if (dailyPrice.isNotEmpty() && weeklyPrice.isNotEmpty()) {
+                addPostScreenViewModel.updateDailyPrice(dailyPrice)
+                addPostScreenViewModel.updateWeeklyPrice(weeklyPrice)
+            }
+            addPostScreenViewModel.updateCarPictures(carPictures.value)
+            addPostScreenViewModel.updateCarteGrisePic(carteGrisePic.value)
+            addPostScreenViewModel.updateAssurancePic(assurancePic.value)
+            addPostScreenViewModel.updateTechnicalControlPic(technicalControlPic.value)
+
+
+            if (openDialog) {
+                AlertDialog(
+                    onDismissRequest = { openDialog = false},
+                    title = { Text("Confirm Car Details") },
+                    text = { VinDetails(modifier = Modifier,addPostScreenViewModel.vinResult)
+                        AsyncImage(
+                            model = addPostScreenViewModel.uiState.value.carPictures[0] ,
+                            contentDescription = null,
+                            modifier = Modifier
+                                .size(60.dp)
+                                .padding(4.dp),
+                            contentScale = ContentScale.Crop
+                        )
+                           },
+                    confirmButton = {
+                        Button(onClick = {
+                            onConfirmButtonClicked()
+                            openDialog = false
+                        }) {
+                            Text("Confirm")
+                        }
+                    },
+                    dismissButton = {
+                        Button(onClick = { openDialog = false }) {
+                            Text("Cancel")
+                        }
+                    }
+                )
+            }
+
+
+
 
         }
+
+
     }
 }
+
+
 

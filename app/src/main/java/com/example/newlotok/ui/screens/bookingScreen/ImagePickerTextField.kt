@@ -32,6 +32,7 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -58,8 +59,9 @@ fun ImagePickerTextField(
     text : String = "    Driving licence Pictures",
     shapeSize : Int = 80,
     imageSize : Int = 80,
+    selectedImageUris : MutableState<List<Uri>> ,
 ) {
-    Log.d(null, "correct until here 5")
+
     val context = LocalContext.current
     val file = context.createImageFile()
     Log.d(null, "correct until here 6")
@@ -67,19 +69,19 @@ fun ImagePickerTextField(
         Objects.requireNonNull(context),
         context.packageName + ".provider", file
     )
-    Log.d(null, "correct until here 7")
+
     var capturedImageUri by remember {
         mutableStateOf<Uri>(Uri.EMPTY)
     }
-    Log.d(null, "correct until here 8")
-    var selectedImageUris by remember {
+
+    var selectedImageUris1 by remember {
         mutableStateOf<List<Uri>>(emptyList())
     }
-    Log.d("imageUris", selectedImageUris.toString())
+
     val cameraLauncher =
         rememberLauncherForActivityResult(ActivityResultContracts.TakePicture()){
             capturedImageUri = uri
-            selectedImageUris = selectedImageUris.toMutableList().apply { add(capturedImageUri) }
+            selectedImageUris1 = selectedImageUris1.toMutableList().apply { add(capturedImageUri) }
         }
 
 
@@ -102,7 +104,7 @@ fun ImagePickerTextField(
 
     val multiplePhotoPickerLauncher = rememberLauncherForActivityResult(
         contract = ActivityResultContracts.PickMultipleVisualMedia(),
-        onResult = { uris -> selectedImageUris = uris }
+        onResult = { uris -> selectedImageUris1 = uris }
     )
     Log.d(null, "correct until here ")
     Card(
@@ -112,7 +114,7 @@ fun ImagePickerTextField(
         colors = CardDefaults.cardColors(Color(0xFFF5F5F5))
     ) {
         Row(modifier = Modifier.fillMaxSize(),horizontalArrangement = Arrangement.SpaceBetween) {
-            if (selectedImageUris.isEmpty()) {
+            if (selectedImageUris1.isEmpty()) {
                 Text(
                     text = text,
                     color = Color.Gray,
@@ -124,13 +126,14 @@ fun ImagePickerTextField(
 
             }
             else  {
+
                 var firstIndex = 0
                 val chunkSize = 4
 
                 Column(modifier = Modifier.fillMaxWidth()) {
-                    while (firstIndex < selectedImageUris.size) {
-                        val lastIndex = (firstIndex + chunkSize).coerceAtMost(selectedImageUris.size)
-                        val imageUris = selectedImageUris.subList(firstIndex, lastIndex)
+                    while (firstIndex < selectedImageUris1.size) {
+                        val lastIndex = (firstIndex + chunkSize).coerceAtMost(selectedImageUris1.size)
+                        val imageUris = selectedImageUris1.subList(firstIndex, lastIndex)
                         Row(modifier = Modifier.fillMaxWidth()) {
                             imageUris.forEach { uri ->
                                 AsyncImage(
@@ -169,7 +172,7 @@ fun ImagePickerTextField(
                         {
                             cameraLauncher.launch(uri)
                             capturedImageUri = uri
-                            selectedImageUris.toMutableList().add(capturedImageUri)
+                            selectedImageUris1.toMutableList().add(capturedImageUri)
 
                         }
                         else
@@ -215,6 +218,8 @@ fun ImagePickerTextField(
     }) {
         Text(text = "test")
     }
+
+    selectedImageUris.value = selectedImageUris1
 }
 
 fun Context.createImageFile(): File {
