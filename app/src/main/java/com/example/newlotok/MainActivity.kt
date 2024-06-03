@@ -88,16 +88,6 @@ class MainActivity : ComponentActivity() {
                 Surface(
                     modifier = Modifier.fillMaxSize()
                 ) {
-                    //val startDestination = viewModel.getStartingScreen()
-                    val startDestination = LotokScreen.BookingScreen.name
-                    LotokApp(
-                        onWelcomeScreenButtonClicked = {
-                            lifecycleScope.launch{
-                                viewModel.changeStartingScreen()
-                            }
-                        },
-                        startDestination = startDestination
-                    )
                     val tokensViewModel: TokensViewModel =
                         viewModel(factory = TokensViewModel.Factory)
                     LaunchedEffect(Unit) {
@@ -107,11 +97,28 @@ class MainActivity : ComponentActivity() {
                             val refreshToken = viewModel.getRefreshToken()
                             val tokens = Tokens(accessToken, refreshToken)
                             tokensViewModel.verifyAccessToken(tokens)
+                            if(tokensViewModel.isAccessVerified){
+
+                            }
                             Log.d("Refresh Token", refreshToken)
                             Log.d("Access Token",accessToken )
                             Log.d("finished here","finished here")
                         }
                     }
+                    //val startDestination = viewModel.getStartingScreen()
+                    val startDestination = LotokScreen.BookingScreen.name
+                    LotokApp(
+                        onWelcomeScreenButtonClicked = {
+                            lifecycleScope.launch{
+                                viewModel.changeStartingScreen()
+                            }
+                        },
+                        startDestination = startDestination,
+                        addPostRoute = if(tokensViewModel.isAccessVerified)
+                            LotokScreen.AddPostScreen.name else LotokScreen.SignInScreen.name,
+                    )
+
+
 
                     /*
                     var moh by remember {

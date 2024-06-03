@@ -29,6 +29,8 @@ class TokensViewModel(private val lotokRepository: LotokRepository) : ViewModel(
         viewModelScope.launch {
             try {
                 lotokRepository.verifyToken(token)
+                isAccessVerified = true
+                Log.d(null,"Access Verified")
             }catch(e: IOException){
                 Log.e(null,"IOException")
             }catch(e: HttpException){

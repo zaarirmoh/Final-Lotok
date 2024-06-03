@@ -27,7 +27,8 @@ import com.example.newlotok.ui.navigation.LotokNavHost
 @Composable
 fun LotokApp(
     startDestination: String,
-    onWelcomeScreenButtonClicked: () -> Unit = {}
+    onWelcomeScreenButtonClicked: () -> Unit = {},
+    addPostRoute: String,
 ) {
     val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior()
     //TryPost()
@@ -35,6 +36,7 @@ fun LotokApp(
     LotokNavHost(
         scrollBehavior = scrollBehavior,
         startDestination = startDestination,
-        onWelcomeScreenButtonClicked = onWelcomeScreenButtonClicked
+        onWelcomeScreenButtonClicked = onWelcomeScreenButtonClicked,
+        addPostRoute = addPostRoute,
     )
 }
