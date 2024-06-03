@@ -23,8 +23,11 @@ import androidx.datastore.preferences.preferencesDataStore
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.newlotok.model.Tokens
 import com.example.newlotok.ui.LotokApp
 import com.example.newlotok.ui.LotokViewModel
+import com.example.newlotok.ui.TokensViewModel
 import com.example.newlotok.ui.navigation.LotokScreen
 import com.example.newlotok.ui.theme.LotokTheme
 import kotlinx.coroutines.launch
@@ -86,7 +89,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize()
                 ) {
                     //val startDestination = viewModel.getStartingScreen()
-                    val startDestination = LotokScreen.SignInScreen.name
+                    val startDestination = LotokScreen.BookingScreen.name
                     LotokApp(
                         onWelcomeScreenButtonClicked = {
                             lifecycleScope.launch{
@@ -95,15 +98,21 @@ class MainActivity : ComponentActivity() {
                         },
                         startDestination = startDestination
                     )
-                    /*
+                    val tokensViewModel: TokensViewModel =
+                        viewModel(factory = TokensViewModel.Factory)
                     LaunchedEffect(Unit) {
                         lifecycleScope.launch {
-                            Log.d("Refresh Token",viewModel.getRefreshToken() )
-                            viewModel.setRefreshToken("mohamed")
-                            Log.d("Refresh Token",viewModel.getRefreshToken() )
+                            Log.d("entered here","entered here")
+                            val accessToken = viewModel.getAccessToken()
+                            val refreshToken = viewModel.getRefreshToken()
+                            val tokens = Tokens(accessToken, refreshToken)
+                            tokensViewModel.verifyAccessToken(tokens)
+                            Log.d("Refresh Token", refreshToken)
+                            Log.d("Access Token",accessToken )
+                            Log.d("finished here","finished here")
                         }
                     }
-                     */
+
                     /*
                     var moh by remember {
                         mutableStateOf(true)

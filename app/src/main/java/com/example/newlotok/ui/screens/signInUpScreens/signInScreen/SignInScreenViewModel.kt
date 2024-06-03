@@ -108,9 +108,7 @@ class SignInScreenViewModel(private val lotokRepository: LotokRepository) : View
         }
         Log.d("accessToken", accessToken)
     }
-    /**
-     * Factory for [HomeScreenViewModel] that takes [LotokRepository] as a dependency
-     */
+
     companion object {
         val Factory: ViewModelProvider.Factory = viewModelFactory {
             initializer {

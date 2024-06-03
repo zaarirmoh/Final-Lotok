@@ -29,7 +29,7 @@ import androidx.compose.ui.unit.dp
 import java.util.Calendar
 
 @Composable
-fun DatePickerButton(date : String,onDateChanged : (String) -> Unit ,modifier: Modifier = Modifier) {
+fun DatePickerButton(date : String , onDateChanged : (String) -> Unit ,modifier: Modifier = Modifier) {
     var selectedDate by remember { mutableStateOf(date) }
     val context = LocalContext.current
 

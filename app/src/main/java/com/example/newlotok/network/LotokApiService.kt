@@ -55,4 +55,11 @@ interface LotokApiService {
     @GET("api/categorys/")
     suspend fun getCategories(): List<Category>
 
+    @POST("api/jwt/verify")
+    suspend fun verifyToken(
+        @Body
+        token: Tokens
+    )
+
+
 }

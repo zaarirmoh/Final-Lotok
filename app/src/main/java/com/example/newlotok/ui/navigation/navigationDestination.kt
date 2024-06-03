@@ -15,13 +15,16 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import com.example.newlotok.ui.TokensViewModel
 import com.example.newlotok.ui.components.navigationBar.MyNavigationBar
 import com.example.newlotok.ui.screens.addPostScreen.AddPostScreenViewModel
 import com.example.newlotok.ui.screens.bookingScreen.BookingSharedViewModel
+import com.example.newlotok.ui.screens.signInUpScreens.signInScreen.SignInScreenViewModel
 
 // ToDo: Try to Extract the scaffold out so all the screen have like one topAppBar and one NavigationBar
 @OptIn(ExperimentalMaterial3Api::class)
@@ -43,11 +46,16 @@ fun LotokNavHost(
     val bookingSharedViewModel = BookingSharedViewModel()
     val addPostScreenViewModel = AddPostScreenViewModel()
     val uiState by bookingSharedViewModel.uiState.collectAsState()
+    val tokensViewModel: TokensViewModel =
+        viewModel(factory = TokensViewModel.Factory)
     Scaffold(
         bottomBar = {
             // Get current back stack entry
 
-            if(currentScreen.hasNavigationBar) MyNavigationBar(navController = navController)
+            if(currentScreen.hasNavigationBar) MyNavigationBar(
+                navController = navController,
+                onAddPostClicked = {""}
+            )
         }
     ) {
 

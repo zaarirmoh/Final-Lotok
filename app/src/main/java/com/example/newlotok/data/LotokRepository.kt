@@ -39,6 +39,8 @@ interface LotokRepository {
 
     suspend fun signUp(signUpInformation: SignUp)
 
+    suspend fun verifyToken(token: Tokens)
+
 }
 
 /**
@@ -59,6 +61,6 @@ class NetworkLotokRepository(
 
     override suspend fun signUp(signUpInformation: SignUp) = lotokApiService.signUp(signUpInformation)
 
-
+    override suspend fun verifyToken(token: Tokens) = lotokApiService.verifyToken(token)
 
 }

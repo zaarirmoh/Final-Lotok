@@ -1,5 +1,6 @@
 package com.example.newlotok.ui.components.navigationBar
 
+import android.util.Log
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ControlPoint
@@ -32,7 +33,8 @@ import com.example.newlotok.ui.theme.RedPrimary
 @Composable
 fun MyNavigationBar(
     modifier: Modifier = Modifier,
-    navController: NavHostController
+    navController: NavHostController,
+    onAddPostClicked: () -> String = {""},
 ){
     NavigationBar {
         var selectedItemIndex by rememberSaveable {
@@ -46,6 +48,10 @@ fun MyNavigationBar(
                 selected = selectedItemIndex == index,
                 onClick = {
                     selectedItemIndex = index
+                    Log.d("seleced item", selectedItemIndex.toString())
+                    if(selectedItemIndex == 1){
+                        item.route = onAddPostClicked()
+                    }
                     navController.navigate(item.route){
                         popUpTo(navController.graph.findStartDestination().id){
                             saveState = true
@@ -53,6 +59,7 @@ fun MyNavigationBar(
                         launchSingleTop = true
                         restoreState = true
                     }
+
                 },
                 icon = {
                     Icon(
