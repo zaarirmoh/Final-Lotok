@@ -76,8 +76,8 @@ fun CarDetailsScreen(
                 modifier = Modifier.padding(start = 11.dp , end = 11.dp , top = 30.dp),
                 name = carPost.model,
                 mark = carPost.make,
-                dayPrice = carPost.dayPrice,
-                weekPrice = carPost.weekPrice
+                dayPrice = carPost.dayPrice.toInt(),
+                weekPrice = carPost.weekPrice.toInt()
             )
 
             ReviewSection(
@@ -97,10 +97,10 @@ fun CarDetailsScreen(
             Details(
                 modifier =Modifier.padding(top =21.dp, start = 11.dp , end = 30.dp),
                 energyType = carPost.fuel,
-                seats = carPost.power,
+                seats = carPost.power.toString(),
                 engine = carPost.engine,
                 type = carPost.transmission,
-                location = carPost.location
+                location = carPost.location.toString()
             )
 
             SimpleLine(

@@ -73,9 +73,9 @@ fun Details(
 fun DetailsPreview(){
     Details(
         energyType = Data.carPostsList[0].fuel,
-        seats = Data.carPostsList[0].power,
+        seats = Data.carPostsList[0].power.toString(),
         engine = Data.carPostsList[0].engine,
         type = Data.carPostsList[0].transmission,
-        location = Data.carPostsList[0].location
+        location = Data.carPostsList[0].location.toString()
     )
 }

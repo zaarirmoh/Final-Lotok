@@ -8,10 +8,10 @@
             <InsightsFilterSettings>
               <option name="connection">
                 <ConnectionSetting>
-                  <option name="appId" value="PLACEHOLDER" />
-                  <option name="mobileSdkAppId" value="" />
-                  <option name="projectId" value="" />
-                  <option name="projectNumber" value="" />
+                  <option name="appId" value="com.example.newlotok" />
+                  <option name="mobileSdkAppId" value="1:545842023797:android:34a8101f5d7a90d826d73c" />
+                  <option name="projectId" value="new-lotok" />
+                  <option name="projectNumber" value="545842023797" />
                 </ConnectionSetting>
               </option>
               <option name="signal" value="SIGNAL_UNSPECIFIED" />

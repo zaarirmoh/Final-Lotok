@@ -24,6 +24,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Upload
 import androidx.compose.material3.AlertDialog
+import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Icon
@@ -44,6 +45,8 @@ import androidx.compose.ui.unit.dp
 import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
 import coil.compose.AsyncImage
+import com.google.firebase.Firebase
+import com.google.firebase.storage.storage
 import java.io.File
 import java.text.SimpleDateFormat
 import java.util.Date
@@ -72,7 +75,7 @@ fun ImagePickerTextField(
     var selectedImageUris by remember {
         mutableStateOf<List<Uri>>(emptyList())
     }
-
+    Log.d("imageUris", selectedImageUris.toString())
     val cameraLauncher =
         rememberLauncherForActivityResult(ActivityResultContracts.TakePicture()){
             capturedImageUri = uri
@@ -190,6 +193,27 @@ fun ImagePickerTextField(
             confirmButton = { },
             dismissButton = { }
         )
+    }
+    //TODO: remove this
+    val storage = Firebase.storage
+    // Create a storage reference from our app
+    var storageRef = storage.reference
+
+    Spacer(modifier = Modifier.height(30.dp))
+    Button(onClick = {
+        val childRef = storageRef.child("images/image1.jpg")
+        Log.d("success: name", childRef.name)
+        Log.d("success: path", childRef.path)
+        Log.d("success: downloadUrl", childRef.downloadUrl.toString())
+        childRef.downloadUrl.addOnSuccessListener { uri ->
+            Log.d("success: downloadUri", uri.toString())
+        }
+        /*
+        storageRef.child("images/image2.jpg").putFile(selectedImageUris[0])
+        Log.d("success", storageRef.child("images/image2.jpg").downloadUrl.toString())
+         */
+    }) {
+        Text(text = "test")
     }
 }
 

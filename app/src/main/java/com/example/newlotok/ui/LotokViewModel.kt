@@ -7,6 +7,8 @@ import androidx.compose.runtime.setValue
 import androidx.datastore.preferences.core.edit
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.newlotok.ACCESS_TOKEN
+import com.example.newlotok.REFRESH_TOKEN
 import com.example.newlotok.SHOW_WELCOME_SCREEN
 import com.example.newlotok.dataStore
 import com.example.newlotok.ui.navigation.LotokScreen
@@ -25,12 +27,13 @@ class LotokViewModel(
     private var showWelcomeScreen by mutableStateOf(false)
     init {
         viewModelScope.launch {
-            delay(1000)
+            //delay(1000)
             val preferences = context.dataStore.data.first()
             showWelcomeScreen = preferences[SHOW_WELCOME_SCREEN] ?: false
             _isReady.value = true
         }
     }
+
     fun getStartingScreen(): String {
         return if (!showWelcomeScreen) {
             LotokScreen.WelcomeScreen.name
@@ -41,4 +44,26 @@ class LotokViewModel(
             settings[SHOW_WELCOME_SCREEN] = true
         }
     }
+
+    suspend fun getRefreshToken(): String {
+        val token = context.dataStore.data.first()
+        return token[REFRESH_TOKEN] ?: ""
+    }
+    suspend fun setRefreshToken(token: String) {
+        context.dataStore.edit { settings ->
+            settings[REFRESH_TOKEN] = token
+        }
+    }
+
+    suspend fun getAccessToken(): String {
+        val token = context.dataStore.data.first()
+        return token[ACCESS_TOKEN] ?: ""
+    }
+    suspend fun setAccessToken(token: String) {
+        context.dataStore.edit { settings ->
+            settings[ACCESS_TOKEN] = token
+        }
+    }
+
+
 }

@@ -41,7 +41,7 @@ fun OrderDetailsScreen(
                 { Text(text = "Car Number:") },
                 { Text(text = uiState.carPost.dayPrice.toString())},
                 { Text(text = "Location:") },
-                { Text(text = uiState.carPost.location) }
+                { Text(text = uiState.carPost.location.toString()) }
             )
 
         )

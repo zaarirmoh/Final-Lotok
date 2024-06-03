@@ -127,7 +127,7 @@ fun AddPostScreen(
             ImagePickerTextField(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(start = 24.dp, end = 16.dp , bottom = 4.dp ),
+                    .padding(start = 24.dp, end = 16.dp, bottom = 4.dp),
                 "     Add the Assurance",
             )
             Spacer(modifier = Modifier.height(4.dp))
@@ -135,7 +135,7 @@ fun AddPostScreen(
             ImagePickerTextField(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(start = 24.dp, end = 16.dp , bottom = 16.dp ),
+                    .padding(start = 24.dp, end = 16.dp, bottom = 16.dp),
                 "     Add the Technical Control",
             )
 
@@ -274,7 +274,7 @@ fun AddPostScreen(
                 colors = ButtonDefaults.buttonColors(Color(android.graphics.Color.parseColor("#B3261E"))),
                 modifier = Modifier
                     .fillMaxSize()
-                    .padding(start = 20.dp, end = 16.dp, top = 16.dp )
+                    .padding(start = 20.dp, end = 16.dp, top = 16.dp)
             ) {
                 Text(
                     text = "Add Post",
@@ -306,8 +306,6 @@ fun AddPostScreen(
                 )
             }
             else Spacer(modifier = Modifier.height(30.dp))
-
-
 
             // Update ViewModel with latest values
             addPostScreenViewModel.updateWilaya(wilaya)

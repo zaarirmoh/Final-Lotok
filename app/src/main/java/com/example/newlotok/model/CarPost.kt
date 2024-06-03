@@ -8,24 +8,32 @@ import kotlinx.serialization.Serializable
 @Immutable
 @Serializable
 data class CarPost(
+    val vin: String,
     val id: Int,
-    @SerialName(value = "img_src")
+    @SerialName(value = "main_image_url")
     val imgSrc: String,
     val model: String,
     val year: Int,
     val make: String,
     val engine: String,
-    val power: String,
+    @SerialName(value= "horse_power")
+    val power: Int,
     val body: String,
     val fuel: String,
     val transmission: String,
     @SerialName(value = "day_price")
-    val dayPrice: Int,
+    val dayPrice: Double,
     @SerialName(value = "week_price")
-    val weekPrice: Int,
+    val weekPrice: Double,
     val rating: Double,
     val description: String? = null,
-    val location: String ,
+    @SerialName(value = "wilaya")
+    val location: Int ,
+    @SerialName(value = "user")
+    val userId: Int,
+    val category: Int,
+    @SerialName(value = "is_verified")
+    val isVerified: Boolean,
     // to be removed
     val fakeImgSrc: List<Int> = listOf()
 )

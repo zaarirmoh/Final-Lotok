@@ -137,8 +137,8 @@ fun BookingScreen(
                 modifier = Modifier.padding(start = 11.dp , end = 11.dp ),
                 name = carPost.model,
                 mark = carPost.make,
-                dayPrice = carPost.dayPrice,
-                weekPrice = carPost.weekPrice
+                dayPrice = carPost.dayPrice.toInt(),
+                weekPrice = carPost.weekPrice.toInt()
             )
 
             Text(

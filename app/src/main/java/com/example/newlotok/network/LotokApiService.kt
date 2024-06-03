@@ -31,10 +31,10 @@ import retrofit2.http.POST
  */
 interface LotokApiService {
 
-    @GET("posts")
+    @GET("api/listings/")
     suspend fun getCarPosts(): List<CarPost>
 
-    @POST("api/users/")
+    @POST("api/listings/")
     suspend fun addCarPost(
         @Body carPost: CarPost
     )
@@ -52,7 +52,7 @@ interface LotokApiService {
     )
 
 
-    @GET("categories")
+    @GET("api/categorys/")
     suspend fun getCategories(): List<Category>
 
 }

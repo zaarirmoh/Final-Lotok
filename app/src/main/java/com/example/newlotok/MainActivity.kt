@@ -3,6 +3,7 @@ package com.example.newlotok
 import android.animation.ObjectAnimator
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.view.animation.OvershootInterpolator
 import androidx.activity.ComponentActivity
@@ -10,12 +11,14 @@ import androidx.activity.compose.setContent
 import androidx.activity.viewModels
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.Surface
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
 import androidx.core.animation.doOnEnd
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.booleanPreferencesKey
+import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
@@ -29,11 +32,12 @@ import kotlinx.coroutines.launch
 
 val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "settings")
 val SHOW_WELCOME_SCREEN = booleanPreferencesKey("show_welcome_screen")
+val REFRESH_TOKEN = stringPreferencesKey("refresh_token")
+val ACCESS_TOKEN = stringPreferencesKey("access_token")
 
 
 
 class MainActivity : ComponentActivity() {
-
     val viewModelFactory = object : ViewModelProvider.Factory {
         override fun <T : ViewModel> create(modelClass: Class<T>): T {
             if (modelClass.isAssignableFrom(LotokViewModel::class.java)) {
@@ -82,7 +86,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize()
                 ) {
                     //val startDestination = viewModel.getStartingScreen()
-                    val startDestination = LotokScreen.AddPostScreen.name
+                    val startDestination = LotokScreen.SignInScreen.name
                     LotokApp(
                         onWelcomeScreenButtonClicked = {
                             lifecycleScope.launch{
@@ -91,6 +95,15 @@ class MainActivity : ComponentActivity() {
                         },
                         startDestination = startDestination
                     )
+                    /*
+                    LaunchedEffect(Unit) {
+                        lifecycleScope.launch {
+                            Log.d("Refresh Token",viewModel.getRefreshToken() )
+                            viewModel.setRefreshToken("mohamed")
+                            Log.d("Refresh Token",viewModel.getRefreshToken() )
+                        }
+                    }
+                     */
                     /*
                     var moh by remember {
                         mutableStateOf(true)

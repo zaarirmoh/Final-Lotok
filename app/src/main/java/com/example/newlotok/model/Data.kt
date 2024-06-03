@@ -27,15 +27,19 @@ object Data{
             make = "BMW",
             year = 2000,
             engine = "V8",
-            dayPrice = 4000,
-            weekPrice = 12000,
+            dayPrice = 4000.0,
+            weekPrice = 12000.0,
             rating = 3.5,
             body = "",
             fuel = "",
-            power = "4",
+            power = 4,
             description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore  .Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore  .Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore  .",
             transmission = "",
-            location = "Mila",
+            location = 25,
+            category = 1,
+            isVerified = true,
+            userId = 1,
+            vin = "",
         )
     )
     val fakeImages: List<Int> = listOf(

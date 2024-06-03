@@ -82,7 +82,7 @@ fun NameAndPricePreview(){
     NameAndPrice(
         name = Data.carPostsList[0].model,
         mark = Data.carPostsList[0].make,
-        dayPrice = Data.carPostsList[0].dayPrice,
-        weekPrice = Data.carPostsList[0].weekPrice
+        dayPrice = Data.carPostsList[0].dayPrice.toInt(),
+        weekPrice = Data.carPostsList[0].weekPrice.toInt()
     )
 }
