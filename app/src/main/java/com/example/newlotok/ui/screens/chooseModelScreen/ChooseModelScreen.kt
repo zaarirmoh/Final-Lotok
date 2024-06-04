@@ -2,6 +2,7 @@ package com.example.newlotok.ui.screens.chooseModelScreen
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -11,10 +12,13 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -30,28 +34,47 @@ import androidx.compose.ui.unit.sp
 import com.example.newlotok.R
 import com.example.newlotok.model.CarModel
 import com.example.newlotok.model.CarPost
+import com.example.newlotok.model.fakeModels
+import com.example.newlotok.ui.components.navigationBar.items
 import com.example.newlotok.ui.components.topBar.EndIconProfile
 import com.example.newlotok.ui.components.topBar.StartIconGoBack
 import com.example.newlotok.ui.components.topBar.TopBar
 import com.example.newlotok.ui.components.topBar.TopBarCenterText
+import com.example.newlotok.ui.theme.LotokTheme
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ChooseModelScreen(
-    onGoBackIconClicked: () -> Unit,
-    model : String ,
+    onGoBackIconClicked: () -> Unit = {},
+    logo : Int ,
+    brand : String ,
+    models : List<CarModel>,
+    onClick : () -> Unit = {},
 ){
     Scaffold(
         topBar = {
             TopBar(
                 startIcon = { StartIconGoBack(onButtonClicked = onGoBackIconClicked) },
-                topBarCenter = { TopBarCenterText(text = "Choose your "+ model) },
+                topBarCenter = { TopBarCenterText(text = "Choose your "+ brand) },
                 endIcon = { EndIconProfile() }
             )
         }
     ) {
-        Column(modifier = Modifier.padding(it)) {
+        Column(modifier = Modifier
+            .verticalScroll(rememberScrollState())
+            .padding(it)
+        ) {
+            models.forEach { model ->
+                CarModelCard(
+                    carModel = model ,
+                    logo = logo ,
+                    brand = brand,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .clickable { onClick() }
+                )
 
+            }
         }
     }
 }
@@ -63,6 +86,9 @@ fun CarModelCard(carModel : CarModel , brand : String , logo : Int, modifier: Mo
         Card(
             shape = RoundedCornerShape(16.dp),
             elevation = CardDefaults.cardElevation(8.dp),
+            colors = CardDefaults.cardColors(MaterialTheme.colorScheme.primaryContainer),
+
+
             modifier = Modifier
                 .padding(start = 16.dp, end = 16.dp, top = 30.dp, bottom = 16.dp)
                 .fillMaxWidth()
@@ -110,5 +136,9 @@ fun CarModelCard(carModel : CarModel , brand : String , logo : Int, modifier: Mo
 @Preview
 @Composable
 fun CarModelCardPreview() {
-    //CarModelCard()
+    ChooseModelScreen(
+        logo = R.drawable.bmw,
+        brand = "BMW",
+        models = fakeModels
+    )
 }
