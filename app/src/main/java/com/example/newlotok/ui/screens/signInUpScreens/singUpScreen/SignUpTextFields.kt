@@ -17,6 +17,7 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -33,17 +34,24 @@ import com.example.newlotok.ui.screens.signInUpScreens.signInScreen.PasswordText
 @Composable
 fun SignUpTextFields(
     modifier: Modifier = Modifier,
+    firstName: MutableState<String>,
+    lastName: MutableState<String>,
+    emailAddress: MutableState<String>,
+    password: MutableState<String>,
+    confirmPassword: MutableState<String>,
 ){
-    val emailAddress = remember { mutableStateOf("") }
-    val password = remember { mutableStateOf("") }
     Column(
         modifier = modifier
             .fillMaxWidth()
             .padding(start = 20.dp, end = 20.dp)
     ){
-        UserNameTextField()
+        UserNameTextField(
+            name = firstName,
+        )
         Spacer(modifier = modifier.height(20.dp))
-        UserNameTextField()
+        UserNameTextField(
+            name = lastName,
+        )
         Spacer(modifier = modifier.height(20.dp))
         EmailTextField(
             emailAddress = emailAddress,
@@ -56,23 +64,23 @@ fun SignUpTextFields(
         Spacer(modifier = modifier.height(20.dp))
         PasswordTextField(
             supportingText = { Text(text = "example: At least 8 characters") },
-            password = password,
+            password = confirmPassword,
         )
     }
 }
 @Composable
 fun UserNameTextField(
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    name: MutableState<String>,
 ){
     val keyboardController = LocalSoftwareKeyboardController.current
-    var text by rememberSaveable { mutableStateOf("") }
     OutlinedTextField(
-        value = text,
-        onValueChange = {text = it},
+        value = name.value,
+        onValueChange = {name.value = it},
         label = { Text(text = "User name") },
         placeholder = { Text(text = "example",color = Color(0xFF7D848D)) },
         trailingIcon = {
-            IconButton(onClick = { text = "" }) {
+            IconButton(onClick = { name.value = "" }) {
                 Icon(
                     imageVector = Icons.Outlined.HighlightOff,
                     contentDescription = null

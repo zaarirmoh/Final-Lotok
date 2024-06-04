@@ -5,7 +5,6 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
 import com.example.newlotok.ui.navigation.LotokScreen
-import com.example.newlotok.ui.screens.homeScreen.HomeScreenViewModel
 
 fun NavGraphBuilder.signInScreenNavigation(
     navController: NavHostController
@@ -24,7 +23,7 @@ fun NavGraphBuilder.signInScreenNavigation(
                 navController.navigateUp()
             },
             onSignInButtonClicked = {
-                signInScreenViewModel.postUserInformation()
+                signInScreenViewModel.postSignInInformation()
             },
             signInScreenViewModel = signInScreenViewModel
         )

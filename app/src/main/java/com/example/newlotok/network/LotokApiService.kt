@@ -45,7 +45,7 @@ interface LotokApiService {
         signInInformation: SignIn,
     ): Tokens
 
-    @POST("api/users")
+    @POST("api/users/")
     suspend fun signUp(
         @Body
         signUpInformation: SignUp

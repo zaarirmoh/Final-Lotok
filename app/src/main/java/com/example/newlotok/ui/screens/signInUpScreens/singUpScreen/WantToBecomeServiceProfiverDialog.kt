@@ -9,16 +9,14 @@ import androidx.compose.runtime.mutableStateOf
 
 @Composable
 fun WantToBecomeServiceProviderDialog(
-    openDialog: MutableState<Boolean> = mutableStateOf(false)
+    signUpScreenViewModel: SignUpScreenViewModel,
+    onConfirmButtonClicked: () -> Unit = {},
+    onDismissButtonClicked: () -> Unit = {}
 ){
-
-    if (openDialog.value) {
+    if (signUpScreenViewModel.openDialog) {
         AlertDialog(
             onDismissRequest = {
-                // Dismiss the dialog when the user clicks outside the dialog or on the back
-                // button. If you want to disable that functionality, simply use an empty
-                // onDismissRequest.
-                openDialog.value = true
+                signUpScreenViewModel.openDialog = true
             },
             title = {
                 Text(text = "Want to become a service provider ?")
@@ -29,7 +27,8 @@ fun WantToBecomeServiceProviderDialog(
             confirmButton = {
                 TextButton(
                     onClick = {
-                        openDialog.value = false
+                        signUpScreenViewModel.openDialog = false
+                        onConfirmButtonClicked()
                     }
                 ) {
                     Text("Confirm")
@@ -38,7 +37,8 @@ fun WantToBecomeServiceProviderDialog(
             dismissButton = {
                 TextButton(
                     onClick = {
-                        openDialog.value = false
+                        signUpScreenViewModel.openDialog = false
+                        onDismissButtonClicked()
                     }
                 ) {
                     Text("Dismiss")
