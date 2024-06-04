@@ -1,5 +1,6 @@
 package com.example.newlotok.ui.screens.bookingScreen
 
+import android.net.Uri
 import androidx.lifecycle.ViewModel
 import com.example.newlotok.model.OrderDetails
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -45,6 +46,11 @@ class BookingSharedViewModel : ViewModel() {
 
     fun updateTotalPrice(totalPrice: Double) {
         updateItem(totalPrice.toString(), "totalPrice")
+    }
+
+    fun updateLicensePics(licensePics: List<Uri>){
+        _uiState.value = _uiState.value.copy(licensePics = licensePics)
+
     }
 
 
