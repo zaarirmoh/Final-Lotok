@@ -26,6 +26,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.newlotok.model.CarPost
+import com.example.newlotok.model.Comment
 import com.example.newlotok.model.Data
 import com.example.newlotok.ui.components.carPost.CommentCard
 import com.example.newlotok.ui.components.lines.SimpleLine
@@ -40,7 +41,8 @@ import com.example.newlotok.ui.components.topBar.TopBarCenterText
 fun CarDetailsScreen(
     carPost : CarPost,
     onGoBackIconClicked: () -> Unit = {},
-    bookButtonClicked : () -> Unit = {}
+    bookButtonClicked : () -> Unit = {},
+    comments: List<Comment> = Data.comments
 ){
     Scaffold(
         topBar = {
@@ -63,6 +65,7 @@ fun CarDetailsScreen(
                 modifier = Modifier.fillMaxWidth(),
                 onButtonClicked = bookButtonClicked,
                 buttonEnabled = true,
+                mainCarPicture = carPost.imgSrc
 
             )
 
@@ -116,7 +119,7 @@ fun CarDetailsScreen(
             )
 
             Text(
-                text = "${Data.comments.size} Comments",
+                text = "${comments.size} Comments",
                 fontSize = 20.sp,
                 fontWeight = FontWeight.Bold,
                 color = Color(0x1D, 0x1B, 0x20),
@@ -125,7 +128,7 @@ fun CarDetailsScreen(
                 )
             Spacer(modifier = Modifier.height(30.dp))
             Column(modifier = Modifier.padding(start = 2.dp,end = 10.dp)) {
-                if (showMore) Data.comments.subList(0,2).forEach { it ->
+                if (showMore) comments.subList(0,2).forEach { it ->
                     CommentCard(
                         profilePic = it.profilePic,
                         title = it.title,
@@ -134,7 +137,7 @@ fun CarDetailsScreen(
                     )
                     Spacer(modifier = Modifier.height(20.dp))
                 }
-                else Data.comments.forEach { it ->
+                else comments.forEach { it ->
                     CommentCard(
                         profilePic = it.profilePic,
                         title = it.title,

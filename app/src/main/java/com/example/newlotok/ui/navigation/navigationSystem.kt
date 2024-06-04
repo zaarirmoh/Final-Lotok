@@ -45,6 +45,7 @@ fun NavGraphBuilder.navigationSystem(
     homeScreenNavigation(
         navController = navController,
         scrollBehavior = scrollBehavior,
+        tokensViewModel = tokensViewModel,
     )
     selectACarScreenNavigation(navController = navController)
     selectBrandScreenNavigation(navController = navController)
@@ -65,7 +66,10 @@ fun NavGraphBuilder.navigationSystem(
     )
     forgotPasswordScreenNavigation(navController = navController)
     otpVerificationScreenNavigation(navController = navController)
-    carDetailsScreenNavigation(navController = navController)
+    carDetailsScreenNavigation(
+        navController = navController,
+        tokensViewModel = tokensViewModel,
+    )
     bookingScreenNavigation(
         navController = navController,
         bookingSharedViewModel = bookingSharedViewModel,

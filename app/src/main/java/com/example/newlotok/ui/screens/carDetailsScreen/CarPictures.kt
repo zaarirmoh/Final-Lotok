@@ -26,17 +26,22 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import coil.compose.AsyncImage
+import coil.request.ImageRequest
+import com.example.newlotok.R
 import com.example.newlotok.model.Data
 
 @Composable
 fun CarPictures(
     modifier : Modifier = Modifier,
     imgSrc : List<Int>,
+    mainCarPicture: String = "",
     onButtonClicked : () -> Unit = {},
     buttonEnabled : Boolean = true,
 ){
@@ -46,6 +51,7 @@ fun CarPictures(
     Box(modifier = modifier
         .fillMaxWidth()
         .height(224.dp)) {
+        /*
         Image(
             painter = painterResource(id = imgSrc[currentPosition]),
             contentDescription = null,
@@ -54,7 +60,18 @@ fun CarPictures(
                 .padding(bottom = 20.dp)
                 .background(Color.Gray)
         )
-
+         */
+        AsyncImage(
+            model = ImageRequest.Builder(context = LocalContext.current).data(mainCarPicture)
+                .crossfade(true).build(),
+            error = painterResource(R.drawable.ic_broken_image),
+            placeholder = painterResource(R.drawable.loading_img),
+            contentDescription = null,
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(bottom = 20.dp)
+                .background(Color.Gray)
+        )
         if (buttonEnabled) BookButton (onButtonClicked,modifier = Modifier
             .height(36.dp)
             .fillMaxWidth()

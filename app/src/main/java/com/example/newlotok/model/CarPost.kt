@@ -1,6 +1,7 @@
 package com.example.newlotok.model
 
 import androidx.compose.runtime.Immutable
+import com.example.newlotok.R
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -35,5 +36,7 @@ data class CarPost(
     @SerialName(value = "is_verified")
     val isVerified: Boolean,
     // to be removed
-    val fakeImgSrc: List<Int> = listOf()
+    val fakeImgSrc: List<Int> = listOf(
+        R.drawable.car2_pic,
+    )
 )
