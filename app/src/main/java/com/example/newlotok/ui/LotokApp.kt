@@ -29,6 +29,7 @@ fun LotokApp(
     startDestination: String,
     onWelcomeScreenButtonClicked: () -> Unit = {},
     addPostRoute: String,
+    tokensViewModel: TokensViewModel
 ) {
     val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior()
     //TryPost()
@@ -38,5 +39,6 @@ fun LotokApp(
         startDestination = startDestination,
         onWelcomeScreenButtonClicked = onWelcomeScreenButtonClicked,
         addPostRoute = addPostRoute,
+        tokensViewModel = tokensViewModel
     )
 }

@@ -29,6 +29,7 @@ fun NavGraphBuilder.signUpScreenNavigation(
                 signUpScreenViewModel.postSignUpInformation()
             },
             onConfirmButtonClicked = {
+                navController.navigate(LotokScreen.SignInScreen.name)
             },
             onDismissButtonClicked = {
                 navController.navigate(LotokScreen.SignInScreen.name)

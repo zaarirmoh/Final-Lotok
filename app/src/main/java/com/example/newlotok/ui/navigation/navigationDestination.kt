@@ -37,6 +37,7 @@ fun LotokNavHost(
     scrollBehavior: TopAppBarScrollBehavior,
     startDestination: String,
     addPostRoute: String,
+    tokensViewModel: TokensViewModel
 ) {
     val backStackEntry by navController.currentBackStackEntryAsState()
     // Get the name of the current screen
@@ -53,7 +54,7 @@ fun LotokNavHost(
 
             if(currentScreen.hasNavigationBar) MyNavigationBar(
                 navController = navController,
-                onAddPostClicked = {addPostRoute}
+                onAddPostClicked = addPostRoute
             )
         }
     ) {
@@ -72,7 +73,8 @@ fun LotokNavHost(
                 context = context,
                 bookingSharedViewModel = bookingSharedViewModel,
                 uiState = uiState,
-                addPostScreenViewModel = addPostScreenViewModel
+                addPostScreenViewModel = addPostScreenViewModel,
+                tokensViewModel = tokensViewModel
             )
         }
     }

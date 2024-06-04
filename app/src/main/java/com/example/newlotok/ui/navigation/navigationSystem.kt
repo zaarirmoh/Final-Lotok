@@ -7,6 +7,7 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import com.example.newlotok.model.CarPostFirst
 import com.example.newlotok.model.OrderDetails
+import com.example.newlotok.ui.TokensViewModel
 import com.example.newlotok.ui.screens.addPostScreen.AddPostScreenViewModel
 import com.example.newlotok.ui.screens.addPostScreen.addPostScreenNavigation
 import com.example.newlotok.ui.screens.bookingScreen.BookingSharedViewModel
@@ -35,7 +36,7 @@ fun NavGraphBuilder.navigationSystem(
     bookingSharedViewModel: BookingSharedViewModel,
     uiState: OrderDetails,
     addPostScreenViewModel: AddPostScreenViewModel,
-
+    tokensViewModel: TokensViewModel
 ){
     welcomeScreenNavigation(
         navController = navController,
@@ -44,11 +45,17 @@ fun NavGraphBuilder.navigationSystem(
     homeScreenNavigation(navController = navController, scrollBehavior = scrollBehavior)
     selectACarScreenNavigation(navController = navController)
     selectBrandScreenNavigation(navController = navController)
-    profileScreenNavigation(navController = navController)
+    profileScreenNavigation(
+        navController = navController,
+        tokensViewModel = tokensViewModel,
+    )
     mainSettingsScreenNavigation(navController = navController)
     profileDetailsScreenNavigation(navController = navController)
     editProfileScreenNavigation(navController = navController)
-    signInScreenNavigation(navController = navController)
+    signInScreenNavigation(
+        navController = navController,
+        tokensViewModel = tokensViewModel,
+    )
     signUpScreenNavigation(
         navController = navController,
         scrollBehavior = scrollBehavior,

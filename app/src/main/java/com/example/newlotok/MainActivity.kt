@@ -12,6 +12,8 @@ import androidx.activity.viewModels
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.core.animation.doOnEnd
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
@@ -24,9 +26,11 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.newlotok.model.AccessToken
 import com.example.newlotok.model.Tokens
 import com.example.newlotok.ui.LotokApp
 import com.example.newlotok.ui.LotokViewModel
+import com.example.newlotok.ui.TokensUiState
 import com.example.newlotok.ui.TokensViewModel
 import com.example.newlotok.ui.navigation.LotokScreen
 import com.example.newlotok.ui.theme.LotokTheme
@@ -88,25 +92,34 @@ class MainActivity : ComponentActivity() {
                 Surface(
                     modifier = Modifier.fillMaxSize()
                 ) {
+
                     val tokensViewModel: TokensViewModel =
                         viewModel(factory = TokensViewModel.Factory)
+                    val addPostRoute = remember { mutableStateOf(LotokScreen.SignInScreen.name) }
                     LaunchedEffect(Unit) {
                         lifecycleScope.launch {
                             Log.d("entered here","entered here")
                             val accessToken = viewModel.getAccessToken()
                             val refreshToken = viewModel.getRefreshToken()
                             val tokens = Tokens(accessToken, refreshToken)
-                            tokensViewModel.verifyAccessToken(tokens)
-                            if(tokensViewModel.isAccessVerified){
-
+                            tokensViewModel.verifyAccessToken(AccessToken(accessToken))
+                            Log.d("is access verified", tokensViewModel.isAccessVerified.toString())
+                            when(tokensViewModel.tokensUiState){
+                                is TokensUiState.Success -> {
+                                    Log.d("entered here", "entered here")
+                                    addPostRoute.value = LotokScreen.AddPostScreen.name
+                                }
+                                is TokensUiState.Error -> {}
+                                is TokensUiState.Loading -> {}
                             }
                             Log.d("Refresh Token", refreshToken)
                             Log.d("Access Token",accessToken )
                             Log.d("finished here","finished here")
                         }
                     }
-                    //val startDestination = viewModel.getStartingScreen()
-                    val startDestination = LotokScreen.BookingScreen.name
+
+                    val startDestination = viewModel.getStartingScreen()
+                    //val startDestination = LotokScreen.AddPostScreen.name
                     LotokApp(
                         onWelcomeScreenButtonClicked = {
                             lifecycleScope.launch{
@@ -114,8 +127,8 @@ class MainActivity : ComponentActivity() {
                             }
                         },
                         startDestination = startDestination,
-                        addPostRoute = if(tokensViewModel.isAccessVerified)
-                            LotokScreen.AddPostScreen.name else LotokScreen.SignInScreen.name,
+                        addPostRoute = tokensViewModel.addPostRoute,
+                        tokensViewModel = tokensViewModel,
                     )
 
 

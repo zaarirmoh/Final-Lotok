@@ -9,12 +9,15 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
+import com.example.newlotok.model.AccessToken
+import com.example.newlotok.ui.TokensViewModel
 import com.example.newlotok.ui.navigation.LotokScreen
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
 
 fun NavGraphBuilder.signInScreenNavigation(
-    navController: NavHostController
+    navController: NavHostController,
+    tokensViewModel: TokensViewModel
 ){
     composable(route = LotokScreen.SignInScreen.name){
         val signInScreenViewModel: SignInScreenViewModel =
@@ -43,6 +46,7 @@ fun NavGraphBuilder.signInScreenNavigation(
                     signInScreenViewModel.setAccessToken(context = context)
                     signInScreenViewModel.setRefreshToken(context = context)
                     navController.navigate(LotokScreen.HomeScreen.name)
+                    tokensViewModel.verifyAccessToken(AccessToken(signInScreenViewModel.accessToken))
                 }
             }
 

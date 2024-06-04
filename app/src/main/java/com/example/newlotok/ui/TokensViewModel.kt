@@ -16,25 +16,36 @@ import com.example.newlotok.LotokApplication
 import com.example.newlotok.REFRESH_TOKEN
 import com.example.newlotok.data.LotokRepository
 import com.example.newlotok.dataStore
+import com.example.newlotok.model.AccessToken
 import com.example.newlotok.model.Tokens
+import com.example.newlotok.ui.navigation.LotokScreen
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 import retrofit2.HttpException
 import java.io.IOException
-
+sealed interface TokensUiState {
+    object Success : TokensUiState
+    object Loading : TokensUiState
+    object Error : TokensUiState
+}
 class TokensViewModel(private val lotokRepository: LotokRepository) : ViewModel() {
-
+    var tokensUiState: TokensUiState by mutableStateOf(TokensUiState.Loading)
     var isAccessVerified: Boolean by mutableStateOf(false)
-    fun verifyAccessToken(token: Tokens) {
+    var addPostRoute: String by mutableStateOf(LotokScreen.SignInScreen.name)
+    fun verifyAccessToken(accessToken: AccessToken) {
         viewModelScope.launch {
-            try {
-                lotokRepository.verifyToken(token)
+            tokensUiState = try {
+                lotokRepository.verifyToken(accessToken)
                 isAccessVerified = true
                 Log.d(null,"Access Verified")
+                addPostRoute = LotokScreen.AddPostScreen.name
+                TokensUiState.Success
             }catch(e: IOException){
                 Log.e(null,"IOException")
+                TokensUiState.Error
             }catch(e: HttpException){
                 Log.e(null,"HttpException")
+                TokensUiState.Error
             }
         }
     }
@@ -51,6 +62,7 @@ class TokensViewModel(private val lotokRepository: LotokRepository) : ViewModel(
     suspend fun getAccessToken(context: Context): String {
         val token = context.dataStore.data.first()
         return token[ACCESS_TOKEN] ?: ""
+
     }
     suspend fun setAccessToken(token: String, context: Context) {
         context.dataStore.edit { settings ->

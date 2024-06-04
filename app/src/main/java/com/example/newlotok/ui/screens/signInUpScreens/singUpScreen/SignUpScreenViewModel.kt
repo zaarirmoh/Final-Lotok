@@ -39,11 +39,8 @@ class SignUpScreenViewModel (private val lotokRepository: LotokRepository) : Vie
 
     var openDialog: Boolean by mutableStateOf(false)
 
-    fun resetUiState(){
-        if(errorMessage.isEmpty()){
-            signUpScreenUiState = SignUpScreenUiState.Loading
-            errorMessage = ""
-        }
+    fun resetErrorMessage() {
+        errorMessage = ""
     }
     fun postSignUpInformation(){
         viewModelScope.launch {

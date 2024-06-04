@@ -205,15 +205,16 @@ fun ImagePickerTextField(
 
     Spacer(modifier = Modifier.height(30.dp))
     Button(onClick = {
-        val childRef = storageRef.child("images/image1.jpg")
+        val childRef = storageRef.child("images/image2.jpg")
         Log.d("success: name", childRef.name)
         Log.d("success: path", childRef.path)
         Log.d("success: downloadUrl", childRef.downloadUrl.toString())
         childRef.downloadUrl.addOnSuccessListener { uri ->
             Log.d("success: downloadUri", uri.toString())
         }
+
         /*
-        storageRef.child("images/image2.jpg").putFile(selectedImageUris[0])
+            storageRef.child("images/image2.jpg").putFile(selectedImageUris[0])
         Log.d("success", storageRef.child("images/image2.jpg").downloadUrl.toString())
          */
     }) {

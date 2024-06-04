@@ -46,7 +46,8 @@ class SignInScreenViewModel(private val lotokRepository: LotokRepository) : View
         private set
     private var refreshToken: String by mutableStateOf("")
 
-    private var accessToken: String by mutableStateOf("")
+    var accessToken: String by mutableStateOf("")
+        private set
     fun postSignInInformation() {
         viewModelScope.launch {
             signInScreenUiState = SignInScreenUiState.Loading
@@ -87,7 +88,9 @@ class SignInScreenViewModel(private val lotokRepository: LotokRepository) : View
             }
         }
     }
-
+    fun clearErrorMessage() {
+        errorMessage = ""
+    }
     suspend fun getRefreshToken(context: Context): String {
         val token = context.dataStore.data.first()
         return token[REFRESH_TOKEN] ?: ""

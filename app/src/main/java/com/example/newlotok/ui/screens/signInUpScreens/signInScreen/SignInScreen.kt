@@ -54,7 +54,10 @@ fun SignInScreen(
     ) {
         val context = LocalContext.current
         when(signInScreenViewModel.signInScreenUiState){
-            is SignInScreenUiState.Error ->  Toast.makeText(context, signInScreenViewModel.errorMessage, Toast.LENGTH_SHORT).show()
+            is SignInScreenUiState.Error ->  {
+                Toast.makeText(context, signInScreenViewModel.errorMessage, Toast.LENGTH_SHORT).show()
+                signInScreenViewModel.clearErrorMessage()
+            }
             is SignInScreenUiState.Loading -> Log.d(null, "SignInScreen: Loading")
             is SignInScreenUiState.Success  -> Log.d(null, "SignInScreen: Success")
         }

@@ -34,7 +34,7 @@ import com.example.newlotok.ui.theme.RedPrimary
 fun MyNavigationBar(
     modifier: Modifier = Modifier,
     navController: NavHostController,
-    onAddPostClicked: () -> String = {""},
+    onAddPostClicked: String = "",
 ){
     NavigationBar {
         var selectedItemIndex by rememberSaveable {
@@ -49,8 +49,8 @@ fun MyNavigationBar(
                 onClick = {
                     selectedItemIndex = index
                     Log.d("seleced item", selectedItemIndex.toString())
-                    if(selectedItemIndex == 1){
-                        item.route = onAddPostClicked()
+                    if(selectedItemIndex == 2){
+                        item.route = onAddPostClicked
                     }
                     navController.navigate(item.route){
                         popUpTo(navController.graph.findStartDestination().id){

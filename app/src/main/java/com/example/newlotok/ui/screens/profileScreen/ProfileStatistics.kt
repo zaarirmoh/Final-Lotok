@@ -20,13 +20,16 @@ import com.example.newlotok.model.Data.profileInformation
 
 @Composable
 fun ProfileStatistics(
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    carsPosted: Int,
+    postsSaved: Int,
+    bookings: Int
 ){
     Row {
         Spacer(modifier = modifier.width(46.dp))
         ProfileStatistic(
             statisticType = "Cars posted",
-            statistic = profileInformation.carsPosted
+            statistic = carsPosted
         )
         Spacer(modifier = modifier.width(17.dp))
         VerticalDivider()
@@ -34,7 +37,7 @@ fun ProfileStatistics(
         //Spacer(modifier = modifier.width(34.dp))
         ProfileStatistic(
             statisticType = "Posts saved",
-            statistic = profileInformation.postsSaved
+            statistic = postsSaved
         )
         Spacer(modifier = modifier.width(17.dp))
         VerticalDivider()
@@ -42,7 +45,7 @@ fun ProfileStatistics(
         //Spacer(modifier = modifier.width(34.dp))
         ProfileStatistic(
             statisticType = "Bookings",
-            statistic = profileInformation.bookings
+            statistic = bookings
         )
     }
 }

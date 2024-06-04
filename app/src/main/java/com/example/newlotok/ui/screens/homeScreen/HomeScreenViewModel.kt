@@ -32,6 +32,7 @@ import com.example.newlotok.model.MarsPhoto
 import kotlinx.coroutines.launch
 import retrofit2.HttpException
 import java.io.IOException
+import java.net.SocketTimeoutException
 
 /**
  * UI state for the Home screen
@@ -70,6 +71,10 @@ class HomeScreenViewModel(private val lotokRepository: LotokRepository) : ViewMo
                     categories = lotokRepository.getCategories()
                 )
             } catch (e: HttpException){
+                HomeScreenUiState.Error
+            } catch (e: IOException){
+                HomeScreenUiState.Error
+            }catch (e: SocketTimeoutException){
                 HomeScreenUiState.Error
             }
             /*

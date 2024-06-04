@@ -15,9 +15,11 @@
  */
 package com.example.newlotok.data
 
+import com.example.newlotok.model.AccessToken
 import com.example.newlotok.model.CarPost
 import com.example.newlotok.model.Category
 import com.example.newlotok.model.MarsPhoto
+import com.example.newlotok.model.ProfileInformation
 import com.example.newlotok.model.SignIn
 import com.example.newlotok.model.SignUp
 import com.example.newlotok.model.Tokens
@@ -39,7 +41,9 @@ interface LotokRepository {
 
     suspend fun signUp(signUpInformation: SignUp)
 
-    suspend fun verifyToken(token: Tokens)
+    suspend fun verifyToken(accessToken: AccessToken)
+
+    suspend fun getProfileInformation(authorization: String): ProfileInformation
 
 }
 
@@ -61,6 +65,8 @@ class NetworkLotokRepository(
 
     override suspend fun signUp(signUpInformation: SignUp) = lotokApiService.signUp(signUpInformation)
 
-    override suspend fun verifyToken(token: Tokens) = lotokApiService.verifyToken(token)
+    override suspend fun verifyToken(accessToken: AccessToken) = lotokApiService.verifyToken(accessToken)
+
+    override suspend fun getProfileInformation(authorization: String): ProfileInformation = lotokApiService.getProfileInformation(authorization)
 
 }

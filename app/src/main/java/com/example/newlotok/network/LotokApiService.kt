@@ -16,14 +16,17 @@
 
 package com.example.newlotok.network
 
+import com.example.newlotok.model.AccessToken
 import com.example.newlotok.model.CarPost
 import com.example.newlotok.model.Category
 import com.example.newlotok.model.MarsPhoto
+import com.example.newlotok.model.ProfileInformation
 import com.example.newlotok.model.SignIn
 import com.example.newlotok.model.SignUp
 import com.example.newlotok.model.Tokens
 import retrofit2.http.Body
 import retrofit2.http.GET
+import retrofit2.http.Header
 import retrofit2.http.POST
 
 /**
@@ -58,8 +61,15 @@ interface LotokApiService {
     @POST("api/jwt/verify")
     suspend fun verifyToken(
         @Body
-        token: Tokens
+        accessToken: AccessToken
     )
+    // "bearer access"
+    @GET("api/users/me/")
+    suspend fun getProfileInformation(
+        @Header(value = "Authorization")
+        authorization: String
+    ): ProfileInformation
+
 
 
 }

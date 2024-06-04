@@ -35,7 +35,7 @@ interface AppContainer {
  */
 class DefaultAppContainer : AppContainer {
     //private val baseUrl = "https://mockend.com/api/zaarirmoh/Lotok/"
-    private val baseUrl = "http://192.168.173.21:8000/"
+    private val baseUrl = "http://192.168.4.20:8000/"
     /**
      * Use the Retrofit builder to build a retrofit object using a kotlinx.serialization converter
      */
