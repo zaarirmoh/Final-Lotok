@@ -1,5 +1,8 @@
 package com.example.newlotok.model
 
+import kotlinx.serialization.Serializable
+
+@Serializable
 data class VinResult(
     val year: Int = 0,
     val make: String = "",

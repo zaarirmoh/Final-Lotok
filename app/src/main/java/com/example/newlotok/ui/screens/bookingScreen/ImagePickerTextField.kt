@@ -198,7 +198,7 @@ fun ImagePickerTextField(
             dismissButton = { }
         )
     }
-    //TODO: remove this
+    /*
     val storage = Firebase.storage
     // Create a storage reference from our app
     var storageRef = storage.reference
@@ -219,7 +219,7 @@ fun ImagePickerTextField(
          */
     }) {
         Text(text = "test")
-    }
+    } */
 
     selectedImageUris.value = selectedImageUris1
 }

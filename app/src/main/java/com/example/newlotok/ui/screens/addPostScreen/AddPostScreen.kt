@@ -327,10 +327,7 @@ fun AddPostScreen(
                 addPostScreenViewModel.updateDailyPrice(dailyPrice)
                 addPostScreenViewModel.updateWeeklyPrice(weeklyPrice)
             }
-            addPostScreenViewModel.updateCarPictures(carPictures.value)
-            addPostScreenViewModel.updateCarteGrisePic(carteGrisePic.value)
-            addPostScreenViewModel.updateAssurancePic(assurancePic.value)
-            addPostScreenViewModel.updateTechnicalControlPic(technicalControlPic.value)
+
 
 
             if (openDialog) {
@@ -349,6 +346,10 @@ fun AddPostScreen(
                            },
                     confirmButton = {
                         Button(onClick = {
+                            addPostScreenViewModel.updateCarPictures(carPictures.value)
+                            addPostScreenViewModel.updateCarteGrisePic(carteGrisePic.value)
+                            addPostScreenViewModel.updateAssurancePic(assurancePic.value)
+                            addPostScreenViewModel.updateTechnicalControlPic(technicalControlPic.value)
                             onConfirmButtonClicked()
                             openDialog = false
                         }) {
@@ -362,13 +363,7 @@ fun AddPostScreen(
                     }
                 )
             }
-
-
-
-
         }
-
-
     }
 }
 
