@@ -223,13 +223,17 @@ object Data{
     val profileInformation: ProfileInformation = ProfileInformation(
         name = "Mohamed Zaarir",
         firstName = "Mohamed",
-        picture = R.drawable.profile_picture,
+        picture = R.drawable.profile_picture.toString(),
         email = "zaarirmo07@gmail.com",
         location = "Soumaa Blida",
         lastName = "Zaarir",
         carsPosted = 424,
         postsSaved = 785,
         bookings = 123,
-        mobileNumber = "0776325625"
+        mobileNumber = "0776325625",
+        id = 1,
+        isVerified = true,
+        isStaff = true,
+        isServiceProvider = true,
     )
 }

@@ -1,5 +1,6 @@
 package com.example.newlotok.ui.screens.profileScreen
 
+import android.util.Log
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
@@ -37,6 +38,7 @@ class ProfileScreenViewModel(private val lotokRepository: LotokRepository) : Vie
         viewModelScope.launch {
             profileScreenUiState = ProfileScreenUiState.Loading
             profileScreenUiState = try {
+                Log.d("authorization", authorization)
                 ProfileScreenUiState.Success(lotokRepository.getProfileInformation(authorization))
             }catch (e: IOException){
                 ProfileScreenUiState.Error

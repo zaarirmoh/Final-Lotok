@@ -13,13 +13,12 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarScrollBehavior
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.example.newlotok.R
+import com.example.newlotok.model.CarPost
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -33,7 +32,8 @@ fun HomeScreenWithConnection(
     expendedMenu: MutableState<Boolean>,
     onMenuIconClicked: () -> Unit,
     onSearchForACarButtonClicked: () -> Unit,
-    onSettingsClicked: () -> Unit
+    onSettingsClicked: () -> Unit,
+    onBookNowButtonClicked: (carPost: CarPost) -> Unit
 ) {
     when (homeScreenUiState) {
         is HomeScreenUiState.Loading -> LoadingScreen(modifier = modifier.fillMaxSize())
@@ -46,7 +46,8 @@ fun HomeScreenWithConnection(
             onMenuIconClicked = onMenuIconClicked,
             onSearchForACarButtonClicked = onSearchForACarButtonClicked,
             onSettingsClicked = onSettingsClicked,
-            modifier = modifier.padding(contentPadding)
+            modifier = modifier.padding(contentPadding),
+            onBookNowButtonClicked = onBookNowButtonClicked
         )
         is HomeScreenUiState.Error -> ErrorScreen(retryAction, modifier = modifier.fillMaxSize())
     }

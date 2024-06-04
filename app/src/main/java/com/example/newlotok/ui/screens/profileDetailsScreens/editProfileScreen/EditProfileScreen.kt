@@ -58,7 +58,9 @@ fun EditProfileScreen(
                         secondTextFontWeight = FontWeight.Medium,
                         modifier = modifier.clickable(onClick = onChangeProfilePictureTextClicked)
                     )
-                }
+                },
+                profilePicture = "",
+                profileName = ""
             )
             Spacer(modifier = modifier.height(25.dp))
             ProfileInformationTextFieldCards(

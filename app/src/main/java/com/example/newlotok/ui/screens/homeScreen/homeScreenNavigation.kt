@@ -9,6 +9,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
+import com.example.newlotok.ui.TokensViewModel
 import com.example.newlotok.ui.navigation.LotokScreen
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -16,6 +17,7 @@ fun NavGraphBuilder.homeScreenNavigation(
     modifier: Modifier = Modifier,
     navController: NavHostController,
     scrollBehavior: TopAppBarScrollBehavior,
+    tokensViewModel: TokensViewModel
 ){
     composable(route = LotokScreen.HomeScreen.name){
         val homeScreenViewModel: HomeScreenViewModel =
@@ -37,7 +39,11 @@ fun NavGraphBuilder.homeScreenNavigation(
                 navController.navigate(LotokScreen.MainSettingsScreen.name)
             },
             openDialog = openDialog,
-            expendedMenu = expandedMenu
+            expendedMenu = expandedMenu,
+            onBookNowButtonClicked = {
+                tokensViewModel.carPost = it
+                navController.navigate(LotokScreen.CarDetailsScreen.name)
+            }
         )
     }
 }

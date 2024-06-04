@@ -42,7 +42,10 @@ fun NavGraphBuilder.navigationSystem(
         navController = navController,
         onWelcomeScreenButtonClicked = onWelcomeScreenButtonClicked,
     )
-    homeScreenNavigation(navController = navController, scrollBehavior = scrollBehavior)
+    homeScreenNavigation(
+        navController = navController,
+        scrollBehavior = scrollBehavior,
+    )
     selectACarScreenNavigation(navController = navController)
     selectBrandScreenNavigation(navController = navController)
     profileScreenNavigation(

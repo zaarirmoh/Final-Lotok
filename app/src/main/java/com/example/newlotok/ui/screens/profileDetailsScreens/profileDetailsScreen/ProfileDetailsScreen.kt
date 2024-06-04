@@ -39,7 +39,10 @@ fun ProfileDetailsScreen(
                 .verticalScroll(rememberScrollState())
         ) {
             Spacer(modifier = modifier.height(28.dp))
-            ProfilePictureAndName()
+            ProfilePictureAndName(
+                profilePicture = "",
+                profileName = ""
+            )
             Spacer(modifier = modifier.height(25.dp))
             ProfileInformationCards()
         }

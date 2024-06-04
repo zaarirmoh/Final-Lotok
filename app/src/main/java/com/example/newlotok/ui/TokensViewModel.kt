@@ -17,6 +17,7 @@ import com.example.newlotok.REFRESH_TOKEN
 import com.example.newlotok.data.LotokRepository
 import com.example.newlotok.dataStore
 import com.example.newlotok.model.AccessToken
+import com.example.newlotok.model.CarPost
 import com.example.newlotok.model.Tokens
 import com.example.newlotok.ui.navigation.LotokScreen
 import kotlinx.coroutines.flow.first
@@ -32,6 +33,8 @@ class TokensViewModel(private val lotokRepository: LotokRepository) : ViewModel(
     var tokensUiState: TokensUiState by mutableStateOf(TokensUiState.Loading)
     var isAccessVerified: Boolean by mutableStateOf(false)
     var addPostRoute: String by mutableStateOf(LotokScreen.SignInScreen.name)
+    // to be moved
+    var carPost: CarPost? by mutableStateOf(null)
     fun verifyAccessToken(accessToken: AccessToken) {
         viewModelScope.launch {
             tokensUiState = try {

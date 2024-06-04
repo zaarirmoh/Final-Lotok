@@ -36,6 +36,7 @@ fun HomeScreen(
     categories: List<Category> = listOf(),
     scrollBehavior: TopAppBarScrollBehavior,
     isLoading: Boolean = false,
+    onBookNowButtonClicked: (carPost: CarPost) -> Unit,
 ) {
     val navigationBarHeight = 90
     Scaffold(
@@ -70,7 +71,10 @@ fun HomeScreen(
             Spacer(modifier = modifier.height(25.dp))
             Categories(categories = categories)
             Spacer(modifier = modifier.height(25.dp))
-            PopularCars(carPosts = carPosts)
+            PopularCars(
+                carPosts = carPosts,
+                onBookNowButtonClicked = onBookNowButtonClicked
+            )
         }
         DateRangePicker(openDialog = openDialog)
     }

@@ -35,6 +35,7 @@ import com.example.newlotok.ui.TokensViewModel
 import com.example.newlotok.ui.navigation.LotokScreen
 import com.example.newlotok.ui.theme.LotokTheme
 import kotlinx.coroutines.launch
+import java.util.UUID
 
 
 val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "settings")
@@ -99,6 +100,7 @@ class MainActivity : ComponentActivity() {
                     LaunchedEffect(Unit) {
                         lifecycleScope.launch {
                             Log.d("entered here","entered here")
+                            Log.d("UUID", UUID.randomUUID().toString())
                             val accessToken = viewModel.getAccessToken()
                             val refreshToken = viewModel.getRefreshToken()
                             val tokens = Tokens(accessToken, refreshToken)

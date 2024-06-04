@@ -19,7 +19,7 @@ fun NavGraphBuilder.profileScreenNavigation(
         val profileScreenViewModel: ProfileScreenViewModel =
             viewModel(factory = ProfileScreenViewModel.Factory)
         val context = LocalContext.current
-        var authorization = "bearer "
+        var authorization = "Bearer "
         LaunchedEffect(Unit) {
             coroutineScope {
                 authorization += tokensViewModel.getAccessToken(context)
@@ -37,7 +37,9 @@ fun NavGraphBuilder.profileScreenNavigation(
             },
             onVersionCardClicked = {},
             profileScreenUiState = profileScreenViewModel.profileScreenUiState,
-            retryAction = {}
+            onSignInButtonClicked = {
+                navController.navigate(LotokScreen.SignInScreen.name)
+            }
         )
     }
 }
