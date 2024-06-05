@@ -1,10 +1,11 @@
 package com.example.newlotok.model
 
 import androidx.annotation.DrawableRes
+import androidx.compose.runtime.Immutable
 import com.example.newlotok.R
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
-
+@Immutable
 @Serializable
 data class ProfileInformation(
     val id: Int,

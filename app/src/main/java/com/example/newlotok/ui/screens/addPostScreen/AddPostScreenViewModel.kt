@@ -26,6 +26,7 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import retrofit2.HttpException
 import java.io.IOException
 
 sealed interface AddPostScreenUiState {
@@ -40,9 +41,35 @@ class AddPostScreenViewModel(private val lotokRepository: LotokRepository) : Vie
     val vinResult : VinResult =  VinResult()
 
     //var vin: String by mutableStateOf("")
+
     fun updateVin(vin: String) {
         updateItem(vin, "vin")
     }
+    fun updateMake(make: String) {
+        updateItem(make, "make")
+    }
+    fun updateModel(model: String){
+        updateItem(model, "model")
+    }
+    fun updateYear(year: Int){
+        updateItem(year.toString(), "year")
+    }
+
+    fun updatePower(power: Int){
+        updateItem(power.toString(), "power")
+    }
+    fun updateEngine(engine: String){
+        updateItem(engine, "engine")
+    }
+    fun updateFuel(fuel: String){
+        updateItem(fuel, "fuel")
+    }
+    fun updateBody(body: String){
+        updateItem(body, "body")
+    }
+
+
+
 
     fun updateWilaya(wilaya: Int) {
         updateItem(wilaya.toString(), "wilaya")
@@ -136,6 +163,13 @@ class AddPostScreenViewModel(private val lotokRepository: LotokRepository) : Vie
                 description = if (type == "description") newItem else currentState.description,
                 dailyPrice = if (type == "dailyPrice") newItem.toDouble() else currentState.dailyPrice,
                 weeklyPrice = if (type == "weeklyPrice") newItem.toDouble() else currentState.weeklyPrice,
+                make = if (type == "make") newItem else currentState.make,
+                model = if (type == "model") newItem else currentState.model,
+                year = if (type == "year") newItem.toInt() else currentState.year,
+                power = if (type == "power") newItem.toInt() else currentState.power,
+                engine = if (type == "engine") newItem else currentState.engine,
+                fuel = if (type == "fuel") newItem else currentState.fuel,
+                body = if (type == "body") newItem else currentState.body,
             )
         }
     }
@@ -149,11 +183,11 @@ class AddPostScreenViewModel(private val lotokRepository: LotokRepository) : Vie
                 )
             }catch (e: IOException){
                 AddPostScreenUiState.Error
-            }
-            /*
-            catch (e: HttpException){
+            }catch (e: HttpException){
                 AddPostScreenUiState.Error
             }
+            /*
+
              */
         }
     }

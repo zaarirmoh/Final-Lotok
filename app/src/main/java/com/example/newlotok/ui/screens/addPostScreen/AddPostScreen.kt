@@ -20,6 +20,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Description
 import androidx.compose.material.icons.filled.DirectionsCarFilled
+import androidx.compose.material.icons.filled.Inventory
 import androidx.compose.material.icons.filled.LocationOn
 import androidx.compose.material.icons.filled.PriceChange
 import androidx.compose.material3.AlertDialog
@@ -74,8 +75,13 @@ fun AddPostScreen(
     var carteGrisePic = mutableStateOf(addPostScreenViewModel.uiState.value.carteGrisePic)
     var assurancePic = mutableStateOf(addPostScreenViewModel.uiState.value.assurancePic)
     var technicalControlPic = mutableStateOf(addPostScreenViewModel.uiState.value.technicalControlPic)
-
-
+    var make by remember { mutableStateOf(addPostScreenViewModel.uiState.value.make) }
+    var model by remember { mutableStateOf(addPostScreenViewModel.uiState.value.model) }
+    var body by remember { mutableStateOf(addPostScreenViewModel.uiState.value.body) }
+    var fuel by remember { mutableStateOf(addPostScreenViewModel.uiState.value.fuel) }
+    var year by remember { mutableStateOf(addPostScreenViewModel.uiState.value.year) }
+    var power by remember { mutableStateOf(addPostScreenViewModel.uiState.value.power) }
+    var engine by remember { mutableStateOf(addPostScreenViewModel.uiState.value.engine) }
     val validPost= (
             address.isNotEmpty() &&
                     vin.isNotEmpty() && dailyPrice.isNotEmpty() && weeklyPrice.isNotEmpty()
@@ -241,8 +247,141 @@ fun AddPostScreen(
                 shapeSize = 61,
                 singleLine = false,
             )
+            // -------------------
+            Text(
+                text = "Enter your cars information: ",
+                fontSize = 20.sp,
+                fontWeight = FontWeight.SemiBold,
+                modifier = Modifier.padding(start = 16.dp, top = 30.dp)
+            )
+            TextField(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(start = 24.dp, end = 16.dp, bottom = 16.dp, top = 16.dp),
+                value = make,
+                onValueChange = { make = it },
+                labelText = "make",
+                labelTextWarning = "",
+                placeHolderText = "",
+                imageVector = Icons.Default.Inventory,
+                keyboardOptions = KeyboardOptions(
+                    imeAction = ImeAction.Next,
+                    keyboardType = KeyboardType.Text
+                ),
+                condition = {it.isNotEmpty() },
+                shapeSize = 60,
+                singleLine = true,
+            )
+            TextField(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(start = 24.dp, end = 16.dp, bottom = 16.dp, top = 16.dp),
+                value = model,
+                onValueChange = { model = it },
+                labelText = "model",
+                labelTextWarning = "",
+                placeHolderText = "",
+                imageVector = Icons.Default.Inventory,
+                keyboardOptions = KeyboardOptions(
+                    imeAction = ImeAction.Next,
+                    keyboardType = KeyboardType.Text
+                ),
+                condition = {it.isNotEmpty() },
+                shapeSize = 60,
+                singleLine = true,
+            )
+            TextField(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(start = 24.dp, end = 16.dp, bottom = 16.dp, top = 16.dp),
+                value = engine,
+                onValueChange = { engine = it },
+                labelText = "engine",
+                labelTextWarning = "",
+                placeHolderText = "",
+                imageVector = Icons.Default.Inventory,
+                keyboardOptions = KeyboardOptions(
+                    imeAction = ImeAction.Next,
+                    keyboardType = KeyboardType.Text
+                ),
+                condition = {it.isNotEmpty() },
+                shapeSize = 60,
+                singleLine = true,
+            )
+            TextField(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(start = 24.dp, end = 16.dp, bottom = 16.dp, top = 16.dp),
+                value = year.toString(),
+                onValueChange = { year = if(it.length > 0) it.toInt() else 0 },
+                labelText = "year",
+                labelTextWarning = "",
+                placeHolderText = "",
+                imageVector = Icons.Default.Inventory,
+                keyboardOptions = KeyboardOptions(
+                    imeAction = ImeAction.Next,
+                    keyboardType = KeyboardType.Number
+                ),
+                condition = {it.isNotEmpty() },
+                shapeSize = 60,
+                singleLine = true,
+            )
+            TextField(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(start = 24.dp, end = 16.dp, bottom = 16.dp, top = 16.dp),
+                value = fuel,
+                onValueChange = { fuel = it },
+                labelText = "fuel",
+                labelTextWarning = "",
+                placeHolderText = "",
+                imageVector = Icons.Default.Inventory,
+                keyboardOptions = KeyboardOptions(
+                    imeAction = ImeAction.Next,
+                    keyboardType = KeyboardType.Text
+                ),
+                condition = {it.isNotEmpty() },
+                shapeSize = 60,
+                singleLine = true,
+            )
+            TextField(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(start = 24.dp, end = 16.dp, bottom = 16.dp, top = 16.dp),
+                value = body,
+                onValueChange = { body = it },
+                labelText = "body",
+                labelTextWarning = "",
+                placeHolderText = "",
+                imageVector = Icons.Default.Inventory,
+                keyboardOptions = KeyboardOptions(
+                    imeAction = ImeAction.Next,
+                    keyboardType = KeyboardType.Text
+                ),
+                condition = {it.isNotEmpty() },
+                shapeSize = 60,
+                singleLine = true,
+            )
+            TextField(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(start = 24.dp, end = 16.dp, bottom = 16.dp, top = 16.dp),
+                value = power.toString(),
+                onValueChange = { power = if(it.length > 0) it.toInt() else 0 },
+                labelText = "power",
+                labelTextWarning = "",
+                placeHolderText = "",
+                imageVector = Icons.Default.Inventory,
+                keyboardOptions = KeyboardOptions(
+                    imeAction = ImeAction.Next,
+                    keyboardType = KeyboardType.Number
+                ),
+                condition = { it.isNotEmpty() },
+                shapeSize = 60,
+                singleLine = true,
+            )
 
-
+            // end here -------------------
             Text(
                 text = "Add a price for your car: ",
                 fontSize = 20.sp,
@@ -264,7 +403,7 @@ fun AddPostScreen(
                     imeAction = ImeAction.Next,
                     keyboardType = KeyboardType.Number
                 ),
-                condition = {it.isNotEmpty() },
+                condition = { it.isNotEmpty() },
                 shapeSize = 60,
                 singleLine = true,
             )
@@ -275,7 +414,7 @@ fun AddPostScreen(
                     .padding(start = 24.dp, end = 16.dp, bottom = 24.dp),
                 value = weeklyPrice,
                 onValueChange = { weeklyPrice = it },
-                labelText = "dailyPrice DZA/week",
+                labelText = "weeklyPrice DZA/week",
                 labelTextWarning = "",
                 placeHolderText = "",
                 imageVector = Icons.Default.PriceChange,
@@ -330,6 +469,13 @@ fun AddPostScreen(
             addPostScreenViewModel.updateAddress(address)
             addPostScreenViewModel.updateDescription(description)
             addPostScreenViewModel.updateVin(vin)
+            addPostScreenViewModel.updateMake(make)
+            addPostScreenViewModel.updateModel(model)
+            addPostScreenViewModel.updateBody(body)
+            addPostScreenViewModel.updateFuel(fuel)
+            addPostScreenViewModel.updateYear(year)
+            addPostScreenViewModel.updatePower(power)
+            addPostScreenViewModel.updateEngine(engine)
             addPostScreenViewModel.updateCarPictures(carPictures.value)
             if (dailyPrice.isNotEmpty() && weeklyPrice.isNotEmpty()) {
                 addPostScreenViewModel.updateDailyPrice(dailyPrice)
