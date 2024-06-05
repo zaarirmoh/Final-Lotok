@@ -30,6 +30,7 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -38,6 +39,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
@@ -60,6 +62,7 @@ fun AddPostScreen(
     addPostScreenViewModel: AddPostScreenViewModel,
     onGoBackIconClicked: () -> Unit,
     onConfirmButtonClicked: () -> Unit,
+    onAddPostButtonClicked: () -> Unit
 ){
     var wilaya by remember { mutableStateOf(addPostScreenViewModel.uiState.value.wilaya) }
     var address by remember { mutableStateOf(addPostScreenViewModel.uiState.value.address) }
@@ -82,7 +85,10 @@ fun AddPostScreen(
 
     var requeredFields by remember { mutableStateOf(false) }
     var openDialog by remember { mutableStateOf(false)}
-
+    val context = LocalContext.current
+    LaunchedEffect(Unit) {
+        Log.d("AddPostScreenId", addPostScreenViewModel.getID(context).toString())
+    }
     Scaffold(
         topBar = {
             TopBar(
@@ -144,7 +150,7 @@ fun AddPostScreen(
             ImagePickerTextField(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(start = 24.dp, end = 16.dp , bottom = 4.dp ),
+                    .padding(start = 24.dp, end = 16.dp, bottom = 4.dp),
                 "     Add the Assurance",
                 selectedImageUris = assurancePic
             )
@@ -153,7 +159,7 @@ fun AddPostScreen(
             ImagePickerTextField(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(start = 24.dp, end = 16.dp , bottom = 16.dp ),
+                    .padding(start = 24.dp, end = 16.dp, bottom = 16.dp),
                 "     Add the Technical Control",
                 selectedImageUris = technicalControlPic
             )
@@ -287,12 +293,13 @@ fun AddPostScreen(
 
             Button(
                 onClick = {
+                    onAddPostButtonClicked()
                     if (!validPost)  requeredFields = true else openDialog = true
                 },
                 colors = ButtonDefaults.buttonColors(Color(android.graphics.Color.parseColor("#B3261E"))),
                 modifier = Modifier
                     .fillMaxSize()
-                    .padding(start = 20.dp, end = 16.dp, top = 16.dp )
+                    .padding(start = 20.dp, end = 16.dp, top = 16.dp)
             ) {
                 Text(
                     text = "Add Post",
@@ -305,7 +312,7 @@ fun AddPostScreen(
 
             if (requeredFields ){
                 Text(
-                        text = "Please fill all the requered fields !",
+                        text = "Please fill all the required fields !",
                         color = Color.Red,
                         modifier = Modifier
                             .fillMaxWidth()
@@ -323,6 +330,7 @@ fun AddPostScreen(
             addPostScreenViewModel.updateAddress(address)
             addPostScreenViewModel.updateDescription(description)
             addPostScreenViewModel.updateVin(vin)
+            addPostScreenViewModel.updateCarPictures(carPictures.value)
             if (dailyPrice.isNotEmpty() && weeklyPrice.isNotEmpty()) {
                 addPostScreenViewModel.updateDailyPrice(dailyPrice)
                 addPostScreenViewModel.updateWeeklyPrice(weeklyPrice)

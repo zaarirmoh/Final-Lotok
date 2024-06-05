@@ -41,8 +41,10 @@ interface LotokApiService {
 
     @POST("api/listings/")
     suspend fun addCarPost(
+        @Header(value = "Authorization")
+        authorization: String,
         @Body carPost: CarPost
-    )
+    ): CarPost
 
     @POST("api/jwt/create")
     suspend fun signIn(
@@ -65,7 +67,7 @@ interface LotokApiService {
         @Body
         accessToken: AccessToken
     )
-    // "bearer access"
+    // "Bearer access"
     @GET("api/users/me/")
     suspend fun getProfileInformation(
         @Header(value = "Authorization")

@@ -9,8 +9,11 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.lifecycleScope
 import com.example.newlotok.model.ProfileInformation
 import com.example.newlotok.ui.components.topBar.EndIconEdit
 import com.example.newlotok.ui.components.topBar.TopBar
@@ -18,6 +21,7 @@ import com.example.newlotok.ui.components.topBar.TopBarCenterText
 import com.example.newlotok.ui.screens.homeScreen.ErrorScreen
 import com.example.newlotok.ui.screens.homeScreen.LoadingScreen
 import com.example.newlotok.ui.screens.signInUpScreens.signInUpComponents.SignInUpButton
+import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -29,6 +33,7 @@ fun ProfileScreen(
     onSettingsCardClicked: () -> Unit,
     onVersionCardClicked: () -> Unit,
     profileScreenUiState: ProfileScreenUiState,
+    profileScreenViewModel: ProfileScreenViewModel,
     onSignInButtonClicked: () -> Unit,
 ){
     Scaffold(
@@ -39,6 +44,7 @@ fun ProfileScreen(
             )
         }
     ) {
+        val context = LocalContext.current
         when (profileScreenUiState) {
             is ProfileScreenUiState.Loading -> LoadingScreen(modifier = modifier.fillMaxSize())
             is ProfileScreenUiState.Success -> {
@@ -63,6 +69,12 @@ fun ProfileScreen(
                         onCarsPostedCardClicked = onCarsPostedCardClicked,
                         onSettingsCardClicked = onSettingsCardClicked,
                         onVersionCardClicked = onVersionCardClicked
+                    )
+                }
+                LaunchedEffect(Unit) {
+                    profileScreenViewModel.setID(
+                        context = context,
+                        id = profileScreenUiState.profileInformation.id
                     )
                 }
             }

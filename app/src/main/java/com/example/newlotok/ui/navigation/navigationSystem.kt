@@ -82,6 +82,7 @@ fun NavGraphBuilder.navigationSystem(
     addPostScreenNavigation(
         navController = navController,
         addPostScreenViewModel = addPostScreenViewModel,
+        tokensViewModel = tokensViewModel
     )
 
 }

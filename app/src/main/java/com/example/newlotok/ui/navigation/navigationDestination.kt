@@ -46,7 +46,8 @@ fun LotokNavHost(
     )
     val context : Context = LocalContext.current
     val bookingSharedViewModel = BookingSharedViewModel()
-    val addPostScreenViewModel = AddPostScreenViewModel()
+    val addPostScreenViewModel: AddPostScreenViewModel
+        = viewModel(factory = AddPostScreenViewModel.Factory)
     val uiState by bookingSharedViewModel.uiState.collectAsState()
     Scaffold(
         bottomBar = {

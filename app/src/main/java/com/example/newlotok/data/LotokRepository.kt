@@ -36,7 +36,7 @@ interface LotokRepository {
 
     suspend fun getCategories(): List<Category>
 
-    suspend fun addCarPost(carPost: CarPost)
+    suspend fun addCarPost(authorization: String, carPost: CarPost): CarPost
 
     suspend fun signIn(signInInformation: SignIn): Tokens
 
@@ -62,7 +62,7 @@ class NetworkLotokRepository(
 
     override suspend fun getCategories(): List<Category> = lotokApiService.getCategories()
 
-    override suspend fun addCarPost(carPost: CarPost) = lotokApiService.addCarPost(carPost)
+    //override suspend fun addCarPost(carPost: CarPost,authorization: String): CarPost = lotokApiService.addCarPost(authorization = authorization, carPost = carPost)
 
     override suspend fun signIn(signInInformation: SignIn) = lotokApiService.signIn(signInInformation)
 
@@ -73,6 +73,8 @@ class NetworkLotokRepository(
     override suspend fun getProfileInformation(authorization: String): ProfileInformation = lotokApiService.getProfileInformation(authorization)
 
     override suspend fun getVinDetails(vin: String) = lotokApiService.getVinDetails(vin)
+
+    override suspend fun addCarPost(authorization: String, carPost: CarPost): CarPost = lotokApiService.addCarPost(authorization = authorization, carPost = carPost)
 
 
 
