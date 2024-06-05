@@ -39,6 +39,7 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
 import com.example.newlotok.model.CarPost
 import com.example.newlotok.ui.components.carPost.Rating
 import com.example.newlotok.ui.components.lines.SimpleLine
@@ -46,6 +47,7 @@ import com.example.newlotok.ui.components.topBar.EndIconProfile
 import com.example.newlotok.ui.components.topBar.StartIconGoBack
 import com.example.newlotok.ui.components.topBar.TopBar
 import com.example.newlotok.ui.components.topBar.TopBarCenterText
+import com.example.newlotok.ui.navigation.LotokScreen
 import com.example.newlotok.ui.screens.carDetailsScreen.CarPictures
 import com.example.newlotok.ui.screens.carDetailsScreen.ClickableText
 import com.example.newlotok.ui.screens.carDetailsScreen.NameAndPrice
@@ -58,8 +60,12 @@ fun BookingScreen(
     bookingSharedViewModel: BookingSharedViewModel,
     carPost : CarPost,
     onGoBackIconClicked: () -> Unit = {},
-    bookNowButtonClicked : () -> Unit = {},
+    onBookNowButtonClicked : () -> Unit = {},
+    navController: NavHostController
 ) {
+    if(bookingSharedViewModel.shouldNavigate){
+        navController.navigate(LotokScreen.OrderDetailsScreen.name)
+    }
     var firstName by remember {
         mutableStateOf(bookingSharedViewModel.uiState.value.firstName)
     }
@@ -95,7 +101,7 @@ fun BookingScreen(
         mutableStateOf(bookingSharedViewModel.uiState.value.paymentMethod)
     }
 
-    var DrivingLicencePics = mutableStateOf(bookingSharedViewModel.uiState.value.licensePics)
+    var drivingLicencePics = mutableStateOf(bookingSharedViewModel.uiState.value.licensePics)
 
 
     val rentedDays = DateDifference(firstDate = fromDate, secondDate = toDate)
@@ -248,7 +254,7 @@ fun BookingScreen(
             ImagePickerTextField(
                 modifier= Modifier
                     .padding(start = 24.dp, end = 16.dp, bottom = 8.dp, top = 16.dp),
-                selectedImageUris = DrivingLicencePics,
+                selectedImageUris = drivingLicencePics,
             )
             Log.d(null, "correct until here 0")
             Text(
@@ -437,7 +443,7 @@ fun BookingScreen(
                     confirmButton = {
                         Button(onClick = {
 
-                            bookNowButtonClicked()
+                            onBookNowButtonClicked()
                             openDialog = false
 
                         }) {
@@ -461,10 +467,9 @@ fun BookingScreen(
             bookingSharedViewModel.updateExpirationDate(expirationDate)
             bookingSharedViewModel.updatePaymentMethod(paymentMethod)
             bookingSharedViewModel.updateTotalPrice(totalPrice.toDouble())
-            bookingSharedViewModel.updateLicensePics(DrivingLicencePics.value)
-
-
-
+            bookingSharedViewModel.updateLicensePics(drivingLicencePics.value)
+            bookingSharedViewModel.updateCarPost(carPost)
+            bookingSharedViewModel.updateEmailAddress(emailAddress)
         }
     }
 }

@@ -1,6 +1,8 @@
 package com.example.newlotok.model
 
 import android.net.Uri
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 
 data class OrderDetails(
     val firstName: String = "",

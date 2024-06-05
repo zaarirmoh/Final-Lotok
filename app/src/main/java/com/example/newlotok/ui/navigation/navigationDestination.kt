@@ -45,7 +45,8 @@ fun LotokNavHost(
         backStackEntry?.destination?.route ?: LotokScreen.HomeScreen.name
     )
     val context : Context = LocalContext.current
-    val bookingSharedViewModel = BookingSharedViewModel()
+    val bookingSharedViewModel: BookingSharedViewModel
+        = viewModel(factory = BookingSharedViewModel.Factory)
     val addPostScreenViewModel: AddPostScreenViewModel
         = viewModel(factory = AddPostScreenViewModel.Factory)
     val uiState by bookingSharedViewModel.uiState.collectAsState()

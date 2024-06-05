@@ -1,9 +1,6 @@
 package com.example.newlotok.ui.screens.bookingScreen
 
 import android.util.Log
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
@@ -23,9 +20,11 @@ fun NavGraphBuilder.bookingScreenNavigation(
         BookingScreen(
             carPost = tokensViewModel.carPost ?: Data.carPostsList[0],
             bookingSharedViewModel = bookingSharedViewModel,
-            bookNowButtonClicked = {
-                navController.navigate(LotokScreen.OrderDetailsScreen.name)
-            }
+            onBookNowButtonClicked = {
+                bookingSharedViewModel.postBooking(bookingSharedViewModel.uiState.value)
+            },
+            navController = navController
         )
     }
+
 }

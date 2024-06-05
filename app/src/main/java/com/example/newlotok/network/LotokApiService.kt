@@ -20,6 +20,8 @@ import com.example.newlotok.model.AccessToken
 import com.example.newlotok.model.CarPost
 import com.example.newlotok.model.Category
 import com.example.newlotok.model.MarsPhoto
+import com.example.newlotok.model.OrderDetails
+import com.example.newlotok.model.OrderDetailsPost
 import com.example.newlotok.model.ProfileInformation
 import com.example.newlotok.model.SignIn
 import com.example.newlotok.model.SignUp
@@ -85,6 +87,12 @@ interface LotokApiService {
         @Query(value = "vin")
         vin : String
     ):VinResult
+
+    @POST("api/orders/create/")
+    suspend fun postBooking(
+        @Body
+        orderDetails: OrderDetailsPost
+    )
 
 
 }
