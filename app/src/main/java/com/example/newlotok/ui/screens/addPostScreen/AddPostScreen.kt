@@ -363,13 +363,7 @@ fun AddPostScreen(
                     }
                 )
             }
-
-
-
-
         }
-
-
     }
 }
 

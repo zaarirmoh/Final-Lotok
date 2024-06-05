@@ -21,6 +21,7 @@ import com.example.newlotok.model.MarsPhoto
 import com.example.newlotok.model.SignIn
 import com.example.newlotok.model.SignUp
 import com.example.newlotok.model.Tokens
+import com.example.newlotok.model.VinResult
 import com.example.newlotok.network.LotokApiService
 
 /**
@@ -40,6 +41,8 @@ interface LotokRepository {
     suspend fun signUp(signUpInformation: SignUp)
 
     suspend fun verifyToken(token: Tokens)
+
+    suspend fun getVinDetails(vin : String ) : VinResult
 
 }
 
@@ -62,5 +65,9 @@ class NetworkLotokRepository(
     override suspend fun signUp(signUpInformation: SignUp) = lotokApiService.signUp(signUpInformation)
 
     override suspend fun verifyToken(token: Tokens) = lotokApiService.verifyToken(token)
+
+    override suspend fun getVinDetails(vin: String) = lotokApiService.getVinDetails(vin)
+
+
 
 }

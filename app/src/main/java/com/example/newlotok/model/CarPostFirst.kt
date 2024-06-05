@@ -4,7 +4,6 @@ import android.net.Uri
 
 
 data class CarPostFirst(
-
     val vin : String = "",
     val wilaya: Int = 0,
     val address: String = "",

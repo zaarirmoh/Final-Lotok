@@ -22,9 +22,11 @@ import com.example.newlotok.model.MarsPhoto
 import com.example.newlotok.model.SignIn
 import com.example.newlotok.model.SignUp
 import com.example.newlotok.model.Tokens
+import com.example.newlotok.model.VinResult
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
+import retrofit2.http.Query
 
 /**
  * A public interface that exposes the [getPhotos] method
@@ -60,6 +62,12 @@ interface LotokApiService {
         @Body
         token: Tokens
     )
+
+    @GET("api/vin/")
+    suspend fun getVinDetails(
+        @Query(value = "vin")
+        vin : String
+    ):VinResult
 
 
 }
