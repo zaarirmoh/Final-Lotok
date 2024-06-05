@@ -106,7 +106,7 @@ class MainActivity : ComponentActivity() {
                         }
                     }
                     //val startDestination = viewModel.getStartingScreen()
-                    val startDestination = LotokScreen.BookingScreen.name
+                    val startDestination = LotokScreen.AddPostScreen.name
                     LotokApp(
                         onWelcomeScreenButtonClicked = {
                             lifecycleScope.launch{
