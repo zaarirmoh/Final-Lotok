@@ -51,7 +51,7 @@ fun NavGraphBuilder.addPostScreenNavigation(
                     make = addPostScreenViewModel.uiState.value.make,
                     model = addPostScreenViewModel.uiState.value.model,
                     description = addPostScreenViewModel.uiState.value.description,
-                    location = addPostScreenViewModel.uiState.value.wilaya,
+                    location = addPostScreenViewModel.uiState.value.wilaya + 1,
                     dayPrice = addPostScreenViewModel.uiState.value.dailyPrice,
                     weekPrice = addPostScreenViewModel.uiState.value.weeklyPrice,
                     id = 50,

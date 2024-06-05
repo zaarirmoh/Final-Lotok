@@ -37,7 +37,12 @@ import retrofit2.http.Query
 interface LotokApiService {
 
     @GET("api/listings/")
-    suspend fun getCarPosts(): List<CarPost>
+    suspend fun getCarPosts(
+        @Query(value = "make")
+        make: String? = null,
+        @Query(value = "year")
+        year: Int? = null,
+    ): List<CarPost>
 
     @POST("api/listings/")
     suspend fun addCarPost(
