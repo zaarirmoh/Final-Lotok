@@ -32,11 +32,14 @@ import com.example.newlotok.network.LotokApiService
 interface LotokRepository {
     /** Fetches list of MarsPhoto from marsApi */
 
-    suspend fun getCarPosts(): List<CarPost>
+    suspend fun getCarPosts(
+        make: String? = null,
+        year: Int? = null
+    ): List<CarPost>
 
     suspend fun getCategories(): List<Category>
 
-    suspend fun addCarPost(carPost: CarPost)
+    suspend fun addCarPost(authorization: String, carPost: CarPost): CarPost
 
     suspend fun signIn(signInInformation: SignIn): Tokens
 
@@ -58,11 +61,18 @@ class NetworkLotokRepository(
 ) : LotokRepository {
     /** Fetches list of MarsPhoto from marsApi*/
 
-    override suspend fun getCarPosts(): List<CarPost> = lotokApiService.getCarPosts()
+    //override suspend fun getCarPosts(): List<CarPost> = lotokApiService.getCarPosts()
+    override suspend fun getCarPosts(
+        make: String?,
+        year: Int?
+    ): List<CarPost> = lotokApiService.getCarPosts(
+        make = make,
+        year = year
+    )
 
     override suspend fun getCategories(): List<Category> = lotokApiService.getCategories()
 
-    override suspend fun addCarPost(carPost: CarPost) = lotokApiService.addCarPost(carPost)
+    //override suspend fun addCarPost(carPost: CarPost,authorization: String): CarPost = lotokApiService.addCarPost(authorization = authorization, carPost = carPost)
 
     override suspend fun signIn(signInInformation: SignIn) = lotokApiService.signIn(signInInformation)
 
@@ -73,6 +83,8 @@ class NetworkLotokRepository(
     override suspend fun getProfileInformation(authorization: String): ProfileInformation = lotokApiService.getProfileInformation(authorization)
 
     override suspend fun getVinDetails(vin: String) = lotokApiService.getVinDetails(vin)
+
+    override suspend fun addCarPost(authorization: String, carPost: CarPost): CarPost = lotokApiService.addCarPost(authorization = authorization, carPost = carPost)
 
 
 

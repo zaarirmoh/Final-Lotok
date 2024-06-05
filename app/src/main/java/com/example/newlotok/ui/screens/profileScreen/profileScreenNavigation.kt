@@ -39,7 +39,8 @@ fun NavGraphBuilder.profileScreenNavigation(
             profileScreenUiState = profileScreenViewModel.profileScreenUiState,
             onSignInButtonClicked = {
                 navController.navigate(LotokScreen.SignInScreen.name)
-            }
+            },
+            profileScreenViewModel = profileScreenViewModel
         )
     }
 }

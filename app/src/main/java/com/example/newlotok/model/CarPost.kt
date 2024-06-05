@@ -12,7 +12,7 @@ data class CarPost(
     val vin: String,
     val id: Int,
     @SerialName(value = "main_image_url")
-    val imgSrc: String,
+    var imgSrc: String,
     val model: String,
     val year: Int,
     val make: String,
@@ -31,7 +31,7 @@ data class CarPost(
     @SerialName(value = "wilaya")
     val location: Int ,
     @SerialName(value = "user")
-    val userId: Int,
+    var userId: Int,
     val category: Int,
     @SerialName(value = "is_verified")
     val isVerified: Boolean,

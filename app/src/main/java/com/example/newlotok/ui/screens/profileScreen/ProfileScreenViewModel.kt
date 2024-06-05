@@ -1,17 +1,22 @@
 package com.example.newlotok.ui.screens.profileScreen
 
+import android.content.Context
 import android.util.Log
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
+import androidx.datastore.preferences.core.edit
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
 import coil.decode.BitmapFactoryDecoder
+import com.example.newlotok.ID
 import com.example.newlotok.LotokApplication
+import com.example.newlotok.REFRESH_TOKEN
 import com.example.newlotok.data.LotokRepository
+import com.example.newlotok.dataStore
 import com.example.newlotok.model.ProfileInformation
 import com.example.newlotok.ui.screens.homeScreen.HomeScreenViewModel
 import kotlinx.coroutines.launch
@@ -45,6 +50,12 @@ class ProfileScreenViewModel(private val lotokRepository: LotokRepository) : Vie
             }catch (e: HttpException){
                 ProfileScreenUiState.Error
             }
+        }
+    }
+
+    suspend fun setID(context: Context, id: Int){
+        context.dataStore.edit { settings ->
+            settings[ID] = id
         }
     }
 

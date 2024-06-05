@@ -1,5 +1,6 @@
 package com.example.newlotok.ui.screens.addPostScreen
 
+import android.content.Context
 import android.net.Uri
 import android.util.Log
 import androidx.compose.runtime.MutableState
@@ -13,6 +14,17 @@ import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
 import com.example.newlotok.LotokApplication
 import com.example.newlotok.data.LotokRepository
+import androidx.compose.runtime.setValue
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.viewmodel.initializer
+import androidx.lifecycle.viewmodel.viewModelFactory
+import com.example.newlotok.ID
+import com.example.newlotok.LotokApplication
+import com.example.newlotok.data.LotokRepository
+import com.example.newlotok.dataStore
+import com.example.newlotok.model.CarPost
 import com.example.newlotok.model.CarPostFirst
 import com.example.newlotok.model.VinResult
 import com.example.newlotok.ui.screens.bookingScreen.hostPictures
@@ -21,12 +33,21 @@ import com.example.newlotok.ui.screens.signInUpScreens.signInScreen.SignInScreen
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.launch
+import retrofit2.HttpException
+import java.io.IOException
 import kotlinx.coroutines.launch
 import org.json.JSONObject
 import retrofit2.HttpException
 import java.io.IOException
 
+sealed interface AddPostScreenUiState {
+    data class Success(val data: CarPost) : AddPostScreenUiState
+    object Loading : AddPostScreenUiState
+    object Error : AddPostScreenUiState
+}
 /*sealed interface VinDetailsScreenUiState {
     data class Success(
         val vinDetails : VinResult
@@ -34,7 +55,6 @@ import java.io.IOException
     object Error : VinDetailsScreenUiState
     object Loading : VinDetailsScreenUiState
 }*/
-
 class AddPostScreenViewModel (private val lotokRepository: LotokRepository) : ViewModel() {
     private val _uiState = MutableStateFlow(CarPostFirst())
     val uiState: StateFlow<CarPostFirst> = _uiState.asStateFlow()
@@ -72,9 +92,38 @@ class AddPostScreenViewModel (private val lotokRepository: LotokRepository) : Vi
     }*/
 
 
+    val vinResult : VinResult =  VinResult()
+
+    //var vin: String by mutableStateOf("")
+
     fun updateVin(vin: String) {
         updateItem(vin, "vin")
     }
+    fun updateMake(make: String) {
+        updateItem(make, "make")
+    }
+    fun updateModel(model: String){
+        updateItem(model, "model")
+    }
+    fun updateYear(year: Int){
+        updateItem(year.toString(), "year")
+    }
+
+    fun updatePower(power: Int){
+        updateItem(power.toString(), "power")
+    }
+    fun updateEngine(engine: String){
+        updateItem(engine, "engine")
+    }
+    fun updateFuel(fuel: String){
+        updateItem(fuel, "fuel")
+    }
+    fun updateBody(body: String){
+        updateItem(body, "body")
+    }
+
+
+
 
     fun updateWilaya(wilaya: Int) {
         updateItem(wilaya.toString(), "wilaya")
@@ -98,6 +147,7 @@ class AddPostScreenViewModel (private val lotokRepository: LotokRepository) : Vi
 
     fun updateCarPictures(newCarPictures: List<Uri>) {
         val newCarPicturesUrls : MutableState<List<Uri>> = mutableStateOf(listOf())
+
         hostPictures(
             picturesUrl = newCarPicturesUrls,
             picturesUri = newCarPictures,
@@ -109,6 +159,7 @@ class AddPostScreenViewModel (private val lotokRepository: LotokRepository) : Vi
                 Log.e("Firebase", "Failed to upload images: ${exception.message}")
             }
         )
+
 
     }
 
@@ -166,10 +217,39 @@ class AddPostScreenViewModel (private val lotokRepository: LotokRepository) : Vi
                 description = if (type == "description") newItem else currentState.description,
                 dailyPrice = if (type == "dailyPrice") newItem.toDouble() else currentState.dailyPrice,
                 weeklyPrice = if (type == "weeklyPrice") newItem.toDouble() else currentState.weeklyPrice,
+                make = if (type == "make") newItem else currentState.make,
+                model = if (type == "model") newItem else currentState.model,
+                year = if (type == "year") newItem.toInt() else currentState.year,
+                power = if (type == "power") newItem.toInt() else currentState.power,
+                engine = if (type == "engine") newItem else currentState.engine,
+                fuel = if (type == "fuel") newItem else currentState.fuel,
+                body = if (type == "body") newItem else currentState.body,
             )
         }
     }
 
+    fun addCarPost(carPost: CarPost, authorization: String){
+        viewModelScope.launch {
+            addPostScreenUiState = AddPostScreenUiState.Loading
+            addPostScreenUiState = try {
+                AddPostScreenUiState.Success(
+                    lotokRepository.addCarPost(authorization,carPost)
+                )
+            }catch (e: IOException){
+                AddPostScreenUiState.Error
+            }catch (e: HttpException){
+                AddPostScreenUiState.Error
+            }
+            /*
+
+             */
+        }
+    }
+
+    suspend fun getID(context: Context): Int{
+        val id = context.dataStore.data.first()
+        return id[ID] ?: -1
+    }
     companion object {
         val Factory: ViewModelProvider.Factory = viewModelFactory {
             initializer {

@@ -99,11 +99,14 @@ fun CarDetailsScreen(
 
             Details(
                 modifier =Modifier.padding(top =21.dp, start = 11.dp , end = 30.dp),
-                energyType = carPost.fuel,
-                seats = carPost.power.toString(),
                 engine = carPost.engine,
                 type = carPost.transmission,
-                location = carPost.location.toString()
+                location = carPost.location.toString(),
+                fuel = carPost.fuel,
+                year = carPost.year.toString(),
+                body = carPost.body,
+                power = carPost.power.toString(),
+                transmission = carPost.transmission,
             )
 
             SimpleLine(

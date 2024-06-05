@@ -20,19 +20,25 @@ import com.example.newlotok.model.Data
 @Composable
 fun Details(
     modifier: Modifier = Modifier,
-    energyType : String,
-    seats : String,
+    year: String,
+    fuel : String,
+    power : String,
+    body: String,
+    transmission: String,
     engine : String,
     type : String,
     location : String
 
 ) {
     val details = listOf(
-        "Energy Type" to energyType,
-        "Seats" to seats,
+        "Fuel" to fuel,
+        "Year" to year,
         "Engine" to engine,
         "Type" to type,
-        "Location" to location
+        "Location" to location,
+        "Transmission" to transmission,
+        "Body" to body,
+        "Power" to power,
     )
 
     Column(modifier = modifier) {
@@ -72,10 +78,13 @@ fun Details(
 @Preview(showBackground = true)
 fun DetailsPreview(){
     Details(
-        energyType = Data.carPostsList[0].fuel,
-        seats = Data.carPostsList[0].power.toString(),
         engine = Data.carPostsList[0].engine,
         type = Data.carPostsList[0].transmission,
-        location = Data.carPostsList[0].location.toString()
+        location = Data.carPostsList[0].location.toString(),
+        year = Data.carPostsList[0].year.toString(),
+        body = Data.carPostsList[0].body,
+        transmission = Data.carPostsList[0].transmission,
+        power = Data.carPostsList[0].power.toString(),
+        fuel = Data.carPostsList[0].fuel
     )
 }
