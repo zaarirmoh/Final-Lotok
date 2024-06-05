@@ -73,6 +73,7 @@ fun NavGraphBuilder.navigationSystem(
     bookingScreenNavigation(
         navController = navController,
         bookingSharedViewModel = bookingSharedViewModel,
+        tokensViewModel = tokensViewModel,
     )
     orderDetailsScreenNavigation(
         navController = navController,

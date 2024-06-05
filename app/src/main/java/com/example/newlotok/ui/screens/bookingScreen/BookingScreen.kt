@@ -17,6 +17,7 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountBox
 import androidx.compose.material.icons.filled.CreditCard
+import androidx.compose.material.icons.filled.Email
 import androidx.compose.material.icons.filled.Person
 import androidx.compose.material.icons.filled.Phone
 import androidx.compose.material3.AlertDialog
@@ -36,11 +37,9 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.newlotok.model.CarPost
-import com.example.newlotok.model.Data
 import com.example.newlotok.ui.components.carPost.Rating
 import com.example.newlotok.ui.components.lines.SimpleLine
 import com.example.newlotok.ui.components.topBar.EndIconProfile
@@ -73,6 +72,9 @@ fun BookingScreen(
         mutableStateOf(bookingSharedViewModel.uiState.value.phoneNumber)
     }
 
+    var emailAddress by remember {
+        mutableStateOf(bookingSharedViewModel.uiState.value.emailAddress)
+    }
     var licenceNumber by remember {
         mutableStateOf(bookingSharedViewModel.uiState.value.licenceNumber)
     }
@@ -111,7 +113,7 @@ fun BookingScreen(
             )
     var openDialog by remember { mutableStateOf(false)}
 
-    var requeredFields by remember { mutableStateOf(false) }
+    var requiredFields by remember { mutableStateOf(false) }
     Log.d(null, "correct until here 2")
     Scaffold(
         topBar = {
@@ -132,6 +134,7 @@ fun BookingScreen(
                     imgSrc = carPost.fakeImgSrc,
                     modifier = Modifier.fillMaxWidth(),
                     buttonEnabled = false,
+                    mainCarPicture = carPost.imgSrc
                 )
                 Rating(stars = carPost.rating)
             }
@@ -143,7 +146,6 @@ fun BookingScreen(
                 dayPrice = carPost.dayPrice.toInt(),
                 weekPrice = carPost.weekPrice.toInt()
             )
-
             Text(
                 text = "Client Informations :",
                 fontSize = 20.sp,
@@ -211,6 +213,24 @@ fun BookingScreen(
 
             )
 
+            TextField(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(start = 24.dp, end = 16.dp, bottom = 8.dp, top = 8.dp),
+                value = emailAddress,
+                onValueChange = { emailAddress = it},
+                labelText ="Email address",
+                labelTextWarning ="Please enter your email address" ,
+                placeHolderText = "",
+                imageVector = Icons.Default.Email,
+                keyboardOptions = KeyboardOptions(
+                    imeAction = ImeAction.Done,
+                    keyboardType = KeyboardType.Text
+                ),
+                condition = {it.isNotEmpty()},
+
+                )
+
             SimpleLine(
                 height = 10,
                 startX = 119,
@@ -246,7 +266,14 @@ fun BookingScreen(
             ) {
                 DatePickerButton(
                     date = expirationDate,
-                    onDateChanged = {it -> expirationDate = it},
+                    onDateChanged = {it ->
+                        val parts = it.split("/")
+                        val part2 = parts[2]
+                        val part1 = if(parts[1].length == 1) "0${parts[1]}" else parts[1]
+                        val part0 = if(parts[0].length == 1) "0${parts[0]}" else parts[0]
+                        expirationDate = "$part2-$part1-$part0"
+                        Log.d("expirationDate", expirationDate)},
+
                     modifier = Modifier
                         .weight(1f)
                         .padding(end = 8.dp)
@@ -315,7 +342,13 @@ fun BookingScreen(
             ) {
                 DatePickerButton(
                     date = fromDate,
-                    onDateChanged = {it -> fromDate = it},
+                    onDateChanged = {it ->
+                        val parts = it.split("/")
+                        val part2 = parts[2]
+                        val part1 = if(parts[1].length == 1) "0${parts[1]}" else parts[1]
+                        val part0 = if(parts[0].length == 1) "0${parts[0]}" else parts[0]
+                        fromDate = "$part2-$part1-$part0"
+                    },
                     modifier = Modifier
                         .weight(1f)
                         .padding(end = 8.dp)
@@ -324,7 +357,13 @@ fun BookingScreen(
 
                 DatePickerButton(
                     date = toDate,
-                    onDateChanged = {it -> toDate = it},
+                    onDateChanged = {it ->
+                        val parts = it.split("/")
+                        val part2 = parts[2]
+                        val part1 = if(parts[1].length == 1) "0${parts[1]}" else parts[1]
+                        val part0 = if(parts[0].length == 1) "0${parts[0]}" else parts[0]
+                        toDate = "$part2-$part1-$part0"
+                                    },
                     modifier = Modifier
                         .weight(1f)
                         .padding(start = 8.dp)
@@ -364,7 +403,7 @@ fun BookingScreen(
 
             Button(
                 onClick = {
-                        if (validCommand) openDialog = true else requeredFields = true
+                        if (validCommand) openDialog = true else requiredFields = true
                           },
                 colors = ButtonDefaults.buttonColors(Color(android.graphics.Color.parseColor("#B3261E"))),
                 modifier = Modifier
@@ -379,7 +418,7 @@ fun BookingScreen(
                     modifier= Modifier.align(alignment = Alignment.CenterVertically)
                 )
             }
-            if (requeredFields)
+            if (requiredFields)
                 Text(
                 text = "Please fill all the fields !",
                 color = Color.Red,
