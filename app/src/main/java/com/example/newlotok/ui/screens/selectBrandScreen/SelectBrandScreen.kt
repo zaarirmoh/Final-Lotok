@@ -38,7 +38,7 @@ import com.example.newlotok.ui.theme.LotokTheme
 fun SelectBrandScreen(
     carBrandsList: List<CarBrand>,
     onGoBackIconClicked: () -> Unit = {},
-    onLogoClicked: () -> Unit = {}
+    onLogoClicked: (make: String) -> Unit = {}
 ){
     Scaffold(
         topBar = {
@@ -59,7 +59,7 @@ fun SelectBrandScreen(
         ) {
             items(items = carBrandsList){ carBrand -> BrandCard(
                 brandPic = carBrand.brandPic,
-                onClicked = onLogoClicked ,
+                onClicked = { onLogoClicked(carBrand.make) },
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(13.dp)

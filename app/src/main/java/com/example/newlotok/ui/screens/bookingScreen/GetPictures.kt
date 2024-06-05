@@ -31,8 +31,12 @@ fun hostPictures(
                 childRef.downloadUrl
             }
         uploadTasks.add(uploadTask)
+        childRef.downloadUrl.addOnSuccessListener { uri ->
+            Log.d("success: downloadUri", uri.toString())
+        }
     }
 
+    /*
     Tasks.whenAllComplete(uploadTasks).addOnCompleteListener { task ->
         if (task.isSuccessful) {
             val downloadUrls = uploadTasks.mapNotNull { it.result }
@@ -42,4 +46,5 @@ fun hostPictures(
             onFailure(task.exception ?: Exception("Unknown error occurred"))
         }
     }
+     */
 }

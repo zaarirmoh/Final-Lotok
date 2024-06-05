@@ -12,6 +12,7 @@ import androidx.lifecycle.viewModelScope
 import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
 import com.example.newlotok.ACCESS_TOKEN
+import com.example.newlotok.ID
 import com.example.newlotok.LotokApplication
 import com.example.newlotok.REFRESH_TOKEN
 import com.example.newlotok.data.LotokRepository
@@ -29,12 +30,20 @@ sealed interface TokensUiState {
     object Loading : TokensUiState
     object Error : TokensUiState
 }
+sealed interface GetCarPostsUiState {
+    data class Success(val carPosts: List<CarPost>) : GetCarPostsUiState
+    object Loading : GetCarPostsUiState
+    object Error : GetCarPostsUiState
+}
 class TokensViewModel(private val lotokRepository: LotokRepository) : ViewModel() {
     var tokensUiState: TokensUiState by mutableStateOf(TokensUiState.Loading)
+    var getCarPostsUiState: GetCarPostsUiState by mutableStateOf(GetCarPostsUiState.Loading)
     var isAccessVerified: Boolean by mutableStateOf(false)
     var addPostRoute: String by mutableStateOf(LotokScreen.SignInScreen.name)
     // to be moved
     var carPost: CarPost? by mutableStateOf(null)
+    var make: String? by mutableStateOf(null)
+    var shouldSendUser: Boolean by mutableStateOf(true)
     fun verifyAccessToken(accessToken: AccessToken) {
         viewModelScope.launch {
             tokensUiState = try {
@@ -72,6 +81,31 @@ class TokensViewModel(private val lotokRepository: LotokRepository) : ViewModel(
             settings[ACCESS_TOKEN] = token
         }
     }
+    suspend fun getID(context: Context): Int{
+        val id = context.dataStore.data.first()
+        return id[ID] ?: -1
+    }
+
+    fun getCarPosts(
+        user: Int? = null,
+        make: String? = null,
+    ){
+        viewModelScope.launch {
+            getCarPostsUiState = GetCarPostsUiState.Loading
+            getCarPostsUiState = try {
+                GetCarPostsUiState.Success(lotokRepository.getCarPosts(
+                    user = user,
+                    make = make
+                ))
+            }catch (e: IOException){
+                GetCarPostsUiState.Error
+            }catch (e: HttpException){
+                GetCarPostsUiState.Error
+            }
+        }
+
+    }
+
     companion object {
         val Factory: ViewModelProvider.Factory = viewModelFactory {
             initializer {

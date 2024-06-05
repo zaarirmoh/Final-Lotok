@@ -44,6 +44,8 @@ interface LotokApiService {
         make: String? = null,
         @Query(value = "year")
         year: Int? = null,
+        @Query(value = "user")
+        user: Int? = null
     ): List<CarPost>
 
     @POST("api/listings/")

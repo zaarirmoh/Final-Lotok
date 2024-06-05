@@ -35,7 +35,8 @@ interface LotokRepository {
 
     suspend fun getCarPosts(
         make: String? = null,
-        year: Int? = null
+        year: Int? = null,
+        user: Int? = null
     ): List<CarPost>
 
     suspend fun getCategories(): List<Category>
@@ -66,10 +67,12 @@ class NetworkLotokRepository(
     //override suspend fun getCarPosts(): List<CarPost> = lotokApiService.getCarPosts()
     override suspend fun getCarPosts(
         make: String?,
-        year: Int?
+        year: Int?,
+        user: Int?
     ): List<CarPost> = lotokApiService.getCarPosts(
         make = make,
-        year = year
+        year = year,
+        user = user
     )
 
     override suspend fun getCategories(): List<Category> = lotokApiService.getCategories()

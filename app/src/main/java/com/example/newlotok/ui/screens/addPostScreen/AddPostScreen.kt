@@ -2,22 +2,17 @@ package com.example.newlotok.ui.screens.addPostScreen
 
 import android.annotation.SuppressLint
 import android.util.Log
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Description
 import androidx.compose.material.icons.filled.DirectionsCarFilled
 import androidx.compose.material.icons.filled.Inventory
@@ -27,7 +22,6 @@ import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Icon
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -53,10 +47,11 @@ import com.example.newlotok.ui.components.topBar.TopBar
 import com.example.newlotok.ui.components.topBar.TopBarCenterText
 import com.example.newlotok.ui.screens.bookingScreen.ImagePickerTextField
 import com.example.newlotok.ui.screens.bookingScreen.TextField
+import kotlinx.coroutines.delay
 
 
-
-@SuppressLint("UnrememberedMutableState", "StateFlowValueCalledInComposition")
+//@SuppressLint("UnrememberedMutableState", "StateFlowValueCalledInComposition")
+@SuppressLint("StateFlowValueCalledInComposition")
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun AddPostScreen(
@@ -71,10 +66,10 @@ fun AddPostScreen(
     var vin by remember { mutableStateOf(addPostScreenViewModel.uiState.value.vin) }
     var dailyPrice by remember { mutableStateOf("0.0") }
     var weeklyPrice by remember { mutableStateOf("0.0") }
-    var carPictures = mutableStateOf(addPostScreenViewModel.uiState.value.carPictures)
-    var carteGrisePic = mutableStateOf(addPostScreenViewModel.uiState.value.carteGrisePic)
-    var assurancePic = mutableStateOf(addPostScreenViewModel.uiState.value.assurancePic)
-    var technicalControlPic = mutableStateOf(addPostScreenViewModel.uiState.value.technicalControlPic)
+    var carPictures = remember {mutableStateOf(addPostScreenViewModel.uiState.value.carPictures)}
+    var carteGrisePic = remember {mutableStateOf(addPostScreenViewModel.uiState.value.carteGrisePic)}
+    var assurancePic = remember {mutableStateOf(addPostScreenViewModel.uiState.value.assurancePic)}
+    var technicalControlPic = remember {mutableStateOf(addPostScreenViewModel.uiState.value.technicalControlPic)}
     var make by remember { mutableStateOf(addPostScreenViewModel.uiState.value.make) }
     var model by remember { mutableStateOf(addPostScreenViewModel.uiState.value.model) }
     var body by remember { mutableStateOf(addPostScreenViewModel.uiState.value.body) }
@@ -82,6 +77,7 @@ fun AddPostScreen(
     var year by remember { mutableStateOf(addPostScreenViewModel.uiState.value.year) }
     var power by remember { mutableStateOf(addPostScreenViewModel.uiState.value.power) }
     var engine by remember { mutableStateOf(addPostScreenViewModel.uiState.value.engine) }
+    var count = remember {mutableStateOf(0)}
     val validPost= (
             address.isNotEmpty() &&
                     vin.isNotEmpty() && dailyPrice.isNotEmpty() && weeklyPrice.isNotEmpty()
@@ -176,7 +172,10 @@ fun AddPostScreen(
                     .fillMaxWidth()
                     .padding(start = 24.dp, end = 16.dp, bottom = 24.dp, top = 16.dp),
                 value = vin,
-                onValueChange = { vin = it },
+                onValueChange = {
+                    vin = it
+                    addPostScreenViewModel.updateVin(vin)
+                                },
                 labelText = "Vehicle Identification Number",
                 labelTextWarning = "",
                 placeHolderText = "",
@@ -206,14 +205,19 @@ fun AddPostScreen(
                     bottom = 8.dp
                 ),
                 selectedWilaya = wilaya,
-                onWilayaSelected = { wilaya = it }
+                onWilayaSelected = {
+                    wilaya = it
+                    addPostScreenViewModel.updateWilaya(wilaya)
+                }
             )
             TextField(
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(start = 24.dp, end = 16.dp, bottom = 8.dp, top = 16.dp),
                 value = address,
-                onValueChange = { address = it },
+                onValueChange = {
+                    address = it
+                    addPostScreenViewModel.updateAddress(address) },
                 labelText = "Your Address",
                 labelTextWarning = "Please enter your address",
                 placeHolderText = "",
@@ -237,7 +241,11 @@ fun AddPostScreen(
                     .fillMaxWidth()
                     .padding(start = 24.dp, end = 16.dp, bottom = 24.dp, top = 16.dp),
                 value = description,
-                onValueChange = { description = it },
+                onValueChange = {
+                    description = it
+                    addPostScreenViewModel.updateDescription(description)
+
+                                },
                 labelText = "Description",
                 labelTextWarning = "",
                 placeHolderText = "",
@@ -259,7 +267,11 @@ fun AddPostScreen(
                     .fillMaxWidth()
                     .padding(start = 24.dp, end = 16.dp, bottom = 16.dp, top = 16.dp),
                 value = make,
-                onValueChange = { make = it },
+                onValueChange = {
+                    make = it
+                    addPostScreenViewModel.updateMake(make)
+
+                                },
                 labelText = "make",
                 labelTextWarning = "",
                 placeHolderText = "",
@@ -277,7 +289,10 @@ fun AddPostScreen(
                     .fillMaxWidth()
                     .padding(start = 24.dp, end = 16.dp, bottom = 16.dp, top = 16.dp),
                 value = model,
-                onValueChange = { model = it },
+                onValueChange = {
+                    model = it
+                    addPostScreenViewModel.updateModel(model)
+                                },
                 labelText = "model",
                 labelTextWarning = "",
                 placeHolderText = "",
@@ -295,7 +310,10 @@ fun AddPostScreen(
                     .fillMaxWidth()
                     .padding(start = 24.dp, end = 16.dp, bottom = 16.dp, top = 16.dp),
                 value = engine,
-                onValueChange = { engine = it },
+                onValueChange = {
+                    engine = it
+                    addPostScreenViewModel.updateEngine(engine)
+                                },
                 labelText = "engine",
                 labelTextWarning = "",
                 placeHolderText = "",
@@ -313,7 +331,10 @@ fun AddPostScreen(
                     .fillMaxWidth()
                     .padding(start = 24.dp, end = 16.dp, bottom = 16.dp, top = 16.dp),
                 value = year.toString(),
-                onValueChange = { year = if(it.length > 0) it.toInt() else 0 },
+                onValueChange = {
+                    year = if(it.length > 0) it.toInt() else 0
+                    addPostScreenViewModel.updateYear(year)
+                                },
                 labelText = "year",
                 labelTextWarning = "",
                 placeHolderText = "",
@@ -331,7 +352,11 @@ fun AddPostScreen(
                     .fillMaxWidth()
                     .padding(start = 24.dp, end = 16.dp, bottom = 16.dp, top = 16.dp),
                 value = fuel,
-                onValueChange = { fuel = it },
+                onValueChange = {
+                    fuel = it
+                    addPostScreenViewModel.updateFuel(fuel)
+
+                                },
                 labelText = "fuel",
                 labelTextWarning = "",
                 placeHolderText = "",
@@ -349,7 +374,10 @@ fun AddPostScreen(
                     .fillMaxWidth()
                     .padding(start = 24.dp, end = 16.dp, bottom = 16.dp, top = 16.dp),
                 value = body,
-                onValueChange = { body = it },
+                onValueChange = {
+                    body = it
+                    addPostScreenViewModel.updateBody(body)
+                                },
                 labelText = "body",
                 labelTextWarning = "",
                 placeHolderText = "",
@@ -367,7 +395,10 @@ fun AddPostScreen(
                     .fillMaxWidth()
                     .padding(start = 24.dp, end = 16.dp, bottom = 16.dp, top = 16.dp),
                 value = power.toString(),
-                onValueChange = { power = if(it.length > 0) it.toInt() else 0 },
+                onValueChange = {
+                    power = if(it.length > 0) it.toInt() else 0
+                    addPostScreenViewModel.updatePower(power)
+                                },
                 labelText = "power",
                 labelTextWarning = "",
                 placeHolderText = "",
@@ -380,7 +411,6 @@ fun AddPostScreen(
                 shapeSize = 60,
                 singleLine = true,
             )
-
             // end here -------------------
             Text(
                 text = "Add a price for your car: ",
@@ -432,8 +462,9 @@ fun AddPostScreen(
 
             Button(
                 onClick = {
-                    onAddPostButtonClicked()
+
                     if (!validPost)  requeredFields = true else openDialog = true
+                    onAddPostButtonClicked()
                 },
                 colors = ButtonDefaults.buttonColors(Color(android.graphics.Color.parseColor("#B3261E"))),
                 modifier = Modifier
@@ -465,18 +496,9 @@ fun AddPostScreen(
 
 
             // Update ViewModel with latest values
-            addPostScreenViewModel.updateWilaya(wilaya)
-            addPostScreenViewModel.updateAddress(address)
-            addPostScreenViewModel.updateDescription(description)
-            addPostScreenViewModel.updateVin(vin)
-            addPostScreenViewModel.updateMake(make)
-            addPostScreenViewModel.updateModel(model)
-            addPostScreenViewModel.updateBody(body)
-            addPostScreenViewModel.updateFuel(fuel)
-            addPostScreenViewModel.updateYear(year)
-            addPostScreenViewModel.updatePower(power)
-            addPostScreenViewModel.updateEngine(engine)
-            addPostScreenViewModel.updateCarPictures(carPictures.value)
+
+
+            addPostScreenViewModel.updateCarPictures(carPictures.value,count = count)
             if (dailyPrice.isNotEmpty() && weeklyPrice.isNotEmpty()) {
                 addPostScreenViewModel.updateDailyPrice(dailyPrice)
                 addPostScreenViewModel.updateWeeklyPrice(weeklyPrice)
@@ -500,7 +522,7 @@ fun AddPostScreen(
                            },
                     confirmButton = {
                         Button(onClick = {
-                            addPostScreenViewModel.updateCarPictures(carPictures.value)
+                            addPostScreenViewModel.updateCarPictures(carPictures.value,count)
                             addPostScreenViewModel.updateCarteGrisePic(carteGrisePic.value)
                             addPostScreenViewModel.updateAssurancePic(assurancePic.value)
                             addPostScreenViewModel.updateTechnicalControlPic(technicalControlPic.value)

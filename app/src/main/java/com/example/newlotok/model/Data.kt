@@ -52,49 +52,63 @@ object Data{
         CarBrand(
             id = 1,
             brandPic = R.drawable.bmw_logo2_logo_svg_vector,
+            make = "bmw"
         ),
         CarBrand(
             id = 2,
-            brandPic = R.drawable.fiat_3_logo_svg_vector),
+            brandPic = R.drawable.fiat_3_logo_svg_vector,
+            make = "fiat"
+        ),
+
         CarBrand(
             id = 3,
             brandPic = R.drawable.audi_14_logo_svg_vector,
+            make = "audi"
         ),
         CarBrand(
             4,
             R.drawable.ford_8_logo_svg_vector,
+            make = "ford"
         ),
         CarBrand(
             5,
             R.drawable.honda_11_logo_svg_vector,
+            make = "honda"
         ),
         CarBrand(
             6,
             R.drawable.infiniti_1_logo_svg_vector,
+            make = "infiniti"
         ),
         CarBrand(
             7,
             R.drawable.jaguar_cars_logo_svg_vector,
+            make = "jaguar"
         ),
         CarBrand(
             8,
             R.drawable.jeep_7_logo_svg_vector,
+            make = "jeep"
         ),
         CarBrand(
             9,
             R.drawable.lamborghini_logo_svg_vector,
+            make = "lamborghini"
         ),
         CarBrand(
             10,
             R.drawable.rolls_royce_logo_svg_vector,
+            make = "rolls-royce"
         ),
         CarBrand(
             11,
             R.drawable.mercedes_benz_6_logo_svg_vector,
+            make = "mercedes-benz"
         ),
         CarBrand(
             12,
             R.drawable.chevrolet,
+            make = "chevrolet"
         ),
         CarBrand(
             id = 1,
@@ -106,10 +120,12 @@ object Data{
         CarBrand(
             id = 3,
             brandPic = R.drawable.porsche_6_logo_svg_vector,
+            make = "porsche"
         ),
         CarBrand(
             4,
             R.drawable.toyota_logo_svg_vector,
+            make = "toyota",
         ),
         CarBrand(
             5,

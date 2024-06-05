@@ -1,6 +1,7 @@
 package com.example.newlotok.ui.screens.addPostScreen
 
 import android.util.Log
+import android.widget.Toast
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -16,6 +17,7 @@ import com.google.firebase.Firebase
 import com.google.firebase.storage.storage
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.delay
 
 fun NavGraphBuilder.addPostScreenNavigation(
     modifier: Modifier = Modifier,
@@ -41,11 +43,12 @@ fun NavGraphBuilder.addPostScreenNavigation(
         if(shouldAddPost.value){
             Log.d("entered here","entered here")
             LaunchedEffect(Unit){
+                delay(1000)
                 Log.d("vin", addPostScreenViewModel.uiState.value.vin)
                 Log.d("entered here 2","entered here 2")
                 authorization += tokensViewModel.getAccessToken(context)
                 Log.d("authorization",authorization)
-                Log.d("imageList",addPostScreenViewModel.uiState.value.carPictures[0].toString())
+                Log.d("les donnees",addPostScreenViewModel.uiState.value.toString())
                 carPost = CarPost(
                     vin = addPostScreenViewModel.uiState.value.vin,
                     make = addPostScreenViewModel.uiState.value.make,
@@ -68,8 +71,13 @@ fun NavGraphBuilder.addPostScreenNavigation(
                     userId = addPostScreenViewModel.getID(context)
                 )
                 addPostScreenViewModel.addCarPost(authorization = authorization, carPost = carPost!!)
-
             }
+        }
+        if(addPostScreenViewModel.shouldNavigate){
+            navController.navigate(LotokScreen.HomeScreen.name)
+            Toast.makeText(context, "post added successfully", Toast.LENGTH_SHORT).show()
+        }else{
+            Toast.makeText(context, "failed to add post or fill required fields", Toast.LENGTH_SHORT).show()
         }
     }
 }
