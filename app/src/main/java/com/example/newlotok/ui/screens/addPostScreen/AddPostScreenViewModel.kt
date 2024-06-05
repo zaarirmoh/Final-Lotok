@@ -3,20 +3,75 @@ package com.example.newlotok.ui.screens.addPostScreen
 import android.net.Uri
 import android.util.Log
 import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.viewmodel.initializer
+import androidx.lifecycle.viewmodel.viewModelFactory
+import com.example.newlotok.LotokApplication
+import com.example.newlotok.data.LotokRepository
 import com.example.newlotok.model.CarPostFirst
 import com.example.newlotok.model.VinResult
 import com.example.newlotok.ui.screens.bookingScreen.hostPictures
+import com.example.newlotok.ui.screens.signInUpScreens.signInScreen.SignInScreenUiState
+import com.example.newlotok.ui.screens.signInUpScreens.signInScreen.SignInScreenViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.launch
+import org.json.JSONObject
+import retrofit2.HttpException
+import java.io.IOException
 
-class AddPostScreenViewModel {
+/*sealed interface VinDetailsScreenUiState {
+    data class Success(
+        val vinDetails : VinResult
+    ) : VinDetailsScreenUiState
+    object Error : VinDetailsScreenUiState
+    object Loading : VinDetailsScreenUiState
+}*/
+
+class AddPostScreenViewModel (private val lotokRepository: LotokRepository) : ViewModel() {
     private val _uiState = MutableStateFlow(CarPostFirst())
     val uiState: StateFlow<CarPostFirst> = _uiState.asStateFlow()
+    /*var vinDetailsScreenUiState: VinDetailsScreenUiState by mutableStateOf(VinDetailsScreenUiState.Loading)
+        private set*/
 
-    val vinResult : VinResult =  VinResult()
+    var errorMessage: String by mutableStateOf("")
+        private set
+
+
+   /* fun getVinDetails() {
+        viewModelScope.launch {
+            vinDetailsScreenUiState = VinDetailsScreenUiState.Loading
+            vinDetailsScreenUiState=  try {
+                val vinDetails = lotokRepository.getVinDetails(uiState.value.vin)
+                VinDetailsScreenUiState.Success(vinDetails)
+            } catch (e: IOException) {
+                Log.d(null, "exception")
+                VinDetailsScreenUiState.Error
+            } catch (e: HttpException){
+                val data = e.response()?.errorBody()?.string()
+                data.let {
+                    val json = JSONObject(data!!)
+                    val keys = json.keys()
+                    while (keys.hasNext()) {
+                        val key = keys.next()
+                        val message = json.getString(key)
+                        errorMessage = message
+                        Log.e(e.message(), errorMessage)
+                    }
+                    VinDetailsScreenUiState.Error
+                }
+            }
+        }
+    }*/
+
+
     fun updateVin(vin: String) {
         updateItem(vin, "vin")
     }
@@ -112,6 +167,16 @@ class AddPostScreenViewModel {
                 dailyPrice = if (type == "dailyPrice") newItem.toDouble() else currentState.dailyPrice,
                 weeklyPrice = if (type == "weeklyPrice") newItem.toDouble() else currentState.weeklyPrice,
             )
+        }
+    }
+
+    companion object {
+        val Factory: ViewModelProvider.Factory = viewModelFactory {
+            initializer {
+                val application = (this[ViewModelProvider.AndroidViewModelFactory.APPLICATION_KEY] as LotokApplication)
+                val marsPhotosRepository = application.container.lotokRepository
+                AddPostScreenViewModel(lotokRepository = marsPhotosRepository)
+            }
         }
     }
 }

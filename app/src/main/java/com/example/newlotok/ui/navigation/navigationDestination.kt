@@ -20,6 +20,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import com.example.newlotok.data.LotokRepository
 import com.example.newlotok.ui.TokensViewModel
 import com.example.newlotok.ui.components.navigationBar.MyNavigationBar
 import com.example.newlotok.ui.screens.addPostScreen.AddPostScreenViewModel
@@ -46,7 +47,9 @@ fun LotokNavHost(
     )
     val context : Context = LocalContext.current
     val bookingSharedViewModel = BookingSharedViewModel()
-    val addPostScreenViewModel = AddPostScreenViewModel()
+    val addPostScreenViewModel:AddPostScreenViewModel =  viewModel(factory = AddPostScreenViewModel.Factory)
+
+
     val uiState by bookingSharedViewModel.uiState.collectAsState()
     Scaffold(
         bottomBar = {

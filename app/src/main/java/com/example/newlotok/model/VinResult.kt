@@ -10,4 +10,6 @@ data class VinResult(
     val engine :String = "",
     val horsePower :Int = 0,
     val fuel : String = "",
+    val transmission: String = "",
+    val body: String = "",
 )
