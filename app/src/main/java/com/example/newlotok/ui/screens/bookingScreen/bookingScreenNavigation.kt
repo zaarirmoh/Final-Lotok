@@ -1,29 +1,30 @@
 package com.example.newlotok.ui.screens.bookingScreen
 
 import android.util.Log
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
 import com.example.newlotok.model.Data
+import com.example.newlotok.ui.TokensViewModel
 import com.example.newlotok.ui.navigation.LotokScreen
 
 fun NavGraphBuilder.bookingScreenNavigation(
     modifier: Modifier = Modifier,
     navController: NavHostController,
-    bookingSharedViewModel: BookingSharedViewModel
+    bookingSharedViewModel: BookingSharedViewModel,
+    tokensViewModel: TokensViewModel
 ){
     composable(route = LotokScreen.BookingScreen.name){
         Log.d(null, "correct until here")
         BookingScreen(
-            carPost = Data.carPostsList[0],
+            carPost = tokensViewModel.carPost ?: Data.carPostsList[0],
             bookingSharedViewModel = bookingSharedViewModel,
-            bookNowButtonClicked = {
-                navController.navigate(LotokScreen.OrderDetailsScreen.name)
-            }
+            onBookNowButtonClicked = {
+                bookingSharedViewModel.postBooking(bookingSharedViewModel.uiState.value)
+            },
+            navController = navController
         )
     }
+
 }

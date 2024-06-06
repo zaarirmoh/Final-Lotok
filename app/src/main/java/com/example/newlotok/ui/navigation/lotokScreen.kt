@@ -20,4 +20,5 @@ enum class LotokScreen(
     BookingScreen(false),
     OrderDetailsScreen(false),
     AddPostScreen(false),
+    UserPostsScreen(false),
 }

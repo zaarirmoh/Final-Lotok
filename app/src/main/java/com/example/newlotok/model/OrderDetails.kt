@@ -1,6 +1,8 @@
 package com.example.newlotok.model
 
 import android.net.Uri
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 
 data class OrderDetails(
     val firstName: String = "",
@@ -12,6 +14,7 @@ data class OrderDetails(
     val toDate: String = "dd/mm/yyyy",
     val carPost: CarPost = Data.carPostsList[0],
     val paymentMethod: String = "Credit Card",
-    val licensePics : List<Uri> = emptyList(),
-    val totalPrice : Double = 0.0
+    val licensePics: List<Uri> = emptyList(),
+    val totalPrice: Double = 0.0,
+    val emailAddress: String = "",
 )

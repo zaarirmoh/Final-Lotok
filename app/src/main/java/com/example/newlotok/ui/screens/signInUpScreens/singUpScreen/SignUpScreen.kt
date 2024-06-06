@@ -67,6 +67,7 @@ fun SignUpScreen(
             is SignUpScreenUiState.Error -> {
                 Toast.makeText(context, signUpScreenViewModel.errorMessage, Toast.LENGTH_SHORT).show()
                 signUpScreenViewModel.resetErrorMessage()
+                //signUpScreenViewModel.signUpScreenUiState = SignUpScreenUiState.Loading
             }
             is SignUpScreenUiState.Loading -> Log.d(null, "Loading")
             is SignUpScreenUiState.Success -> Log.d(null, "Success")

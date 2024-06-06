@@ -23,11 +23,12 @@ import com.example.newlotok.ui.components.carPost.CarPostCard
 fun PopularCars(
     modifier: Modifier = Modifier,
     carPosts: List<CarPost> = listOf(),
-    onBookNowButtonClicked: (carPost: CarPost) -> Unit
+    onBookNowButtonClicked: (carPost: CarPost) -> Unit,
+    popularCarsText: String = "Popular Cars"
 ){
     Column{
         Text(
-            text = stringResource(id = R.string.PopularCars),
+            text = popularCarsText,
             fontWeight = FontWeight.ExtraBold,
             fontSize = 20.sp,
             modifier = modifier.padding(start = 21.dp)
@@ -42,7 +43,7 @@ fun PopularCars(
 fun CarPosts(
     modifier: Modifier = Modifier,
     carPosts: List<CarPost> = listOf(),
-    onBookNowButtonClicked: (carPost: CarPost) -> Unit
+    onBookNowButtonClicked: (carPost: CarPost) -> Unit,
 ) {
     val isEven = carPosts.size % 2 == 0
     val height = if(isEven) (220*(carPosts.size/2)).dp

@@ -5,7 +5,6 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.TopAppBarScrollBehavior
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
-import com.example.newlotok.model.CarPostFirst
 import com.example.newlotok.model.OrderDetails
 import com.example.newlotok.ui.TokensViewModel
 import com.example.newlotok.ui.screens.addPostScreen.AddPostScreenViewModel
@@ -18,6 +17,7 @@ import com.example.newlotok.ui.screens.orderDetailsScreen.orderDetailsScreenNavi
 import com.example.newlotok.ui.screens.profileDetailsScreens.editProfileScreen.editProfileScreenNavigation
 import com.example.newlotok.ui.screens.profileDetailsScreens.profileDetailsScreen.profileDetailsScreenNavigation
 import com.example.newlotok.ui.screens.profileScreen.profileScreenNavigation
+import com.example.newlotok.ui.screens.filterCars.userCarPostsScreenNavigation
 import com.example.newlotok.ui.screens.selectACarScreen.selectACarScreenNavigation
 import com.example.newlotok.ui.screens.selectBrandScreen.selectBrandScreenNavigation
 import com.example.newlotok.ui.screens.settingsScreens.mainSettingsScreen.mainSettingsScreenNavigation
@@ -48,7 +48,10 @@ fun NavGraphBuilder.navigationSystem(
         tokensViewModel = tokensViewModel,
     )
     selectACarScreenNavigation(navController = navController)
-    selectBrandScreenNavigation(navController = navController)
+    selectBrandScreenNavigation(
+        navController = navController,
+        tokensViewModel = tokensViewModel,
+    )
     profileScreenNavigation(
         navController = navController,
         tokensViewModel = tokensViewModel,
@@ -73,6 +76,7 @@ fun NavGraphBuilder.navigationSystem(
     bookingScreenNavigation(
         navController = navController,
         bookingSharedViewModel = bookingSharedViewModel,
+        tokensViewModel = tokensViewModel,
     )
     orderDetailsScreenNavigation(
         navController = navController,
@@ -83,6 +87,10 @@ fun NavGraphBuilder.navigationSystem(
         navController = navController,
         addPostScreenViewModel = addPostScreenViewModel,
         tokensViewModel = tokensViewModel
+    )
+    userCarPostsScreenNavigation(
+        navController = navController,
+        tokensViewModel = tokensViewModel,
     )
 
 }

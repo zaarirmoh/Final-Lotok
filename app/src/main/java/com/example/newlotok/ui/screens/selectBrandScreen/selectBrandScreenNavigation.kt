@@ -4,10 +4,12 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
 import com.example.newlotok.model.Data
+import com.example.newlotok.ui.TokensViewModel
 import com.example.newlotok.ui.navigation.LotokScreen
 
 fun NavGraphBuilder.selectBrandScreenNavigation(
-    navController: NavHostController
+    navController: NavHostController,
+    tokensViewModel: TokensViewModel,
 ){
     composable(route = LotokScreen.SelectBrandScreen.name){
         SelectBrandScreen(
@@ -15,7 +17,11 @@ fun NavGraphBuilder.selectBrandScreenNavigation(
             onGoBackIconClicked = {
                 navController.navigateUp()
             },
-            onLogoClicked ={ navController.navigate(LotokScreen.CarDetailsScreen.name)}
+            onLogoClicked ={
+                tokensViewModel.make = it
+                tokensViewModel.shouldSendUser = false
+                navController.navigate(LotokScreen.UserPostsScreen.name
+                )}
         )
     }
 }

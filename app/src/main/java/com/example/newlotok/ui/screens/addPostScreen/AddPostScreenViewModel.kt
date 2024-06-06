@@ -20,6 +20,8 @@ import com.example.newlotok.model.CarPost
 import com.example.newlotok.model.CarPostFirst
 import com.example.newlotok.model.VinResult
 import com.example.newlotok.ui.screens.bookingScreen.hostPictures
+import com.google.firebase.Firebase
+import com.google.firebase.storage.storage
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -28,6 +30,7 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import retrofit2.HttpException
 import java.io.IOException
+import java.util.UUID
 
 sealed interface AddPostScreenUiState {
     data class Success(val data: CarPost) : AddPostScreenUiState
@@ -81,7 +84,7 @@ class AddPostScreenViewModel (private val lotokRepository: LotokRepository) : Vi
 
 
     val vinResult : VinResult =  VinResult()
-
+    var shouldNavigate: Boolean by mutableStateOf(false)
     //var vin: String by mutableStateOf("")
 
     fun updateVin(vin: String) {
@@ -133,20 +136,25 @@ class AddPostScreenViewModel (private val lotokRepository: LotokRepository) : Vi
         updateItem(price, "weeklyPrice")
     }
 
-    fun updateCarPictures(newCarPictures: List<Uri>) {
+    fun updateCarPictures(newCarPictures: List<Uri>,count: MutableState<Int>) {
+        Log.d("carPictures",newCarPictures.toString())
         val newCarPicturesUrls : MutableState<List<Uri>> = mutableStateOf(listOf())
-
-        hostPictures(
-            picturesUrl = newCarPicturesUrls,
-            picturesUri = newCarPictures,
-            onSuccess = { urls ->
-                _uiState.value = _uiState.value.copy(carPictures = urls)
-
-            },
-            onFailure = { exception ->
-                Log.e("Firebase", "Failed to upload images: ${exception.message}")
+        if(newCarPictures.size > count.value) {
+            val firstPicture = newCarPictures[0]
+            val storage = Firebase.storage
+            // Create a storage reference from our app
+            var storageRef = storage.reference
+            val childRef = storageRef.child("images/image${UUID.randomUUID()}.jpg")
+            childRef.putFile(firstPicture).addOnCompleteListener {
+                childRef.downloadUrl.addOnSuccessListener { uri ->
+                    Log.d("success: downloadUri", uri.toString())
+                    _uiState.value = _uiState.value.copy(carPictures = listOf(uri))
+                }
+                Log.d("newCarPictures",uiState.value.carPictures.toString())
+                count.value += 1
             }
-        )
+
+        }
 
 
     }
@@ -220,8 +228,10 @@ class AddPostScreenViewModel (private val lotokRepository: LotokRepository) : Vi
         viewModelScope.launch {
             addPostScreenUiState = AddPostScreenUiState.Loading
             addPostScreenUiState = try {
+                val carPostAdded = lotokRepository.addCarPost(authorization,carPost)
+                shouldNavigate = true
                 AddPostScreenUiState.Success(
-                    lotokRepository.addCarPost(authorization,carPost)
+                    carPostAdded
                 )
             }catch (e: IOException){
                 AddPostScreenUiState.Error
