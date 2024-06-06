@@ -2,6 +2,7 @@ package com.example.newlotok.ui.screens.addPostScreen
 
 import android.annotation.SuppressLint
 import android.util.Log
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -21,6 +22,7 @@ import androidx.compose.material.icons.filled.PriceChange
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
@@ -60,6 +62,8 @@ fun AddPostScreen(
     onConfirmButtonClicked: () -> Unit,
     onAddPostButtonClicked: () -> Unit,
     onProfileIconClicked : ()-> Unit = {},
+    dialogOpened: () -> Unit = {},
+    vinDetailsScreenUiState: VinDetailsScreenUiState
 ){
     var category by remember { mutableStateOf(addPostScreenViewModel.uiState.value.category) }
     var wilaya by remember { mutableStateOf(addPostScreenViewModel.uiState.value.wilaya) }
@@ -522,37 +526,88 @@ fun AddPostScreen(
 
 
             if (openDialog) {
-                AlertDialog(
-                    onDismissRequest = { openDialog = false},
-                    title = { Text("Confirm Car Details") },
-                    text = { VinDetails(modifier = Modifier,addPostScreenViewModel.vinResult)
-                        AsyncImage(
-                            model = addPostScreenViewModel.uiState.value.carPictures[0] ,
-                            contentDescription = null,
-                            modifier = Modifier
-                                .size(60.dp)
-                                .padding(4.dp),
-                            contentScale = ContentScale.Crop
+                //addPostScreenViewModel.getVinDetails()
+                dialogOpened()
+                when(vinDetailsScreenUiState){
+                    is VinDetailsScreenUiState.Loading -> {
+                        AlertDialog(
+                            onDismissRequest = { openDialog = false},
+                            title = { Text("Loading...")  },
+                            text = {
+                                Box(
+                                    contentAlignment = Alignment.Center,
+                                    modifier = Modifier
+                                        .fillMaxWidth()
+                                        .height(100.dp)
+                                ) {
+                                    CircularProgressIndicator()
+                                }
+                            },
+                            confirmButton = {
+                            },
+                            dismissButton = {
+                            }
                         )
-                           },
-                    confirmButton = {
-                        Button(onClick = {
-                            addPostScreenViewModel.updateCarPictures(carPictures.value,count)
-                            addPostScreenViewModel.updateCarteGrisePic(carteGrisePic.value)
-                            addPostScreenViewModel.updateAssurancePic(assurancePic.value)
-                            addPostScreenViewModel.updateTechnicalControlPic(technicalControlPic.value)
-                            onConfirmButtonClicked()
-                            openDialog = false
-                        }) {
-                            Text("Confirm")
-                        }
-                    },
-                    dismissButton = {
-                        Button(onClick = { openDialog = false }) {
-                            Text("Cancel")
-                        }
                     }
-                )
+                    is VinDetailsScreenUiState.Error -> {
+                        AlertDialog(
+                            onDismissRequest = { openDialog = false },
+                            title = { Text("Error") },
+                            text = {
+                                Text(addPostScreenViewModel.errorMessage)
+                            },
+                            confirmButton = {
+                                Button(onClick = {
+                                    addPostScreenViewModel.getVinDetails()
+                                    openDialog = false
+                                }) {
+                                    Text("Try again")
+                                }
+                            },
+                            dismissButton = {
+                                Button(onClick = { openDialog = false }) {
+                                    Text("Cancel")
+                                }
+                            }
+                        )
+                    }
+                    is VinDetailsScreenUiState.Success ->{
+                        AlertDialog(
+                            onDismissRequest = { openDialog = false},
+                            title = { Text("Confirm Car Details") },
+                            text = { VinDetails(modifier = Modifier,
+                                //addPostScreenViewModel.vinResult
+                                vinDetailsScreenUiState.vinDetails
+                            )
+                                AsyncImage(
+                                    model = addPostScreenViewModel.uiState.value.carPictures[0] ,
+                                    contentDescription = null,
+                                    modifier = Modifier
+                                        .size(60.dp)
+                                        .padding(4.dp),
+                                    contentScale = ContentScale.Crop
+                                )
+                            },
+                            confirmButton = {
+                                Button(onClick = {
+                                    addPostScreenViewModel.updateCarPictures(carPictures.value,count)
+                                    addPostScreenViewModel.updateCarteGrisePic(carteGrisePic.value)
+                                    addPostScreenViewModel.updateAssurancePic(assurancePic.value)
+                                    addPostScreenViewModel.updateTechnicalControlPic(technicalControlPic.value)
+                                    onConfirmButtonClicked()
+                                    openDialog = false
+                                }) {
+                                    Text("Confirm")
+                                }
+                            },
+                            dismissButton = {
+                                Button(onClick = { openDialog = false }) {
+                                    Text("Cancel")
+                                }
+                            }
+                        )}
+
+                }
             }
         }
     }

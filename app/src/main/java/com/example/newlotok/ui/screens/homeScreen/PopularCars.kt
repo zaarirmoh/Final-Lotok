@@ -46,8 +46,8 @@ fun CarPosts(
     onBookNowButtonClicked: (carPost: CarPost) -> Unit,
 ) {
     val isEven = carPosts.size % 2 == 0
-    val height = if(isEven) (220*(carPosts.size/2)).dp
-    else (220*((carPosts.size/2) + 1)).dp
+    val height = if(isEven) (240*(carPosts.size/2)).dp
+    else (240*((carPosts.size/2) + 1)).dp
     LazyVerticalGrid(
         columns = GridCells.Fixed(count = 2),
         contentPadding = PaddingValues(8.dp),

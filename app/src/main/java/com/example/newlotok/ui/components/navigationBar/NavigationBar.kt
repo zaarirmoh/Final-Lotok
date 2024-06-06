@@ -107,7 +107,7 @@ val items = listOf(
         route = LotokScreen.SignInScreen.name
     ),
     BottomNavigationItem(
-        title = "Favourites",
+        title = "Favourite",
         selectedIcon = Icons.Filled.Favorite,
         unselectedIcon = Icons.Outlined.FavoriteBorder,
         hasNews = false,

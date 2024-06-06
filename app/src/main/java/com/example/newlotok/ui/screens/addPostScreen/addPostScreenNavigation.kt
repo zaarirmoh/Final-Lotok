@@ -40,7 +40,11 @@ fun NavGraphBuilder.addPostScreenNavigation(
                 Log.d("vin",addPostScreenViewModel.uiState.value.vin)
                 shouldAddPost.value = true
             },
-            onProfileIconClicked = {navController.navigate(LotokScreen.ProfileScreen.name)}
+            onProfileIconClicked = {navController.navigate(LotokScreen.ProfileScreen.name)},
+            dialogOpened = {
+                addPostScreenViewModel.getVinDetails()
+            },
+            vinDetailsScreenUiState = addPostScreenViewModel.vinDetailsScreenUiState
         )
         if(shouldAddPost.value){
             Log.d("entered here","entered here")

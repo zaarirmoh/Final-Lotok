@@ -55,7 +55,7 @@ fun CarPostCard(
     onBookNowButtonClicked: () -> Unit = {}
 ){
     Card(
-        modifier = modifier.size(width = 172.dp, height = 200.dp),
+        modifier = modifier.size(width = 172.dp, height = 220.dp),
         onClick = {},
         colors = CardDefaults.cardColors(containerColor = Color(0xFFDADADA))
     ) {

@@ -28,6 +28,7 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import org.json.JSONObject
 import retrofit2.HttpException
 import java.io.IOException
 import java.util.UUID
@@ -37,26 +38,26 @@ sealed interface AddPostScreenUiState {
     object Loading : AddPostScreenUiState
     object Error : AddPostScreenUiState
 }
-/*sealed interface VinDetailsScreenUiState {
+sealed interface VinDetailsScreenUiState {
     data class Success(
         val vinDetails : VinResult
     ) : VinDetailsScreenUiState
     object Error : VinDetailsScreenUiState
     object Loading : VinDetailsScreenUiState
-}*/
+}
 class AddPostScreenViewModel (private val lotokRepository: LotokRepository) : ViewModel() {
     private val _uiState = MutableStateFlow(CarPostFirst())
     val uiState: StateFlow<CarPostFirst> = _uiState.asStateFlow()
 
     var addPostScreenUiState: AddPostScreenUiState by mutableStateOf(AddPostScreenUiState.Loading)
-    /*var vinDetailsScreenUiState: VinDetailsScreenUiState by mutableStateOf(VinDetailsScreenUiState.Loading)
-        private set*/
+    var vinDetailsScreenUiState: VinDetailsScreenUiState by mutableStateOf(VinDetailsScreenUiState.Loading)
+        private set
 
     var errorMessage: String by mutableStateOf("")
         private set
 
 
-   /* fun getVinDetails() {
+    fun getVinDetails() {
         viewModelScope.launch {
             vinDetailsScreenUiState = VinDetailsScreenUiState.Loading
             vinDetailsScreenUiState=  try {
@@ -80,7 +81,7 @@ class AddPostScreenViewModel (private val lotokRepository: LotokRepository) : Vi
                 }
             }
         }
-    }*/
+    }
 
 
     val vinResult : VinResult =  VinResult()
