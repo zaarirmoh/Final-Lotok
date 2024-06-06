@@ -33,7 +33,10 @@ fun HomeScreenWithConnection(
     onMenuIconClicked: () -> Unit,
     onSearchForACarButtonClicked: () -> Unit,
     onSettingsClicked: () -> Unit,
-    onBookNowButtonClicked: (carPost: CarPost) -> Unit
+    onBookNowButtonClicked: (carPost: CarPost) -> Unit,
+    onYearSelected: (year: Int) -> Unit,
+    onStateSelected: (state: Int) -> Unit
+
 ) {
     when (homeScreenUiState) {
         is HomeScreenUiState.Loading -> LoadingScreen(modifier = modifier.fillMaxSize())
@@ -47,8 +50,11 @@ fun HomeScreenWithConnection(
             onSearchForACarButtonClicked = onSearchForACarButtonClicked,
             onSettingsClicked = onSettingsClicked,
             modifier = modifier.padding(contentPadding),
-            onBookNowButtonClicked = onBookNowButtonClicked
+            onBookNowButtonClicked = onBookNowButtonClicked,
+            onYearSelected = onYearSelected,
+            onStateSelected = onStateSelected,
         )
+
         is HomeScreenUiState.Error -> ErrorScreen(retryAction, modifier = modifier.fillMaxSize())
     }
 

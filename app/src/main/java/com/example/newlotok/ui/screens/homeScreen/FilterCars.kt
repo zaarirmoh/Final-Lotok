@@ -18,6 +18,7 @@ import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -32,13 +33,16 @@ fun FilterCars(
     onStateButtonClicked: () -> Unit = {},
     onFromToButtonClicked: () -> Unit = {},
     onYearButtonClicked: () -> Unit = {},
-    onEnergyButtonClicked: () -> Unit = {}
+    onYearSelected: (Int) -> Unit = {},
+    onEnergyButtonClicked: () -> Unit = {},
+    expandedYears: MutableState<Boolean>,
+    expandedStates: MutableState<Boolean>
 ){
     Column {
         Row(
             modifier = modifier.fillMaxWidth()
         ) {
-            State(onStateButtonClicked = onStateButtonClicked)
+            State(expanded = expandedStates)
             Spacer(modifier = modifier.width(18.dp))
             FromTo(onFromToButtonClicked = onFromToButtonClicked)
         }
@@ -46,7 +50,9 @@ fun FilterCars(
         Row(
             modifier = modifier.fillMaxWidth(),
         ) {
-            Year(onYearButtonClicked = onYearButtonClicked)
+            Year(
+                expanded = expandedYears,
+            )
             Spacer(modifier = modifier.width(34.dp))
             Energy(onEnergyButtonClicked = onEnergyButtonClicked)
         }
@@ -56,11 +62,13 @@ fun FilterCars(
 @Composable
 fun State(
     modifier: Modifier = Modifier,
-    onStateButtonClicked: () -> Unit
+    expanded: MutableState<Boolean>
 ){
     Box{
         Button(
-            onClick = onStateButtonClicked,
+            onClick = {
+                expanded.value = true
+            },
             modifier = modifier
                 .padding(start = 44.dp)
                 .height(34.dp)
@@ -120,11 +128,14 @@ fun FromTo(
 @Composable
 fun Year(
     modifier: Modifier = Modifier,
-    onYearButtonClicked: () -> Unit
+    expanded: MutableState<Boolean>,
 ){
+
     Box {
         Button(
-            onClick = onYearButtonClicked,
+            onClick = {
+                expanded.value = true
+            },
             modifier = modifier
                 .padding(start = 86.dp)
                 .width(106.dp)
@@ -132,7 +143,7 @@ fun Year(
             colors = ButtonDefaults.buttonColors(containerColor = Color(0xFFDADADA))
         ) {
             Text(
-                text = stringResource(id = R.string.Year),
+                text = "Year",
                 color = Color.Black
             )
         }
@@ -145,6 +156,9 @@ fun Year(
                 .padding(start = 90.dp)
 
         )
+
+
+
     }
 }
 

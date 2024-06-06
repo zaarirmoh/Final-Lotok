@@ -50,24 +50,31 @@ class HomeScreenViewModel(private val lotokRepository: LotokRepository) : ViewMo
     /** The mutable State that stores the status of the most recent request */
     var homeScreenUiState: HomeScreenUiState by mutableStateOf(HomeScreenUiState.Loading)
         private set
-
+    var year: Int? by mutableStateOf(null)
+    var state: Int? by mutableStateOf(null)
     /**
      * Call getMarsPhotos() on init so we can display status immediately.
      */
     init {
-        getCarPosts()
+        getCarPosts(
+            year = year,
+            state = state
+        )
     }
 
     /**
      * Gets Mars photos information from the Mars API Retrofit service and updates the
      * [MarsPhoto] [List] [MutableList].
      */
-    fun getCarPosts() {
+    fun getCarPosts(
+        year: Int? = null,
+        state: Int? = null
+    ) {
         viewModelScope.launch {
             homeScreenUiState = HomeScreenUiState.Loading
             homeScreenUiState = try {
                 HomeScreenUiState.Success(
-                    carPosts = lotokRepository.getCarPosts(),
+                    carPosts = lotokRepository.getCarPosts(year = year, location = state),
                     categories = lotokRepository.getCategories()
                 )
             } catch (e: HttpException){

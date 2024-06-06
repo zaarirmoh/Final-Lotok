@@ -145,6 +145,7 @@ object Data{
         CarBrand(
             4,
             R.drawable.ford_8_logo_svg_vector,
+            make = "ford"
         ),
         CarBrand(
             5,
@@ -197,6 +198,11 @@ object Data{
             5,
             R.drawable.bentley_logo_svg_vector,
         ),
+        CarBrand(
+            id = 6,
+            R.drawable.tesla_motors_logo_svg_vector,
+            make = "testa"
+        )
     )
     val comments: List<Comment> = listOf(
         Comment(

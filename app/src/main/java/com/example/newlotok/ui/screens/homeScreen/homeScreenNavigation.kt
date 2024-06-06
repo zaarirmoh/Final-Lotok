@@ -43,7 +43,15 @@ fun NavGraphBuilder.homeScreenNavigation(
             onBookNowButtonClicked = {
                 tokensViewModel.carPost = it
                 navController.navigate(LotokScreen.CarDetailsScreen.name)
+            },
+            onYearSelected = {
+                homeScreenViewModel.year = it
+                homeScreenViewModel.getCarPosts(year = homeScreenViewModel.year) },
+            onStateSelected = {
+                homeScreenViewModel.state = it
+                homeScreenViewModel.getCarPosts(state = homeScreenViewModel.state)
             }
+
         )
     }
 }
