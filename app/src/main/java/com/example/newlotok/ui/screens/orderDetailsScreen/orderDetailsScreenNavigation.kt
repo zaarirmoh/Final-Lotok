@@ -21,7 +21,8 @@ fun NavGraphBuilder.orderDetailsScreenNavigation(
             context = context,
             onDoneButtonClicked = {
                 navController.navigate(LotokScreen.HomeScreen.name)
-            }
+            },
+
         )
     }
 }

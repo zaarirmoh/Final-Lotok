@@ -19,6 +19,7 @@ package com.example.newlotok.network
 import com.example.newlotok.model.AccessToken
 import com.example.newlotok.model.CarPost
 import com.example.newlotok.model.Category
+import com.example.newlotok.model.Image
 import com.example.newlotok.model.MarsPhoto
 import com.example.newlotok.model.OrderDetails
 import com.example.newlotok.model.OrderDetailsPost
@@ -99,6 +100,12 @@ interface LotokApiService {
         @Body
         orderDetails: OrderDetailsPost
     )
+
+    @GET("api/listings/images")
+    suspend fun getPostPictures(
+        @Query(value = "id")
+        id : Int
+    ) : List<Image>
 
 
 }

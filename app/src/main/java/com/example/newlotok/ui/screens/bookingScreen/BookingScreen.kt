@@ -61,7 +61,8 @@ fun BookingScreen(
     carPost : CarPost,
     onGoBackIconClicked: () -> Unit = {},
     onBookNowButtonClicked : () -> Unit = {},
-    navController: NavHostController
+    navController: NavHostController,
+    onProfileIconClicked : ()-> Unit = {},
 ) {
     if(bookingSharedViewModel.shouldNavigate){
         navController.navigate(LotokScreen.OrderDetailsScreen.name)
@@ -126,7 +127,7 @@ fun BookingScreen(
             TopBar(
                 startIcon = { StartIconGoBack(onButtonClicked = onGoBackIconClicked) },
                 topBarCenter = { TopBarCenterText(text = "Booking") },
-                endIcon = { EndIconProfile() }
+                endIcon = { EndIconProfile(onProfileIconClicked) }
             )
         }
     ) {

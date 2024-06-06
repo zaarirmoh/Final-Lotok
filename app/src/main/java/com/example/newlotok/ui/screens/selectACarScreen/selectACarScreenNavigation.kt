@@ -13,6 +13,7 @@ fun NavGraphBuilder.selectACarScreenNavigation(
     composable(route = LotokScreen.SelectACarScreen.name){
         SelectACarScreen(
             onProfileIconClicked = {
+                navController.navigate(LotokScreen.ProfileScreen.name)
             },
             onGoBackIconClicked = {
                 navController.navigateUp()

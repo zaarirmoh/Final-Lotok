@@ -14,7 +14,9 @@ fun NavGraphBuilder.carDetailsScreenNavigation(
     composable(route = LotokScreen.CarDetailsScreen.name){
         CarDetailsScreen(
             carPost = tokensViewModel.carPost ?: Data.carPostsList[0],
-            bookButtonClicked = { navController.navigate(LotokScreen.BookingScreen.name)}
+            bookButtonClicked = { navController.navigate(LotokScreen.BookingScreen.name)},
+            onGoBackIconClicked = {navController.navigateUp()},
+            onProfileIconClicked = {navController.navigate(LotokScreen.ProfileScreen.name)}
         )
     }
 }

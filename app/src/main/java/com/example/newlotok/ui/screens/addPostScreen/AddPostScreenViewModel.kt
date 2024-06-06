@@ -37,10 +37,52 @@ sealed interface AddPostScreenUiState {
     object Loading : AddPostScreenUiState
     object Error : AddPostScreenUiState
 }
-class AddPostScreenViewModel(private val lotokRepository: LotokRepository) : ViewModel() {
-    var addPostScreenUiState: AddPostScreenUiState by mutableStateOf(AddPostScreenUiState.Loading)
+/*sealed interface VinDetailsScreenUiState {
+    data class Success(
+        val vinDetails : VinResult
+    ) : VinDetailsScreenUiState
+    object Error : VinDetailsScreenUiState
+    object Loading : VinDetailsScreenUiState
+}*/
+class AddPostScreenViewModel (private val lotokRepository: LotokRepository) : ViewModel() {
     private val _uiState = MutableStateFlow(CarPostFirst())
     val uiState: StateFlow<CarPostFirst> = _uiState.asStateFlow()
+
+    var addPostScreenUiState: AddPostScreenUiState by mutableStateOf(AddPostScreenUiState.Loading)
+    /*var vinDetailsScreenUiState: VinDetailsScreenUiState by mutableStateOf(VinDetailsScreenUiState.Loading)
+        private set*/
+
+    var errorMessage: String by mutableStateOf("")
+        private set
+
+
+   /* fun getVinDetails() {
+        viewModelScope.launch {
+            vinDetailsScreenUiState = VinDetailsScreenUiState.Loading
+            vinDetailsScreenUiState=  try {
+                val vinDetails = lotokRepository.getVinDetails(uiState.value.vin)
+                VinDetailsScreenUiState.Success(vinDetails)
+            } catch (e: IOException) {
+                Log.d(null, "exception")
+                VinDetailsScreenUiState.Error
+            } catch (e: HttpException){
+                val data = e.response()?.errorBody()?.string()
+                data.let {
+                    val json = JSONObject(data!!)
+                    val keys = json.keys()
+                    while (keys.hasNext()) {
+                        val key = keys.next()
+                        val message = json.getString(key)
+                        errorMessage = message
+                        Log.e(e.message(), errorMessage)
+                    }
+                    VinDetailsScreenUiState.Error
+                }
+            }
+        }
+    }*/
+
+
     val vinResult : VinResult =  VinResult()
     var shouldNavigate: Boolean by mutableStateOf(false)
     //var vin: String by mutableStateOf("")

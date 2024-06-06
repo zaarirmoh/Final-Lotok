@@ -58,7 +58,8 @@ fun AddPostScreen(
     addPostScreenViewModel: AddPostScreenViewModel,
     onGoBackIconClicked: () -> Unit,
     onConfirmButtonClicked: () -> Unit,
-    onAddPostButtonClicked: () -> Unit
+    onAddPostButtonClicked: () -> Unit,
+    onProfileIconClicked : ()-> Unit = {},
 ){
     var wilaya by remember { mutableStateOf(addPostScreenViewModel.uiState.value.wilaya) }
     var address by remember { mutableStateOf(addPostScreenViewModel.uiState.value.address) }
@@ -96,7 +97,7 @@ fun AddPostScreen(
             TopBar(
                 startIcon = { StartIconGoBack(onButtonClicked = onGoBackIconClicked) },
                 topBarCenter = { TopBarCenterText(text = "Add a Car") },
-                endIcon = { EndIconProfile() }
+                endIcon = { EndIconProfile(onProfileIconClicked) }
             )
         }
     ) {

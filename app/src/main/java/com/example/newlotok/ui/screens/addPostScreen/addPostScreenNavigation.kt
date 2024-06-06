@@ -23,7 +23,8 @@ fun NavGraphBuilder.addPostScreenNavigation(
     modifier: Modifier = Modifier,
     navController: NavHostController,
     addPostScreenViewModel: AddPostScreenViewModel,
-    tokensViewModel: TokensViewModel
+    tokensViewModel: TokensViewModel,
+
 ){
 
     composable(route = LotokScreen.AddPostScreen.name){
@@ -32,13 +33,14 @@ fun NavGraphBuilder.addPostScreenNavigation(
         val shouldAddPost = remember { mutableStateOf(false) }
         var authorization = "Bearer "
         AddPostScreen(
-            onGoBackIconClicked = { },
+            onGoBackIconClicked = { navController.navigateUp()},
             addPostScreenViewModel = addPostScreenViewModel,
             onConfirmButtonClicked = {},
             onAddPostButtonClicked = {
                 Log.d("vin",addPostScreenViewModel.uiState.value.vin)
                 shouldAddPost.value = true
-            }
+            },
+            onProfileIconClicked = {navController.navigate(LotokScreen.ProfileScreen.name)}
         )
         if(shouldAddPost.value){
             Log.d("entered here","entered here")

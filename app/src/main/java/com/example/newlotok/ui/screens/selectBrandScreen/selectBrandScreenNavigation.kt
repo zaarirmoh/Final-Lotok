@@ -20,8 +20,9 @@ fun NavGraphBuilder.selectBrandScreenNavigation(
             onLogoClicked ={
                 tokensViewModel.make = it
                 tokensViewModel.shouldSendUser = false
-                navController.navigate(LotokScreen.UserPostsScreen.name
-                )}
+                navController.navigate(LotokScreen.UserPostsScreen.name)
+            },
+            onProfileIconClicked = {navController.navigate(LotokScreen.ProfileScreen.name)}
         )
     }
 }
