@@ -67,6 +67,7 @@ fun AddPostScreen(
     addPostScreenViewModel: AddPostScreenViewModel,
     onGoBackIconClicked: () -> Unit,
     onConfirmButtonClicked: () -> Unit,
+    onAddPostButtonClicked: () -> Unit,
 ){
     var wilaya by remember { mutableStateOf(addPostScreenViewModel.uiState.value.wilaya) }
     var address by remember { mutableStateOf(addPostScreenViewModel.uiState.value.address) }

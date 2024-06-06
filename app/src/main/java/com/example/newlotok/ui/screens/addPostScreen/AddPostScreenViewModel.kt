@@ -12,14 +12,6 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
-import com.example.newlotok.LotokApplication
-import com.example.newlotok.data.LotokRepository
-import androidx.compose.runtime.setValue
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.viewModelScope
-import androidx.lifecycle.viewmodel.initializer
-import androidx.lifecycle.viewmodel.viewModelFactory
 import com.example.newlotok.ID
 import com.example.newlotok.LotokApplication
 import com.example.newlotok.data.LotokRepository
@@ -28,18 +20,12 @@ import com.example.newlotok.model.CarPost
 import com.example.newlotok.model.CarPostFirst
 import com.example.newlotok.model.VinResult
 import com.example.newlotok.ui.screens.bookingScreen.hostPictures
-import com.example.newlotok.ui.screens.signInUpScreens.signInScreen.SignInScreenUiState
-import com.example.newlotok.ui.screens.signInUpScreens.signInScreen.SignInScreenViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import retrofit2.HttpException
-import java.io.IOException
-import kotlinx.coroutines.launch
-import org.json.JSONObject
 import retrofit2.HttpException
 import java.io.IOException
 
@@ -58,6 +44,8 @@ sealed interface AddPostScreenUiState {
 class AddPostScreenViewModel (private val lotokRepository: LotokRepository) : ViewModel() {
     private val _uiState = MutableStateFlow(CarPostFirst())
     val uiState: StateFlow<CarPostFirst> = _uiState.asStateFlow()
+
+    var addPostScreenUiState: AddPostScreenUiState by mutableStateOf(AddPostScreenUiState.Loading)
     /*var vinDetailsScreenUiState: VinDetailsScreenUiState by mutableStateOf(VinDetailsScreenUiState.Loading)
         private set*/
 

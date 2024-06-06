@@ -12,10 +12,6 @@ import androidx.navigation.compose.composable
 import com.example.newlotok.model.CarPost
 import com.example.newlotok.ui.TokensViewModel
 import com.example.newlotok.ui.navigation.LotokScreen
-import com.google.firebase.Firebase
-import com.google.firebase.storage.storage
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.coroutineScope
 
 fun NavGraphBuilder.addPostScreenNavigation(
     modifier: Modifier = Modifier,
