@@ -14,8 +14,10 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.example.newlotok.ui.GetCarPostsUiState
 import com.example.newlotok.ui.TokensViewModel
+import com.example.newlotok.ui.components.topBar.EndIconProfile
 import com.example.newlotok.ui.components.topBar.StartIconGoBack
 import com.example.newlotok.ui.components.topBar.TopBar
+import com.example.newlotok.ui.components.topBar.TopBarCenterText
 import com.example.newlotok.ui.navigation.LotokScreen
 import com.example.newlotok.ui.screens.homeScreen.ErrorScreen
 import com.example.newlotok.ui.screens.homeScreen.LoadingScreen
@@ -27,6 +29,9 @@ fun FilteredCars(
     tokensViewModel: TokensViewModel,
     navController: NavHostController,
     getCarPostsUiState: GetCarPostsUiState,
+    onGoBackIconClicked : ()-> Unit = {} ,
+    onProfileIconClicked : () -> Unit = {},
+
     retryAction: () -> Unit
 ){
     when(val getCarPostsUiState = tokensViewModel.getCarPostsUiState){
@@ -34,7 +39,9 @@ fun FilteredCars(
             Scaffold(
                 topBar = {
                     TopBar(
-                        startIcon = { StartIconGoBack(onButtonClicked = {}) }
+                        startIcon = { StartIconGoBack(onButtonClicked = onGoBackIconClicked) },
+                        topBarCenter = { TopBarCenterText(text = "your car Posts") },
+                        endIcon = { EndIconProfile(onProfileIconClicked) }
                     )
                 },
             ){

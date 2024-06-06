@@ -27,7 +27,9 @@ fun NavGraphBuilder.userCarPostsScreenNavigation(
             tokensViewModel = tokensViewModel,
             navController = navController,
             getCarPostsUiState = tokensViewModel.getCarPostsUiState,
-            retryAction = { tokensViewModel.getCarPosts(user = id, make = tokensViewModel.make) }
+            retryAction = { tokensViewModel.getCarPosts(user = id, make = tokensViewModel.make) },
+            onGoBackIconClicked = {navController.navigateUp()},
+            onProfileIconClicked = {navController.navigate(LotokScreen.ProfileScreen.name)}
         )
     }
 }

@@ -23,7 +23,9 @@ fun NavGraphBuilder.bookingScreenNavigation(
             onBookNowButtonClicked = {
                 bookingSharedViewModel.postBooking(bookingSharedViewModel.uiState.value)
             },
-            navController = navController
+            navController = navController,
+            onGoBackIconClicked = {navController.navigateUp()},
+            onProfileIconClicked = {navController.navigate(LotokScreen.ProfileScreen.name)}
         )
     }
 

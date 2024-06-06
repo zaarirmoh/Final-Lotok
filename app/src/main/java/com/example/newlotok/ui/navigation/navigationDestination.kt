@@ -56,7 +56,7 @@ fun LotokNavHost(
 
             if(currentScreen.hasNavigationBar) MyNavigationBar(
                 navController = navController,
-                onAddPostClicked = addPostRoute
+                onAddPostClicked = addPostRoute,
             )
         }
     ) {

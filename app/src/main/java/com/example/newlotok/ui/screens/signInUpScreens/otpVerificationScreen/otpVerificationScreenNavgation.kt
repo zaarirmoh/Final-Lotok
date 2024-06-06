@@ -9,6 +9,8 @@ fun NavGraphBuilder.otpVerificationScreenNavigation(
     navController: NavHostController
 ){
     composable(route = LotokScreen.OtpVerificationScreen.name){
-        OtpVerificationScreen()
+        OtpVerificationScreen(
+            onGoBackButtonClicked = {navController.navigateUp()}
+        )
     }
 }

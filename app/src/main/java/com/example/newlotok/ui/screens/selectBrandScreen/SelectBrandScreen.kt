@@ -38,14 +38,15 @@ import com.example.newlotok.ui.theme.LotokTheme
 fun SelectBrandScreen(
     carBrandsList: List<CarBrand>,
     onGoBackIconClicked: () -> Unit = {},
-    onLogoClicked: (make: String) -> Unit = {}
+    onLogoClicked: (make: String) -> Unit = {},
+    onProfileIconClicked : () -> Unit = {}
 ){
     Scaffold(
         topBar = {
             TopBar(
                 startIcon = { StartIconGoBack(onButtonClicked = onGoBackIconClicked) }, //StartIconMenu()
                 topBarCenter = { TopBarCenterText(text = "Choose a brand") },   //TopBarCenterText(text = "Home")
-                endIcon = { EndIconProfile() }
+                endIcon = { EndIconProfile(onProfileIconClicked) }
             )
         }
     ) {

@@ -42,6 +42,7 @@ fun CarDetailsScreen(
     carPost : CarPost,
     onGoBackIconClicked: () -> Unit = {},
     bookButtonClicked : () -> Unit = {},
+    onProfileIconClicked : ()-> Unit = {},
     comments: List<Comment> = Data.comments
 ){
     Scaffold(
@@ -49,7 +50,7 @@ fun CarDetailsScreen(
             TopBar(
                 startIcon = { StartIconGoBack(onButtonClicked = onGoBackIconClicked) },
                 topBarCenter = { TopBarCenterText(text = "Car Details") },
-                endIcon = { EndIconProfile() }
+                endIcon = { EndIconProfile(onProfileIconClicked) }
             )
         }
     ) {
