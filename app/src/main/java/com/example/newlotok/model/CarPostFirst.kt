@@ -23,4 +23,5 @@ data class CarPostFirst(
     val power: Int = 0,
     val body: String = "",
     val transmission: String = "",
+    val category :Int = 0,
 )

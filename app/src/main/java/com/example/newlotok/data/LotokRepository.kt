@@ -22,6 +22,7 @@ import com.example.newlotok.model.Image
 import com.example.newlotok.model.MarsPhoto
 import com.example.newlotok.model.OrderDetailsPost
 import com.example.newlotok.model.ProfileInformation
+import com.example.newlotok.model.ServiceProviderId
 import com.example.newlotok.model.SignIn
 import com.example.newlotok.model.SignUp
 import com.example.newlotok.model.Tokens
@@ -59,6 +60,8 @@ interface LotokRepository {
     suspend fun postBooking(orderDetailsPost: OrderDetailsPost)
 
     suspend fun getPostImages(id : Int) : List<Image>
+
+    suspend fun becomeServiceProvider(authorization: String, serviceProviderId: ServiceProviderId)
 }
 
 /**
@@ -103,7 +106,7 @@ class NetworkLotokRepository(
     override suspend fun postBooking(orderDetailsPost: OrderDetailsPost) = lotokApiService.postBooking(orderDetailsPost)
     override suspend fun getPostImages(id: Int): List<Image> = lotokApiService.getPostPictures(id)
 
-
+    override suspend fun becomeServiceProvider(authorization: String, serviceProviderId: ServiceProviderId ) = lotokApiService.becomeServiceProvider(authorization,serviceProviderId)
     }
 
 

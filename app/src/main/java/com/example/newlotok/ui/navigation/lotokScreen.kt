@@ -21,4 +21,5 @@ enum class LotokScreen(
     OrderDetailsScreen(false),
     AddPostScreen(false),
     UserPostsScreen(false),
+    BecomeServiceProviderScreen(false)
 }

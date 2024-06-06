@@ -61,6 +61,7 @@ fun AddPostScreen(
     onAddPostButtonClicked: () -> Unit,
     onProfileIconClicked : ()-> Unit = {},
 ){
+    var category by remember { mutableStateOf(addPostScreenViewModel.uiState.value.category) }
     var wilaya by remember { mutableStateOf(addPostScreenViewModel.uiState.value.wilaya) }
     var address by remember { mutableStateOf(addPostScreenViewModel.uiState.value.address) }
     var description by remember { mutableStateOf(addPostScreenViewModel.uiState.value.description) }
@@ -188,6 +189,19 @@ fun AddPostScreen(
                 condition = {true},
                 shapeSize = 60,
                 singleLine = false,
+            )
+
+            CategoryDropDownMenu(
+                selectedCategory = category,
+                modifier = Modifier.padding(
+                    start = 24.dp,
+                    end = 16.dp,
+                    bottom = 8.dp
+                ),
+                onCategorySelected = {
+                    category = it
+                    addPostScreenViewModel.updateCategory(category)
+                }
             )
 
 

@@ -67,7 +67,7 @@ fun NavGraphBuilder.addPostScreenNavigation(
                     imgSrc = addPostScreenViewModel.uiState.value.carPictures[0].toString(),
                     body = addPostScreenViewModel.uiState.value.body,
                     transmission = addPostScreenViewModel.uiState.value.transmission,
-                    category = 1,
+                    category = addPostScreenViewModel.uiState.value.category+2,
                     isVerified = true,
                     rating = 0.0,
                     userId = addPostScreenViewModel.getID(context)

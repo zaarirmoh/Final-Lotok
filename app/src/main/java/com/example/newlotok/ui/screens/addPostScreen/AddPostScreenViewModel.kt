@@ -136,6 +136,10 @@ class AddPostScreenViewModel (private val lotokRepository: LotokRepository) : Vi
         updateItem(price, "weeklyPrice")
     }
 
+    fun updateCategory(category: Int) {
+        updateItem(category.toString(), "category")
+    }
+
     fun updateCarPictures(newCarPictures: List<Uri>,count: MutableState<Int>) {
         Log.d("carPictures",newCarPictures.toString())
         val newCarPicturesUrls : MutableState<List<Uri>> = mutableStateOf(listOf())
@@ -220,6 +224,7 @@ class AddPostScreenViewModel (private val lotokRepository: LotokRepository) : Vi
                 engine = if (type == "engine") newItem else currentState.engine,
                 fuel = if (type == "fuel") newItem else currentState.fuel,
                 body = if (type == "body") newItem else currentState.body,
+                category = if (type == "category") newItem.toInt() else currentState.category
             )
         }
     }

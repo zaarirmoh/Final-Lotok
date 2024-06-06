@@ -24,6 +24,7 @@ import com.example.newlotok.model.MarsPhoto
 import com.example.newlotok.model.OrderDetails
 import com.example.newlotok.model.OrderDetailsPost
 import com.example.newlotok.model.ProfileInformation
+import com.example.newlotok.model.ServiceProviderId
 import com.example.newlotok.model.SignIn
 import com.example.newlotok.model.SignUp
 import com.example.newlotok.model.Tokens
@@ -106,6 +107,14 @@ interface LotokApiService {
         @Query(value = "id")
         id : Int
     ) : List<Image>
+
+    @POST("api/users/id")
+    suspend fun becomeServiceProvider(
+        @Header(value = "Authorization")
+        authorization: String,
+        @Body
+        serviceProviderId: ServiceProviderId
+    )
 
 
 }

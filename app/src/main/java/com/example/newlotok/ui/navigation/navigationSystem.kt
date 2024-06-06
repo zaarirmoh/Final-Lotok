@@ -21,6 +21,7 @@ import com.example.newlotok.ui.screens.filterCars.userCarPostsScreenNavigation
 import com.example.newlotok.ui.screens.selectACarScreen.selectACarScreenNavigation
 import com.example.newlotok.ui.screens.selectBrandScreen.selectBrandScreenNavigation
 import com.example.newlotok.ui.screens.settingsScreens.mainSettingsScreen.mainSettingsScreenNavigation
+import com.example.newlotok.ui.screens.signInUpScreens.becomeServiceProviderScreen.becomeServiceProviderNavigation
 import com.example.newlotok.ui.screens.signInUpScreens.forgotPasswordScreen.forgotPasswordScreenNavigation
 import com.example.newlotok.ui.screens.signInUpScreens.otpVerificationScreen.otpVerificationScreenNavigation
 import com.example.newlotok.ui.screens.signInUpScreens.signInScreen.signInScreenNavigation
@@ -89,6 +90,10 @@ fun NavGraphBuilder.navigationSystem(
         tokensViewModel = tokensViewModel
     )
     userCarPostsScreenNavigation(
+        navController = navController,
+        tokensViewModel = tokensViewModel,
+    )
+    becomeServiceProviderNavigation(
         navController = navController,
         tokensViewModel = tokensViewModel,
     )

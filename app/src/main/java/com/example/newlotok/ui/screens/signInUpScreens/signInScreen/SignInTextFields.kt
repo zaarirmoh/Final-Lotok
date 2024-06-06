@@ -77,11 +77,11 @@ fun EmailTextField(
             }
         },
         keyboardOptions = KeyboardOptions(
-            imeAction = ImeAction.Done,
+            imeAction = ImeAction.Next,
             keyboardType = KeyboardType.Email
         ),
-        keyboardActions = KeyboardActions(onDone = {
-            keyboardController?.hide()
+        keyboardActions = KeyboardActions(onNext = {
+            //keyboardController?.hide()
             emailAddress.value += suffix
             suffix = ""
         }),
