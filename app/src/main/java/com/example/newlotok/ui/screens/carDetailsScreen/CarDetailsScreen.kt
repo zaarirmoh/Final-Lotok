@@ -28,6 +28,7 @@ import androidx.compose.ui.unit.sp
 import com.example.newlotok.model.CarPost
 import com.example.newlotok.model.Comment
 import com.example.newlotok.model.Data
+import com.example.newlotok.model.Image
 import com.example.newlotok.ui.components.carPost.CommentCard
 import com.example.newlotok.ui.components.lines.SimpleLine
 import com.example.newlotok.ui.components.topBar.EndIconProfile
@@ -43,7 +44,8 @@ fun CarDetailsScreen(
     onGoBackIconClicked: () -> Unit = {},
     bookButtonClicked : () -> Unit = {},
     onProfileIconClicked : ()-> Unit = {},
-    comments: List<Comment> = Data.comments
+    comments: List<Comment> = Data.comments,
+    carPostPictures : List<Image> = listOf(),
 ){
     Scaffold(
         topBar = {

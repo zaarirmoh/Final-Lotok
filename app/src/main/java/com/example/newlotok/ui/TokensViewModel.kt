@@ -19,6 +19,7 @@ import com.example.newlotok.data.LotokRepository
 import com.example.newlotok.dataStore
 import com.example.newlotok.model.AccessToken
 import com.example.newlotok.model.CarPost
+import com.example.newlotok.model.Image
 import com.example.newlotok.model.Tokens
 import com.example.newlotok.ui.navigation.LotokScreen
 import kotlinx.coroutines.flow.first
@@ -35,6 +36,14 @@ sealed interface GetCarPostsUiState {
     object Loading : GetCarPostsUiState
     object Error : GetCarPostsUiState
 }
+
+sealed interface GetCarPostImagesUiState{
+    data class Success(val carPostImages: List<Image>) : GetCarPostImagesUiState
+    object Loading : GetCarPostImagesUiState
+    object Error : GetCarPostImagesUiState
+}
+
+
 class TokensViewModel(private val lotokRepository: LotokRepository) : ViewModel() {
     var tokensUiState: TokensUiState by mutableStateOf(TokensUiState.Loading)
     var getCarPostsUiState: GetCarPostsUiState by mutableStateOf(GetCarPostsUiState.Loading)
@@ -42,6 +51,9 @@ class TokensViewModel(private val lotokRepository: LotokRepository) : ViewModel(
     var addPostRoute: String by mutableStateOf(LotokScreen.SignInScreen.name)
     // to be moved
     var carPost: CarPost? by mutableStateOf(null)
+    var getCarPostImagesUiState : GetCarPostImagesUiState by mutableStateOf(GetCarPostImagesUiState.Loading)
+    var carPostImages : List<Image>? by mutableStateOf(null)
+
     var make: String? by mutableStateOf(null)
     var shouldSendUser: Boolean by mutableStateOf(true)
     fun verifyAccessToken(accessToken: AccessToken) {
@@ -103,8 +115,22 @@ class TokensViewModel(private val lotokRepository: LotokRepository) : ViewModel(
                 GetCarPostsUiState.Error
             }
         }
-
     }
+
+    fun getCarPostImages(carPostId : Int? = carPost?.id){
+        viewModelScope.launch {
+            getCarPostImagesUiState = GetCarPostImagesUiState.Loading
+            getCarPostImagesUiState  = try {
+                GetCarPostImagesUiState.Success(lotokRepository.getPostImages(carPostId?:0))
+            }catch (e: IOException){
+                GetCarPostImagesUiState.Error
+            }catch (e: HttpException){
+                GetCarPostImagesUiState.Error
+            }
+        }
+    }
+
+
 
     companion object {
         val Factory: ViewModelProvider.Factory = viewModelFactory {
