@@ -10,7 +10,9 @@
 - **Collaborative Development**: Developed collaboratively with [Djawad Sofian](https://github.com/djawadsofian).
 
 ## 📸 Screenshots
-[]()
+![RentACar](LOTOK_Screenshot.png)
+
+![Authenticate](LOTOK_Screenshot2.png)
 
 ## 🛠️ Tech Stack
 - **Language**: Kotlin
